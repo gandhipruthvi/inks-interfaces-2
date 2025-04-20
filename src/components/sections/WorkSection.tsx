@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
@@ -74,18 +74,19 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
     },
   ];
   
-  // Animation for the cards' scroll behavior
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-  
-  // Handle case study click
+  // Calculate dynamic values for the sticky effect
+  const cardHeight = "80vh";
+  const cardTopPadding = "1.5em";
+  const cardMargin = "4vw";
+  const cardsCount = caseStudies.length;
+  // How much of the previous card should peek from the top
+  const peekHeight = 150; // px
+
+
   const handleCaseStudyClick = (caseStudy: CaseStudy) => {
     setSelectedCaseStudy(caseStudy);
   };
   
-  // Close modal
   const closeModal = () => {
     setSelectedCaseStudy(null);
   };
@@ -93,7 +94,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
   return (
     <section 
       ref={ref}
-      className="relative py-16 sm:py-24 lg:py-32 bg-gray-50 overflow-hidden"
+      className="relative py-16 sm:py-24 lg:py-32 bg-gray-50 overflow-visible"
       id="work"
     >
       {/* Background elements */}
@@ -121,117 +122,123 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
         {/* Project cards container with sticky scrolling behavior */}
         <div 
           ref={containerRef} 
-          className="relative min-h-[300vh]"
+          className="relative"
+          style={{
+            height: `calc(${cardsCount} * ${cardHeight})`,
+            paddingBottom: `calc(${cardsCount} * ${cardTopPadding})`,
+          }}
         >
-          {caseStudies.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className="sticky top-[15vh] h-[70vh] mx-auto mb-8 max-w-6xl px-8"
-              style={{
-                opacity: 1,
-                // Calculate when this card should be visible based on scroll progress
-                // Each card gets a segment of the scroll range
-                willChange: "transform, opacity",
-              }}
-            >
-              <motion.div 
-                className="relative w-full h-full rounded-xl sm:rounded-2xl shadow-lg overflow-hidden bg-white animate-fade-in-up"
-                initial={{ y: 100, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ 
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
-                }}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-              >
-                <div className="flex flex-col lg:flex-row h-full">
-                  {/* Left side - Project image */}
-                  <div className="lg:w-1/2 h-48 sm:h-64 lg:h-auto overflow-hidden relative">
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-br"
-                      style={{ backgroundColor: project.color, opacity: 0.1 }}
-                      whileHover={{ opacity: 0.2 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <motion.img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover object-center"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.6 }}
-                    />
-                  </div>
-                  
-                  {/* Right side - Project details */}
-                  <div className="lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-between">
-                    <div>
-                      {/* Project category and tags */}
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                        <span 
-                          className="inline-block px-3 py-1 text-sm font-medium rounded-full"
-                          style={{ 
-                            backgroundColor: `${project.color}20`,
-                            color: project.color
-                          }}
-                        >
-                          {project.subtitle}
-                        </span>
-                        
-                        {project.tags.slice(0, 2).map(tag => (
-                          <span 
-                            key={tag} 
-                            className="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+          <ul className="flex flex-col gap-10">
+            {caseStudies.map((project, index) => {
+              return (
+                <motion.li
+                  key={project.id}
+                  className="sticky"
+                  style={{
+                    top: `${peekHeight}px`,
+                    zIndex: index + 1
+                  }}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <motion.div
+                    className="relative w-full rounded-xl sm:rounded-2xl shadow-lg overflow-hidden bg-white"
+                    whileHover={{ 
+                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
+                    }}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    <div className="flex flex-col lg:flex-row h-full">
+                      {/* Left side - Project image */}
+                      <div className="lg:w-1/2 h-48 sm:h-64 lg:h-auto overflow-hidden relative">
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-br"
+                          style={{ backgroundColor: project.color, opacity: 0.1 }}
+                          whileHover={{ opacity: 0.2 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                        <motion.img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover object-center"
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.6 }}
+                        />
                       </div>
                       
-                      {/* Project title and description - improved mobile size */}
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">{project.title}</h3>
-                      <p className="text-gray-700 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg leading-relaxed">
-                        {project.description}
-                      </p>
+                      {/* Right side - Project details */}
+                      <div className="lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-between">
+                        <div>
+                          {/* Project category and tags */}
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                            <span 
+                              className="inline-block px-3 py-1 text-sm font-medium rounded-full"
+                              style={{ 
+                                backgroundColor: `${project.color}20`,
+                                color: project.color
+                              }}
+                            >
+                              {project.subtitle}
+                            </span>
+                            
+                            {project.tags.slice(0, 2).map(tag => (
+                              <span 
+                                key={tag} 
+                                className="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          
+                          {/* Project title and description */}
+                          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">{project.title}</h3>
+                          <p className="text-gray-700 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg leading-relaxed">
+                            {project.description}
+                          </p>
+                        </div>
+                        
+                        {/* CTA Button */}
+                        <motion.button
+                          className="flex items-center gap-2 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg font-medium text-base sm:text-lg touch-target"
+                          style={{ backgroundColor: project.color }}
+                          whileHover={{ 
+                            scale: 1.02,
+                            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" 
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleCaseStudyClick(project)}
+                        >
+                          View Case Study 
+                          <ArrowRight size={18} />
+                        </motion.button>
+                      </div>
                     </div>
                     
-                    {/* CTA Button */}
-                    <motion.button
-                      className="flex items-center gap-2 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg font-medium text-base sm:text-lg touch-target"
+                    {/* Project number indicator */}
+                    <div 
+                      className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white"
                       style={{ backgroundColor: project.color }}
-                      whileHover={{ 
-                        scale: 1.02,
-                        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" 
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => handleCaseStudyClick(project)}
                     >
-                      View Case Study 
-                      <ArrowRight size={18} />
-                    </motion.button>
-                  </div>
-                </div>
-                
-                {/* Project number indicator */}
-                <div 
-                  className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white"
-                  style={{ backgroundColor: project.color }}
-                >
-                  {index + 1}
-                </div>
-              </motion.div>
-            </motion.div>
-          ))}
+                      {index + 1}
+                    </div>
+                  </motion.div>
+                </motion.li>
+              );
+            })}
+          </ul>
         </div>
         
-        {/* Explore More Projects button */}
+        {/* Call to action */}
         <motion.div 
-          className="flex justify-center pt-12 pb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+           className="flex justify-center pt-12 pb-16"
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <motion.a
             href="/imaginations"

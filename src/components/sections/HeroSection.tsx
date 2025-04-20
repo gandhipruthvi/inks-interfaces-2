@@ -36,7 +36,7 @@ export default function HeroSection({ setIsHovering }: HeroSectionProps) {
   return (
     <section 
       ref={ref}
-      className="relative min-h-screen flex flex-col items-start justify-center px-4 sm:px-8 lg:px-12 py-16 sm:py-24 pt-32 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-start justify-center px-4 sm:px-8 lg:px-12 py-16 sm:py-24 pt-32 overflow-visible"
     >
       {/* Geometric pattern background */}
       <div className="absolute inset-0 z-0 opacity-5">
@@ -89,7 +89,7 @@ export default function HeroSection({ setIsHovering }: HeroSectionProps) {
       {/* Main content */}
       <div className="relative z-10 max-w-4xl mx-auto">
         {/* Animated headline */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 overflow-hidden">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 overflow-visible">
           {heroText.split("").map((letter, i) => (
             <motion.span
               key={i}

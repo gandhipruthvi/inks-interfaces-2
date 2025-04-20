@@ -146,7 +146,7 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
 
       {/* Desktop navigation */}
       <motion.nav
-        className={`fixed top-5 sm:top-8 left-1/2 transform -translate-x-1/2 z-30 bg-white/90 backdrop-blur-md px-1 py-1 rounded-full shadow-lg hidden md:flex items-center gap-1 sm:gap-2 transition-all duration-300 ${
+        className={`fixed top-5 sm:top-8 right-4 transform -translate-x-1/2 z-30 bg-white/90 backdrop-blur-md px-1 py-1 rounded-full shadow-lg hidden md:flex items-center gap-1 sm:gap-2 transition-all duration-300 ${
           scrolled ? 'py-2 px-2 scale-95 shadow-md' : ''
         }`}
         initial={{ opacity: 0, y: -20 }}
