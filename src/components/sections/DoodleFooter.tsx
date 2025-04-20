@@ -386,13 +386,13 @@ export default function DoodleFooter({ setIsHovering }: DoodleFooterProps) {
               </div>
               
               <motion.button
-                className="bg-black text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors"
-                whileHover={{ scale: 1.05 }}
+                className="bg-[#FFD700] text-black font-bold py-4 px-8 rounded-lg hover:bg-black hover:text-white transition-colors shadow-lg"
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
                 whileTap={{ scale: 0.98 }}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
               >
-                Send Message
+                Start Your Project
               </motion.button>
             </form>
           </motion.div>

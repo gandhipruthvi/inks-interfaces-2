@@ -10,9 +10,41 @@ interface CursorProps {
 
 export default function Cursor({ position, isHovering }: CursorProps) {
   const [isMounted, setIsMounted] = useState(false);
+  // Track whether cursor is visible (only show when mouse moves)
+  const [isActive, setIsActive] = useState(false);
   
   useEffect(() => {
+    // Set mounted state
     setIsMounted(true);
+    
+    // Reset activity timer whenever position changes
+    if (position.x !== 0 && position.y !== 0) {
+      setIsActive(true);
+    }
+    
+    // Hide cursor after 2 seconds of inactivity
+    const timer = setTimeout(() => {
+      if (position.x === 0 && position.y === 0) {
+        setIsActive(false);
+      }
+    }, 2000);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [position]);
+  
+  // Handle mouse movement globally
+  useEffect(() => {
+    const handleMouseMove = () => {
+      setIsActive(true);
+    };
+    
+    window.addEventListener("mousemove", handleMouseMove);
+    
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
   
   if (!isMounted) return null;
@@ -26,12 +58,13 @@ export default function Cursor({ position, isHovering }: CursorProps) {
           x: position.x - 12,
           y: position.y - 12,
           scale: isHovering ? 2 : 1,
+          opacity: isActive ? 1 : 0,
         }}
         transition={{
           type: "spring",
-          damping: 30,
-          stiffness: 200,
-          mass: 0.5,
+          damping: 35,
+          stiffness: 300,
+          mass: 0.3,
         }}
       />
       
@@ -41,13 +74,13 @@ export default function Cursor({ position, isHovering }: CursorProps) {
         animate={{
           x: position.x - 6,
           y: position.y - 6,
+          opacity: isActive ? 0.5 : 0,
         }}
         transition={{
           type: "spring",
-          damping: 50,
-          stiffness: 100,
-          mass: 0.8,
-          delay: 0.05,
+          damping: 60,
+          stiffness: 300,
+          mass: 0.5,
         }}
       />
     </>

@@ -133,7 +133,7 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
                   {item}
                   {isActive(item) && (
                     <motion.div 
-                      className="w-2 h-2 bg-[#FFD700] rounded-full"
+                      className="w-2 h-2 border-2 border-[#FFD700] rounded-full"
                       layoutId="navIndicator-mobile"
                     />
                   )}
@@ -174,10 +174,10 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
               </Link>
             </motion.div>
 
-            {/* Active indicator */}
+            {/* Active indicator with border instead of underline */}
             {isActive(item) && (
               <motion.div 
-                className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#FFD700] rounded-full"
+                className="absolute inset-0 border-2 border-[#FFD700] rounded-full"
                 layoutId="navIndicator"
               />
             )}

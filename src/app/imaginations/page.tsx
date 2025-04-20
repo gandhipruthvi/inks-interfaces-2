@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ExternalLink, X } from "lucide-react";
 import { useInView } from "react-intersection-observer";
 import Navbar from "@/components/ui/Navbar";
+import Cursor from "@/components/ui/Cursor";
 
 interface CaseStudy {
   id: string;
@@ -160,6 +161,9 @@ export default function ImaginationsPage() {
     <main className="min-h-screen bg-white">
       {/* Navbar */}
       <Navbar setIsHovering={setIsHovering} />
+      
+      {/* Custom cursor component */}
+      <Cursor position={cursorPosition} isHovering={isHovering} />
       
       {/* Hero Section */}
       <section className="relative pt-36 pb-24 px-8 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
@@ -379,23 +383,44 @@ export default function ImaginationsPage() {
           </motion.div>
         )}
       </AnimatePresence>
-      
-      {/* Custom cursor if isHovering */}
-      {isHovering && (
-        <motion.div
-          className="fixed top-0 left-0 w-6 h-6 rounded-full bg-[#FFD700] mix-blend-difference pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2" 
-          animate={{
-            x: cursorPosition.x,
-            y: cursorPosition.y,
-          }}
-          transition={{
-            type: "spring",
-            damping: 25,
-            stiffness: 300,
-            mass: 0.5
-          }}
-        />
-      )}
+      {/* Global CTA */}
+      <section className="py-16 bg-black text-white">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <motion.h2 
+            className="text-4xl font-bold mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            Ready to Transform Your Brand?
+          </motion.h2>
+          
+          <motion.p
+            className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            Let's create something extraordinary together. Our team is ready to bring your vision to life.
+          </motion.p>
+          
+          <motion.button
+            className="px-10 py-5 bg-[#FFD700] text-black font-bold rounded-xl text-xl shadow-lg hover:scale-105 transition-all duration-300"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
+            whileTap={{ scale: 0.98 }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            Start Your Project
+          </motion.button>
+        </div>
+      </section>
     </main>
   );
 }

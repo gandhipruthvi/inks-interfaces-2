@@ -101,9 +101,9 @@ export default function Footer() {
 
   return (
     <footer className="bg-white border-t border-gray-100">
-      {/* Top section with logo, tagline, and newsletter */}
+      {/* Top section with logo and company info */}
       <div className="max-w-7xl mx-auto px-5 sm:px-8 pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 lg:gap-16">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-10">
           {/* Logo and mission statement */}
           <div className="max-w-md">
             <div className="flex items-center gap-2 mb-6">
@@ -144,33 +144,16 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Newsletter signup */}
-          <div className="lg:pl-12">
-            <h4 className="text-lg font-bold mb-6">Subscribe to our newsletter</h4>
-            <p className="text-gray-600 mb-6">
-              Stay updated with our latest work, design insights, and industry trends.
-            </p>
-            
-            <form className="flex flex-col sm:flex-row gap-3 w-full">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
-                required
-              />
-              <motion.button
-                type="submit"
-                className="bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Subscribe
-              </motion.button>
-            </form>
-            
-            <p className="text-xs text-gray-500 mt-3">
-              By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.
-            </p>
+          {/* CTA Button for Start Your Project */}
+          <div className="flex flex-col items-start justify-center">
+            <h4 className="text-lg font-bold mb-4">Ready to get started?</h4>
+            <motion.button
+              className="px-8 py-4 bg-black text-white font-bold rounded-xl hover:bg-[#FFD700] hover:text-black transition-colors duration-300 shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Start Your Project
+            </motion.button>
           </div>
         </div>
       </div>
