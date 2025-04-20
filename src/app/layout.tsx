@@ -11,6 +11,8 @@ import {
 } from "@/utils/creatr.scripts";
 import { GlobalErrorHandler } from "@/utils/global-error-handler";
 
+
+
 // Create a proper React component wrapper
 const ErrorBoundaryWrapper: React.FC<{ children: React.ReactNode }> = (
   props,
@@ -62,17 +64,17 @@ export const metadata: Metadata = {
 const filsonPro = localFont({
   src: [
     {
-      path: '../fonts/FilsonProRegular.woff2',
+      path: '../fonts/filsonProRegular.otf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../fonts/FilsonProMedium.woff2',
+      path: '../fonts/filsonProMedium.otf',
       weight: '500',
       style: 'normal',
     },
     {
-      path: '../fonts/FilsonProBold.woff2',
+      path: '../fonts/filsonProBold.otf',
       weight: '700',
       style: 'normal',
     },

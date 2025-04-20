@@ -32,7 +32,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-white overflow-hidden">
+    <main className="relative min-h-screen bg-white overflow-visible">
       {/* Custom cursor */}
       <Cursor position={cursorPosition} isHovering={isHovering} />
       
