@@ -13,8 +13,8 @@ const steps = [
     deliverables: [
       "Brand questionnaire & discovery workshop",
       "Target audience analysis",
-      "Project scope & timeline planning"
-    ]
+      "Project scope & timeline planning",
+    ],
   },
   {
     id: 2,
@@ -25,8 +25,8 @@ const steps = [
     deliverables: [
       "Competitive analysis report",
       "Mood boards & creative direction",
-      "Design reference collection"
-    ]
+      "Design reference collection",
+    ],
   },
   {
     id: 3,
@@ -37,8 +37,8 @@ const steps = [
     deliverables: [
       "Information architecture document",
       "User flow diagrams",
-      "Low-fidelity wireframes"
-    ]
+      "Low-fidelity wireframes",
+    ],
   },
   {
     id: 4,
@@ -49,8 +49,8 @@ const steps = [
     deliverables: [
       "Color palette & typography system",
       "High-fidelity design mockups",
-      "Component design library"
-    ]
+      "Component design library",
+    ],
   },
   {
     id: 5,
@@ -61,8 +61,8 @@ const steps = [
     deliverables: [
       "Interactive clickable prototype",
       "Usability testing results",
-      "Refinement recommendations"
-    ]
+      "Refinement recommendations",
+    ],
   },
   {
     id: 6,
@@ -73,9 +73,9 @@ const steps = [
     deliverables: [
       "Final design assets & specifications",
       "Developer handoff documentation",
-      "Implementation support"
-    ]
-  }
+      "Implementation support",
+    ],
+  },
 ];
 
 // Main Section
@@ -101,20 +101,28 @@ function HorizontalScrollCarousel() {
   const activeCard = useMotionValue(0);
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange(value => {
-      const cardIndex = Math.round(value * (steps.length - 1));
+    const unsubscribe = scrollYProgress.onChange((value) => {
+      const cardIndex = Math.round(value * (steps.length));
       setActiveCardIndex(cardIndex);
       animate(activeCard, cardIndex, { type: "spring", stiffness: 300, damping: 30, mass: 0.5 });
     });
+
     return () => unsubscribe();
   }, [scrollYProgress]);
 
-  const x = useTransform(activeCard, index =>
-    index >= steps.length - 1 ? `-${(steps.length - 1) * 100}%` : `-${Math.max(index, 0) * 100}%`
+  const x = useTransform(activeCard, (index) =>
+    index >= steps.length ? `-${steps.length * 100}%` : `-${Math.max(index, 0) * 100}%`
   );
 
+  // 👇 Adjust height based on number of cards (1 card = 100vh extra scroll)
+  const sectionHeight = `${steps.length * 100}vh`;
+
   return (
-    <section ref={targetRef} className="relative h-[200vh] overflow-visible bg-gradient-to-br from-neutral-100 via-white to-indigo-50">
+    <section
+      ref={targetRef}
+      className="relative overflow-visible bg-gradient-to-br from-neutral-100 via-white to-indigo-50"
+      style={{ height: sectionHeight }}
+    >
       <div className="sticky top-0 h-screen flex items-center justify-center">
         <motion.div style={{ x }} className="flex w-full">
           {steps.map((step, i) => (
@@ -123,33 +131,15 @@ function HorizontalScrollCarousel() {
             </div>
           ))}
         </motion.div>
-
-        {/* Step Indicator */}
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-4">
-          {steps.map((step, i) => (
-            <motion.div key={i} className="flex flex-col items-center" animate={{ scale: i === activeCardIndex ? 1.25 : 1 }}>
-              <motion.div
-                className="w-4 h-4 rounded-full border-2 mb-1"
-                style={{
-                  boxShadow: i === activeCardIndex ? '0 0 0 4px #a5b4fc55' : undefined
-                }}
-                animate={{
-                  backgroundColor: i <= activeCardIndex ? "#6366f1" : "#e0e7ff",
-                  borderColor: i === activeCardIndex ? "#6366f1" : "#d1d5db"
-                }}
-              />
-              <span className="text-xs text-indigo-700 font-semibold hidden md:block">{step.title}</span>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   );
 }
 
+
 // Individual Card
 function ProcessCard({ step, active }: { step: typeof steps[number]; active: boolean }) {
-  const duration = step.id === 1 || step.id === 6 ? '1-2 weeks' : '2-3 weeks';
+  const duration = step.id === 1 || step.id === 6 ? "1-2 weeks" : "2-3 weeks";
 
   return (
     <div className="group relative h-[500px] max-w-[90vw] bg-white rounded-3xl shadow-xl border p-8 flex flex-col">
@@ -168,7 +158,10 @@ function ProcessCard({ step, active }: { step: typeof steps[number]; active: boo
       </div>
 
       <div className="w-full h-2 bg-gray-100 rounded-full mb-6">
-        <div className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" style={{ width: `${step.progress * 100}%` }} />
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"
+          style={{ width: `${step.progress * 100}%` }}
+        />
       </div>
 
       <div className="bg-gray-50 rounded-xl p-6 flex-grow">
