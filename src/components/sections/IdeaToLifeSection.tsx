@@ -136,7 +136,6 @@ function HorizontalScrollCarousel() {
   );
 }
 
-
 // Individual Card
 function ProcessCard({ step, active }: { step: typeof steps[number]; active: boolean }) {
   const duration = step.id === 1 || step.id === 6 ? "1-2 weeks" : "2-3 weeks";
