@@ -1,18 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Player } from "@lottiefiles/react-lottie-player";
-import { useInView } from "react-intersection-observer";
-import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import HeroSection from "@/components/sections/HeroSection";
 import IdeaToLifeSection from "@/components/sections/IdeaToLifeSection";
 import CraftingIdentitiesSection from "@/components/sections/CraftingIdentitiesSection";
 import WorkSection from "@/components/sections/WorkSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import PricingSection from "@/components/sections/PricingSection";
-import DoodleFooter from "@/components/sections/DoodleFooter";
 import Cursor from "@/components/ui/Cursor";
+import Navbar from "@/components/ui/Navbar";
 
 export default function HomePage() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -36,6 +33,9 @@ export default function HomePage() {
       {/* Custom cursor */}
       <Cursor position={cursorPosition} isHovering={isHovering} />
       
+      {/* Navbar */}
+      <Navbar setIsHovering={setIsHovering} />
+      
       {/* Hero Section */}
       <HeroSection setIsHovering={setIsHovering} />
       
@@ -53,9 +53,6 @@ export default function HomePage() {
       
       {/* Pricing Section */}
       <PricingSection setIsHovering={setIsHovering} />
-      
-      {/* Doodle Footer */}
-      <DoodleFooter setIsHovering={setIsHovering} />
     </main>
   );
 }

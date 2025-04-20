@@ -1,302 +1,363 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { 
+  CheckCircle, 
+  Palette, 
+  Layers, 
+  Layout, 
+  LineChart, 
+  Users, 
+  Code, 
+  FileText, 
+  Laptop, 
+  Figma,
+  Zap, 
+  UserCheck,
+  PencilRuler,
+  Workflow,
+  BarChart4,
+  PenTool
+} from "lucide-react";
 
 interface PricingSectionProps {
   setIsHovering: (isHovering: boolean) => void;
 }
 
+interface PricingPlan {
+  id: string;
+  title: string;
+  price: string;
+  description: string;
+  features: Array<{
+    text: string;
+    icon: React.ReactNode;
+  }>;
+  popular: boolean;
+  accentColor: string;
+  ctaText: string;
+}
+
 export default function PricingSection({ setIsHovering }: PricingSectionProps) {
-  const [activeTab, setActiveTab] = useState<"branding" | "ui">("branding");
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
+
+  // Hover state for each pricing card
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   
-  // Pricing data
-  const brandingPricing = [
+  // Pricing data with integrated icons
+  const pricingPlans: PricingPlan[] = [
     {
-      title: "Logo Design",
-      price: "$1,200",
-      description: "A distinctive mark that captures your brand's essence",
-      features: [
-        "3 Unique Concepts",
-        "Unlimited Revisions",
-        "Brand Guidelines",
-        "All File Formats",
-        "Copyright Transfer",
-      ],
-      popular: false,
-      color: "#FFD700",
-    },
-    {
-      title: "Brand Identity",
-      price: "$3,500",
-      description: "Complete visual system for your brand",
-      features: [
-        "Logo Design",
-        "Color Palette",
-        "Typography System",
-        "Brand Guidelines",
-        "Stationery Design",
-        "Social Media Templates",
-      ],
-      popular: true,
-      color: "#FFD700",
-    },
-    {
-      title: "Brand Strategy",
-      price: "$5,000",
-      description: "Strategic positioning and messaging",
-      features: [
-        "Market Research",
-        "Competitor Analysis",
-        "Brand Positioning",
-        "Messaging Framework",
-        "Brand Voice & Tone",
-        "Brand Identity",
-      ],
-      popular: false,
-      color: "#FFD700",
-    },
-  ];
-  
-  const uiPricing = [
-    {
+      id: "ui-audit",
       title: "UI Audit",
       price: "$1,500",
-      description: "Comprehensive review of your interface",
+      description: "Comprehensive review of your interface to identify opportunities for improvement",
       features: [
-        "Usability Assessment",
-        "Visual Design Review",
-        "Accessibility Check",
-        "Detailed Report",
-        "Recommendations",
+        { 
+          text: "Usability Assessment",
+          icon: <UserCheck size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Visual Design Review", 
+          icon: <Palette size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Accessibility Check",
+          icon: <Users size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Conversion Optimization", 
+          icon: <LineChart size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Detailed Report & Recommendations",
+          icon: <FileText size={18} className="flex-shrink-0" />
+        }
       ],
       popular: false,
-      color: "#FFD700",
+      accentColor: "#4F46E5", // Indigo
+      ctaText: "Schedule Audit"
     },
     {
+      id: "ui-design-system",
       title: "UI Design System",
       price: "$4,500",
-      description: "Cohesive design system for your product",
+      description: "Cohesive, scalable design system that ensures consistency across your product",
       features: [
-        "Component Library",
-        "Style Guide",
-        "Design Tokens",
-        "Documentation",
-        "Figma/Sketch Files",
-        "Developer Handoff",
+        { 
+          text: "Component Library",
+          icon: <Layers size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Style Guide & Design Tokens",
+          icon: <Palette size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Responsive Design Patterns", 
+          icon: <Layout size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Interactive Documentation",
+          icon: <FileText size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Figma/Sketch Design Files", 
+          icon: <Figma size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Developer Handoff & Support",
+          icon: <Code size={18} className="flex-shrink-0" />
+        }
       ],
       popular: true,
-      color: "#FFD700",
+      accentColor: "#8B5CF6", // Purple
+      ctaText: "Start Your Design System"
     },
     {
-      title: "Full UX/UI Project",
+      id: "full-uxui-project",
+      title: "Full UX/UI Design Project",
       price: "$8,000+",
-      description: "End-to-end design for digital products",
+      description: "End-to-end design process from research to high-fidelity prototypes ready for development",
       features: [
-        "User Research",
-        "Information Architecture",
-        "Wireframing",
-        "UI Design",
-        "Prototyping",
-        "Usability Testing",
-        "Developer Handoff",
+        { 
+          text: "In-depth User Research",
+          icon: <Users size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Information Architecture",
+          icon: <Workflow size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Wireframing & User Flows",
+          icon: <PencilRuler size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "High-fidelity UI Design",
+          icon: <PenTool size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Interactive Prototyping",
+          icon: <Laptop size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Usability Testing",
+          icon: <UserCheck size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "UI Kit Development",
+          icon: <Layers size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Implementation Support",
+          icon: <Zap size={18} className="flex-shrink-0" /> 
+        }
       ],
       popular: false,
-      color: "#FFD700",
-    },
+      accentColor: "#EC4899", // Pink
+      ctaText: "Get Full Project Quote"
+    }
   ];
-  
-  const currentPricing = activeTab === "branding" ? brandingPricing : uiPricing;
   
   return (
     <section 
       ref={ref}
-      className="relative py-20 bg-white"
+      className="relative py-28 bg-white"
+      id="pricing"
     >
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-gray-50 to-transparent" />
         <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-gray-50 to-transparent" />
+        <div className="absolute left-0 top-1/4 w-40 h-40 rounded-full bg-blue-100/40 blur-3xl" />
+        <div className="absolute right-0 bottom-1/4 w-60 h-60 rounded-full bg-purple-100/40 blur-3xl" />
       </div>
       
       {/* Main content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-5xl font-bold mb-6">The Ink Drop</h2>
+          <h2 className="text-5xl font-bold mb-6">UI/UX Design Services</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Transparent pricing for projects that make an impact. Each package is customizable to your specific needs.
+            Transform your digital product with our premium design services. Choose the package that best fits your needs or contact us for a custom solution.
           </p>
         </motion.div>
         
-        {/* Pricing tabs */}
-        <div className="flex justify-center mb-12">
-          <div className="relative inline-flex bg-gray-100 rounded-lg p-1">
-            {/* Yellow ink drip animation */}
+        {/* Pricing cards - optimized for mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
+          {pricingPlans.map((plan, index) => (
             <motion.div
-              className="absolute top-0 bottom-0 rounded-lg bg-[#FFD700]"
-              animate={{
-                x: activeTab === "branding" ? 0 : "100%",
-                width: "50%",
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30,
-              }}
+              key={plan.id}
+              className={`relative bg-white rounded-xl overflow-hidden ${
+                plan.popular ? "ring-2 ring-opacity-80" : "border border-gray-200"
+              } shadow-lg transition-all duration-300`}
               style={{
-                translateX: activeTab === "branding" ? "0%" : "-100%",
+                ["--tw-ring-color" as any]: plan.popular ? plan.accentColor : 'transparent',
+                boxShadow: hoveredCard === plan.id 
+                  ? `0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 15px 2px ${plan.accentColor}30`
+                  : '0 10px 25px -5px rgba(0, 0, 0, 0.05)'
+              }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                transition: { delay: index * 0.15, duration: 0.6 }
+              }}
+              whileHover={{ 
+                y: -8,
+                transition: { duration: 0.3 }
+              }}
+              onMouseEnter={() => {
+                setHoveredCard(plan.id);
+                setIsHovering(true);
+              }}
+              onMouseLeave={() => {
+                setHoveredCard(null);
+                setIsHovering(false);
               }}
             >
-              <motion.div
-                className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-2 h-8 bg-[#FFD700]"
-                animate={{
-                  height: [8, 16, 8],
-                  y: [0, 4, 0],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2,
-                  ease: "easeInOut",
-                }}
-              />
-              <motion.div
-                className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-[#FFD700]"
-                animate={{
-                  y: [0, 8, 16],
-                  opacity: [1, 1, 0],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2,
-                  ease: "easeInOut",
-                }}
-              />
-            </motion.div>
-            
-            <button
-              className={`relative z-10 px-8 py-3 rounded-lg font-bold transition-colors ${activeTab === "branding" ? "text-black" : "text-gray-600"}`}
-              onClick={() => setActiveTab("branding")}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              Branding
-            </button>
-            
-            <button
-              className={`relative z-10 px-8 py-3 rounded-lg font-bold transition-colors ${activeTab === "ui" ? "text-black" : "text-gray-600"}`}
-              onClick={() => setActiveTab("ui")}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              UI/UX
-            </button>
-          </div>
-        </div>
-        
-        {/* Pricing cards */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {currentPricing.map((plan, index) => (
-              <motion.div
-                key={plan.title}
-                className={`relative bg-white rounded-lg overflow-hidden ${plan.popular ? "ring-2 ring-[#FFD700]" : "border border-gray-200"}`}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ 
-                  opacity: 1, 
-                  y: 0,
-                  transition: { delay: index * 0.1 }
-                }}
-                whileHover={{ 
-                  y: -5,
-                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                }}
-                style={{
-                  transformStyle: "preserve-3d",
-                  perspective: "1000px",
-                }}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-              >
-                {plan.popular && (
-                  <div className="absolute top-0 right-0 bg-[#FFD700] text-black font-bold text-xs px-3 py-1 rounded-bl-lg">
-                    MOST POPULAR
-                  </div>
-                )}
-                
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                  <p className="text-gray-600 mb-6">{plan.description}</p>
-                  
-                  <div className="flex items-end mb-6">
-                    <span className="text-4xl font-bold">{plan.price}</span>
-                    {!plan.price.includes("+") && (
-                      <span className="text-gray-500 ml-2">/ project</span>
-                    )}
-                  </div>
-                  
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-center">
-                        <svg className="w-5 h-5 mr-2 text-[#FFD700]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-                        </svg>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <motion.button
-                    className={`w-full py-3 px-6 rounded-lg font-bold transition-colors ${plan.popular ? "bg-[#FFD700] text-black" : "bg-gray-100 text-black hover:bg-gray-200"}`}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Get Started
-                  </motion.button>
+              {plan.popular && (
+                <div 
+                  className="absolute top-0 right-0 text-white font-bold text-xs px-4 py-2 rounded-bl-lg z-10"
+                  style={{ backgroundColor: plan.accentColor }}
+                >
+                  MOST POPULAR
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
+              )}
+              
+              {/* Card header with accent color */}
+              <div 
+                className="pt-8 sm:pt-10 px-6 sm:px-8 pb-6 relative overflow-hidden"
+                style={{ backgroundColor: `${plan.accentColor}08` }}
+              >
+                <motion.div 
+                  className="absolute top-0 right-0 w-32 h-32 opacity-10 rounded-full"
+                  style={{ backgroundColor: plan.accentColor }}
+                  initial={{ scale: 1, x: 40, y: -40 }}
+                  animate={hoveredCard === plan.id ? 
+                    { scale: 1.5, x: 20, y: -20 } : 
+                    { scale: 1, x: 40, y: -40 }
+                  }
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                />
+                
+                <h3 
+                  className="text-2xl font-bold mb-2"
+                  style={{ color: plan.accentColor }}
+                >
+                  {plan.title}
+                </h3>
+                <p className="text-gray-600 mb-5 min-h-[3rem] sm:min-h-[4rem]">{plan.description}</p>
+                
+                <div className="flex items-end mb-4">
+                  <span className="text-4xl font-bold">{plan.price}</span>
+                  {!plan.price.includes("+") && (
+                    <span className="text-gray-500 ml-2">/ project</span>
+                  )}
+                </div>
+              </div>
+              
+              {/* Card features */}
+              <div className="p-6 sm:p-8 pt-6 bg-white">
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature) => (
+                    <motion.li 
+                      key={feature.text} 
+                      className="flex items-start text-gray-700"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div 
+                        className="mr-3 mt-0.5 p-1 rounded-full"
+                        style={{ color: plan.accentColor }}
+                      >
+                        {feature.icon}
+                      </div>
+                      <span>{feature.text}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+                
+                <motion.button
+                  className="w-full py-3.5 px-6 rounded-lg font-bold text-white transition-all duration-300 relative overflow-hidden"
+                  style={{ 
+                    backgroundColor: hoveredCard === plan.id 
+                      ? plan.accentColor 
+                      : plan.accentColor + "CC"
+                  }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <motion.span
+                    className="absolute inset-0 w-full h-full bg-black opacity-0"
+                    animate={hoveredCard === plan.id ? 
+                      { opacity: 0.1, scale: 1 } : 
+                      { opacity: 0, scale: 0.9 }
+                    }
+                    transition={{ duration: 0.4 }}
+                  />
+                  <span className="relative z-10">{plan.ctaText}</span>
+                </motion.button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
         
         {/* Custom projects */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 text-center"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-16 sm:mt-20 text-center bg-gray-50 p-6 sm:p-10 rounded-xl sm:rounded-2xl shadow-sm"
         >
-          <h3 className="text-2xl font-bold mb-4">Need something custom?</h3>
-          <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
-            Every project is unique. If you don't see what you're looking for, let's discuss your specific needs and create a tailored solution.
-          </p>
-          
-          <motion.button
-            className="bg-black text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            Contact for Custom Quote
-          </motion.button>
+          <div className="max-w-3xl mx-auto">
+            <BarChart4 className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+            <h3 className="text-2xl font-bold mb-4">Need a custom solution?</h3>
+            <p className="text-gray-700 mb-8">
+              Every project is unique. If you need something tailored to your specific requirements, 
+              our team of UX/UI experts is ready to create a custom solution that perfectly fits your needs.
+            </p>
+            
+            <motion.button
+              className="bg-black text-white font-bold py-3 sm:py-4 px-6 sm:px-10 rounded-lg hover:bg-gray-800 transition-all duration-300 touch-target"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.15)" 
+              }}
+              whileTap={{ scale: 0.98 }}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <span className="flex items-center gap-2">
+                Contact for Custom Quote
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </motion.button>
+          </div>
         </motion.div>
+        
+        {/* Guarantee section */}
+        <div className="mt-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="flex items-center justify-center gap-2 text-gray-500"
+          >
+            <CheckCircle size={18} />
+            <span>14-day satisfaction guarantee on all projects</span>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

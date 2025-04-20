@@ -10,6 +10,7 @@ import {
   Branding,
 } from "@/utils/creatr.scripts";
 import { GlobalErrorHandler } from "@/utils/global-error-handler";
+import Footer from "@/components/ui/Footer";
 
 // Create a proper React component wrapper
 const ErrorBoundaryWrapper: React.FC<{ children: React.ReactNode }> = (
@@ -23,7 +24,8 @@ const ErrorBoundaryWrapper: React.FC<{ children: React.ReactNode }> = (
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 5,
+  minimumScale: 1,
 };
 
 export const metadata: Metadata = {
@@ -90,6 +92,7 @@ export default function RootLayout({
         <DOMInspector>
           <ErrorBoundaryWrapper>
             {children}
+            <Footer />
             <Branding />
           </ErrorBoundaryWrapper>
           <AnalyticsTracker siteKey="${siteKey}" />

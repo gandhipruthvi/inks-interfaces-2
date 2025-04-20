@@ -2,7 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile-first responsive breakpoints */
+:root {
+  --xs: 320px; /* Small mobile */
+  --sm: 640px; /* Large mobile */
+  --md: 768px; /* Tablet */
+  --lg: 1024px; /* Small desktop/laptop */
+  --xl: 1280px; /* Standard desktop */
+  --two-xl: 1440px; /* Large desktop */
+  --three-xl: 1920px; /* Extra large displays */
+}
+
 @layer base {
+  html {
+    font-size: 100%; /* Base font-size for rem calculations */
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  }
+  
+  /* Adjust base font sizes for different screens using mobile-first approach */
+  @media (width <= 320px) {
+    html {
+      font-size: 85%; /* 13.6px base for very small screens */
+    }
+  }
+  
+  @media (321px <= width <= 640px) {
+    html {
+      font-size: 87.5%; /* 14px base for mobile */
+    }
+  }
+  
+  @media (width >= 1440px) {
+    html {
+      font-size: 112.5%; /* 18px base for large screens */
+    }
+  }
+  
   :root {
     --background: #FFFFFF;
     --foreground: #09090B;
@@ -111,6 +147,10 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #FFD700;
   }
+
+  svg path {
+    stroke: currentcolor;
+  }
 }
 
 @layer components {
@@ -149,6 +189,59 @@
     background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px),
                       linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+  
+  /* 3D Card Flip Effect */
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+  
+  /* Ink Animation */
+  .ink-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation-fill-mode: forwards;
+  }
+  
+  /* Animated underline */
+  .animated-underline {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .animated-underline:hover::after {
+    width: 100%;
   }
 }
 
@@ -221,6 +314,160 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Mobile-first Responsive utilities */
+@layer utilities {
+  /* Container & spacing utilities */
+  .container-padding {
+    @apply px-5 sm:px-6 md:px-8 lg:px-12;
+  }
+  
+  .content-container {
+    @apply w-full max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-7xl mx-auto;
+  }
+  
+  /* Touch interaction utilities */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .active-touch-area {
+    @apply before:absolute before:inset-0 before:content-[''] before:w-full before:h-full before:min-h-[44px] before:min-w-[44px];
+  }
+
+  /* Mobile-first responsive typography */
+  .responsive-heading-1 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  .responsive-heading-2 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+  }
+
+  .responsive-heading-3 {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight;
+  }
+  
+  .responsive-text {
+    @apply text-sm sm:text-base md:text-lg leading-relaxed;
+  }
+
+  .responsive-text-small {
+    @apply text-xs sm:text-sm leading-normal;
+  }
+  
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  
+  /* Layout utilities */
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8;
+  }
+  
+  .responsive-section-spacing {
+    @apply py-12 sm:py-16 md:py-20 lg:py-24;
+  }
+  
+  .responsive-section-spacing-small {
+    @apply py-8 sm:py-10 md:py-12 lg:py-16;
+  }
+  
+  /* Enhanced accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  /* Responsive image utilities */
+  .responsive-image {
+    @apply w-full h-auto object-cover object-center;
+  }
+  
+  .responsive-aspect-ratio {
+    @apply relative pt-[56.25%]; /* 16:9 aspect ratio */
+  }
+  
+  .responsive-aspect-content {
+    @apply absolute inset-0 w-full h-full;
+  }
+  
+  /* Mobile interaction states */
+  @media (hover: hover) {
+    .hover-lift {
+      @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg;
+    }
+  }
+}
+
+/* Sticky Card Height for Mobile */
+@media screen and (width <= 768px) {
+  .sticky-card {
+    height: 40vh;
+  }
+}
+
+/* Smooth Scrolling for Sticky Cards */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Work section scroll effects */
+.sticky-project-card {
+  position: sticky;
+  top: 15vh;
+  max-height: 70vh;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+.scroll-container {
+  position: relative;
+  overflow-x: hidden;
+  padding-top: 10vh;
+  padding-bottom: 25vh;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+/* Add subtle glow effect for cards */
+.card-glow-blue:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0 0 30px rgba(100, 150, 255, 0.2);
+}
+
+.card-glow-yellow:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.card-glow-green:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0 0 30px rgba(50, 205, 50, 0.2);
+}
+
+.card-glow-pink:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1), 0 0 30px rgba(255, 105, 180, 0.2);
 }
 
 nextjs-portal {
