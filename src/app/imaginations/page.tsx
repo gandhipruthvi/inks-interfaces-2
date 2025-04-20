@@ -1,13 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ExternalLink, X } from "lucide-react";
 import { useInView } from "react-intersection-observer";
-import { ArrowRight, ExternalLink } from "lucide-react";
-
-interface WorkSectionProps {
-  setIsHovering: (isHovering: boolean) => void;
-}
+import Navbar from "@/components/ui/Navbar";
 
 interface CaseStudy {
   id: string;
@@ -21,16 +18,30 @@ interface CaseStudy {
   link?: string;
 }
 
-export default function WorkSection({ setIsHovering }: WorkSectionProps) {
+export default function ImaginationsPage() {
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
   
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
+  const [isHovering, setIsHovering] = useState(false);
   
-  // Case studies data - kept to 4 projects as per requirements
+  // Handle cursor movement
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setCursorPosition({ x: e.clientX, y: e.clientY });
+    };
+    
+    window.addEventListener("mousemove", handleMouseMove);
+    
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+  
+  // Case studies data - kept to 4 projects
   const caseStudies: CaseStudy[] = [
     {
       id: "bloom-cafe",
@@ -72,183 +83,194 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
       tags: ["Fashion", "Branding", "Global"],
       content: "Nomad Apparel wanted to position itself as a global brand with local sensibilities. The identity system incorporated elements from various cultures while maintaining a cohesive, contemporary aesthetic. The brand launch generated significant press coverage and exceeded first-quarter sales projections by 25%."
     },
+    {
+      id: "eco-travel-platform",
+      title: "EcoTravel Platform",
+      subtitle: "Web App Design",
+      description: "A comprehensive travel platform focused on sustainable tourism options with carbon footprint tracking and eco-friendly accommodations.",
+      image: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      color: "#2A9D8F",
+      tags: ["Web Design", "Sustainability", "User Experience"],
+      content: "EcoTravel needed a platform that would make sustainable travel choices attractive and accessible. We designed an interface that highlights eco-friendly options while maintaining a sense of adventure and discovery. The platform saw 200,000 signups within the first three months of launch."
+    },
+    {
+      id: "future-city",
+      title: "Future City Campaign",
+      subtitle: "Interactive Experience",
+      description: "An immersive digital experience showcasing urban planning innovations and sustainable development for future smart cities.",
+      image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      color: "#4059AD",
+      tags: ["Interactive", "3D", "Campaign"],
+      content: "The Future City Campaign needed to make complex urban planning concepts accessible and engaging for the general public. Our solution was an interactive 3D experience that allowed users to explore different aspects of sustainable city design. The campaign reached over 1 million unique visitors and was featured in several international design publications."
+    },
+    {
+      id: "culinary-app",
+      title: "Culinary Connection",
+      subtitle: "Social Platform",
+      description: "A social platform connecting home chefs with food enthusiasts for shared dining experiences, recipe exchanges, and culinary education.",
+      image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      color: "#D62828",
+      tags: ["Social", "Food", "Community"],
+      content: "Culinary Connection wanted to create a platform where passion for food could become a social experience. We designed an interface that makes discovering and connecting with fellow food enthusiasts intuitive and engaging. The app gained 50,000 active users within six months and has facilitated over 10,000 in-person dining events."
+    },
+    {
+      id: "wellness-retreat",
+      title: "Serenity Spaces",
+      subtitle: "Brand Experience",
+      description: "A comprehensive brand identity and digital presence for a luxury wellness retreat focusing on mindfulness and holistic health.",
+      image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      color: "#457B9D",
+      tags: ["Branding", "Wellness", "Luxury"],
+      content: "Serenity Spaces needed a brand identity that communicated both exclusivity and approachability. The design system uses natural textures, a calming color palette, and thoughtful typography to create a sense of tranquility and premium quality. Booking rates increased by 65% after the rebrand launch."
+    }
   ];
-  
-  // Animation for the cards' scroll behavior
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-  
+
   // Handle case study click
   const handleCaseStudyClick = (caseStudy: CaseStudy) => {
     setSelectedCaseStudy(caseStudy);
+    // Prevent scrolling when modal is open
+    document.body.style.overflow = "hidden";
   };
   
   // Close modal
   const closeModal = () => {
     setSelectedCaseStudy(null);
+    // Re-enable scrolling
+    document.body.style.overflow = "";
   };
-  
+
+  // Keyboard handling for modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && selectedCaseStudy) {
+        closeModal();
+      }
+    };
+    
+    window.addEventListener("keydown", handleKeyDown);
+    
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      // Make sure scrolling is re-enabled when component unmounts
+      document.body.style.overflow = "";
+    };
+  }, [selectedCaseStudy]);
+
   return (
-    <section 
-      ref={ref}
-      className="relative py-16 sm:py-24 lg:py-32 bg-gray-50 overflow-hidden"
-      id="work"
-    >
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent" />
-      </div>
+    <main className="min-h-screen bg-white">
+      {/* Navbar */}
+      <Navbar setIsHovering={setIsHovering} />
       
-      {/* Main content */}
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="px-4 sm:px-8 mb-12 sm:mb-16 lg:mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">Work Worth Watching</h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto">
-              Scroll through our featured projects to see how strategic design thinking translates into business success.
-            </p>
-          </motion.div>
+      {/* Hero Section */}
+      <section className="relative pt-36 pb-24 px-8 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-yellow-100 opacity-40 blur-3xl transform -translate-y-1/3" />
+          <div className="absolute bottom-0 left-20 w-96 h-96 rounded-full bg-blue-50 opacity-60 blur-3xl transform translate-y-1/4" />
         </div>
         
-        {/* Project cards container with sticky scrolling behavior */}
-        <div 
-          ref={containerRef} 
-          className="relative min-h-[300vh]"
-        >
-          {caseStudies.map((project, index) => (
-            <motion.div
-              key={project.id}
-              className="sticky top-[15vh] h-[70vh] mx-auto mb-8 max-w-6xl px-8"
-              style={{
-                opacity: 1,
-                // Calculate when this card should be visible based on scroll progress
-                // Each card gets a segment of the scroll range
-                willChange: "transform, opacity",
-              }}
-            >
-              <motion.div 
-                className="relative w-full h-full rounded-xl sm:rounded-2xl shadow-lg overflow-hidden bg-white animate-fade-in-up"
-                initial={{ y: 100, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
+          <motion.h1 
+            className="text-5xl sm:text-6xl font-bold mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            Imaginations
+          </motion.h1>
+          <motion.p 
+            className="text-xl text-gray-700 max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            Explore our portfolio of projects where strategic design thinking translates into extraordinary experiences and measurable business success.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Project Grid Section */}
+      <section ref={ref} className="py-16 px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {caseStudies.map((project, index) => (
+              <motion.div
+                key={project.id}
+                className="bg-white rounded-xl overflow-hidden shadow-lg"
+                initial={{ opacity: 0, y: 40 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ 
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
+                  y: -10,
+                  transition: { duration: 0.3 }
                 }}
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
               >
-                <div className="flex flex-col lg:flex-row h-full">
-                  {/* Left side - Project image */}
-                  <div className="lg:w-1/2 h-48 sm:h-64 lg:h-auto overflow-hidden relative">
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-br"
-                      style={{ backgroundColor: project.color, opacity: 0.1 }}
-                      whileHover={{ opacity: 0.2 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <motion.img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover object-center"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.6 }}
-                    />
+                {/* Project image */}
+                <div className="h-64 overflow-hidden relative">
+                  <div 
+                    className="absolute inset-0 opacity-10"
+                    style={{ backgroundColor: project.color }}
+                  />
+                  <motion.img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-center"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </div>
+                
+                {/* Project details */}
+                <div className="p-6">
+                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                    <span 
+                      className="inline-block px-3 py-1 text-sm font-medium rounded-full"
+                      style={{ 
+                        backgroundColor: `${project.color}20`,
+                        color: project.color
+                      }}
+                    >
+                      {project.subtitle}
+                    </span>
+                    
+                    {project.tags.slice(0, 2).map(tag => (
+                      <span 
+                        key={tag} 
+                        className="inline-block px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                   
-                  {/* Right side - Project details */}
-                  <div className="lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-between">
-                    <div>
-                      {/* Project category and tags */}
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                        <span 
-                          className="inline-block px-3 py-1 text-sm font-medium rounded-full"
-                          style={{ 
-                            backgroundColor: `${project.color}20`,
-                            color: project.color
-                          }}
-                        >
-                          {project.subtitle}
-                        </span>
-                        
-                        {project.tags.slice(0, 2).map(tag => (
-                          <span 
-                            key={tag} 
-                            className="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      
-                      {/* Project title and description - improved mobile size */}
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">{project.title}</h3>
-                      <p className="text-gray-700 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg leading-relaxed">
-                        {project.description}
-                      </p>
-                    </div>
-                    
-                    {/* CTA Button */}
-                    <motion.button
-                      className="flex items-center gap-2 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg font-medium text-base sm:text-lg touch-target"
-                      style={{ backgroundColor: project.color }}
-                      whileHover={{ 
-                        scale: 1.02,
-                        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" 
-                      }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => handleCaseStudyClick(project)}
-                    >
-                      View Case Study 
-                      <ArrowRight size={18} />
-                    </motion.button>
-                  </div>
+                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-gray-600 mb-6 line-clamp-3">{project.description}</p>
+                  
+                  <motion.button
+                    className="flex items-center gap-2 text-white px-5 py-2.5 rounded-lg font-medium"
+                    style={{ backgroundColor: project.color }}
+                    whileHover={{ scale: 1.03, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => handleCaseStudyClick(project)}
+                  >
+                    View Case Study 
+                    <ArrowRight size={16} />
+                  </motion.button>
                 </div>
                 
                 {/* Project number indicator */}
                 <div 
-                  className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white"
+                  className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white"
                   style={{ backgroundColor: project.color }}
                 >
                   {index + 1}
                 </div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
-        
-        {/* Explore More Projects button */}
-        <motion.div 
-          className="flex justify-center pt-12 pb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <motion.a
-            href="/imaginations"
-            className="inline-flex items-center gap-2 bg-black text-white px-10 py-5 rounded-xl font-bold text-lg shadow-lg"
-            whileHover={{ 
-              scale: 1.05, 
-              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" 
-            }}
-            whileTap={{ scale: 0.98 }}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            Explore More Projects
-            <ExternalLink size={20} />
-          </motion.a>
-        </motion.div>
-      </div>
+      </section>
       
       {/* Case study modal */}
       <AnimatePresence>
@@ -261,7 +283,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
             onClick={closeModal}
           >
             <motion.div
-              className="relative bg-white rounded-2xl max-w-5xl w-full max-h-[85vh] overflow-y-auto"
+              className="relative bg-white rounded-2xl max-w-5xl w-full max-h-[85vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300"
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
@@ -298,10 +320,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <X size={24} />
                 </motion.button>
               </div>
               
@@ -360,6 +379,23 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+      
+      {/* Custom cursor if isHovering */}
+      {isHovering && (
+        <motion.div
+          className="fixed top-0 left-0 w-6 h-6 rounded-full bg-[#FFD700] mix-blend-difference pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2" 
+          animate={{
+            x: cursorPosition.x,
+            y: cursorPosition.y,
+          }}
+          transition={{
+            type: "spring",
+            damping: 25,
+            stiffness: 300,
+            mass: 0.5
+          }}
+        />
+      )}
+    </main>
   );
 }

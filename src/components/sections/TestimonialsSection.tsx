@@ -3,7 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay, EffectCoverflow } from 'swiper/modules';
 
 // Define Timeout type since NodeJS namespace isn't available
 type Timeout = ReturnType<typeof setTimeout>;
@@ -23,14 +27,15 @@ interface Testimonial {
 }
 
 export default function TestimonialsSection({ setIsHovering }: TestimonialsSectionProps) {
-  const [ref, inView] = useInView({
+  // Viewport detection
+  const [sectionRef, sectionInView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
-
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [autoplay, setAutoplay] = useState(true);
-  const autoplayTimeoutRef = useRef<Timeout | null>(null);
+  
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   
   const testimonials: Testimonial[] = [
     {
@@ -71,154 +76,232 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
     }
   ];
 
-  // Handle autoplay functionality
-  useEffect(() => {
-    if (!inView || !autoplay) {
-      if (autoplayTimeoutRef.current) {
-        clearTimeout(autoplayTimeoutRef.current);
-      }
-      return;
-    }
-
-    autoplayTimeoutRef.current = setTimeout(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-
-    return () => {
-      if (autoplayTimeoutRef.current) {
-        clearTimeout(autoplayTimeoutRef.current);
-      }
-    };
-  }, [activeTestimonial, autoplay, inView, testimonials.length]);
-
-  // Handle testimonial navigation
-  const handlePrevious = () => {
-    setAutoplay(false);
-    setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const handleNext = () => {
-    setAutoplay(false);
-    setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const handleDotClick = (index: number) => {
-    setAutoplay(false);
-    setActiveTestimonial(index);
-  };
-
   return (
     <section
-      ref={ref}
-      className="relative py-20 bg-white overflow-hidden"
+      ref={sectionRef}
+      className="relative py-20 px-8 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
       id="testimonials"
+      aria-labelledby="testimonials-heading"
     >
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-gray-50 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-gray-50 to-transparent" />
-        <Quote className="absolute top-20 left-10 text-gray-100 opacity-20 w-24 h-24" />
-        <Quote className="absolute bottom-20 right-10 text-gray-100 opacity-20 w-16 h-16 transform rotate-180" />
+      {/* Background elements with enhanced parallax */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">        
+        {/* Left floating quote */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={sectionInView ? {
+            opacity: [0.15, 0.25, 0.15],
+            y: [0, -15, 0],
+            scale: [1, 1.05, 1]
+          } : {}}
+          transition={{ 
+            repeat: Infinity, 
+            duration: 8,
+            ease: "easeInOut"
+          }}
+          className="absolute -left-10 top-40 transform -rotate-12"
+        >
+          <Quote className="text-gray-200 w-32 h-32" strokeWidth={1} />
+        </motion.div>
+        
+        {/* Right floating quote */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={sectionInView ? {
+            opacity: [0.15, 0.25, 0.15],
+            y: [0, 15, 0],
+            rotate: [0, 5, 0]
+          } : {}}
+          transition={{ 
+            repeat: Infinity, 
+            duration: 9,
+            ease: "easeInOut",
+            delay: 1.2
+          }}
+          className="absolute right-10 bottom-20 transform rotate-180"
+        >
+          <Quote className="text-gray-200 w-24 h-24" strokeWidth={1} />
+        </motion.div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={sectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-6">Client Testimonials</h2>
+          <h2 
+            id="testimonials-heading" 
+            className="text-5xl font-bold mb-6 text-gray-900"
+          >
+            Client Testimonials
+          </h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Hear what our clients have to say about their experience working with us.
           </p>
         </motion.div>
 
         {/* Testimonials carousel */}
-        <div className="relative min-h-[400px]">
-          <AnimatePresence mode="wait">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.id}
-                className={`absolute inset-0 ${index === activeTestimonial ? "block" : "hidden"}`}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-              >
-                <div className="flex flex-col md:flex-row items-center gap-10 bg-white rounded-2xl p-8 shadow-xl">
-                  <div className="md:w-1/3">
-                    <div className="relative rounded-full overflow-hidden w-48 h-48 mx-auto border-4 border-white shadow-lg">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.author}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="md:w-2/3 flex flex-col">
-                    <div className="flex mb-4 text-yellow-500">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} size={20} fill="currentColor" />
-                      ))}
-                    </div>
-                    
-                    <blockquote className="text-xl italic text-gray-700 mb-6 relative">
-                      <span className="absolute -top-4 -left-4 text-5xl text-gray-200">"</span>
-                      {testimonial.content}
-                      <span className="absolute -bottom-10 -right-4 text-5xl text-gray-200">"</span>
-                    </blockquote>
-                    
-                    <div className="mt-4">
-                      <h4 className="text-xl font-bold">{testimonial.author}</h4>
-                      <p className="text-gray-600">{testimonial.position}, {testimonial.company}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-
-          {/* Navigation controls */}
-          <div className="absolute bottom-[-60px] left-1/2 transform -translate-x-1/2 flex items-center justify-center gap-4">
-            <button
-              onClick={handlePrevious}
-              className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleDotClick(index)}
-                  className={`w-3 h-3 rounded-full ${
-                    index === activeTestimonial
-                      ? "bg-black"
-                      : "bg-gray-300 hover:bg-gray-400"
-                  } transition-colors`}
+        <div className="max-w-6xl mx-auto px-4 relative">
+          <Swiper
+            modules={[Navigation, Autoplay, EffectCoverflow]}
+            effect="coverflow"
+            grabCursor
+            centeredSlides
+            slidesPerView="auto"
+            coverflowEffect={{
+              rotate: 0,
+              stretch: 0,
+              depth: 100,
+              modifier: 2.5,
+              slideShadows: false,
+            }}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            initialSlide={1}
+            loop={true}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+            onSwiper={(swiper) => {
+              // Connect custom navigation buttons
+              // @ts-ignore
+              swiper.params.navigation.prevEl = prevRef.current;
+              // @ts-ignore
+              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }}
+            navigation={{
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            className="testimonial-swiper"
+          >
+            {testimonials.map((testimonial) => (
+              <SwiperSlide key={testimonial.id} className="py-12 px-2">
+                <motion.div
+                  className="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-300 mx-auto max-w-2xl"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
+                >
+                  <div className="p-8 sm:p-10">
+                    {/* Content */}
+                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start sm:items-center mb-6">
+                      {/* Author image */}
+                      <div className="flex-shrink-0">
+                        <div className="w-20 h-20 sm:w-24 sm:h-24 relative">
+                          <motion.div 
+                            className="absolute inset-0 rounded-full"
+                            style={{
+                              background: `conic-gradient(from 180deg at 50% 50%, #FFD700 0deg, transparent 60deg, #FFD700 360deg)`,
+                            }}
+                            animate={{ rotate: 360 }}
+                            transition={{ 
+                              duration: 8, 
+                              repeat: Infinity, 
+                              ease: "linear",
+                            }}
+                          />
+                          <div className="absolute inset-[2px] rounded-full overflow-hidden border-2 border-white">
+                            <img
+                              src={testimonial.image}
+                              alt={`Portrait of ${testimonial.author}`}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Author info */}
+                      <div>
+                        <h4 className="font-bold text-xl">{testimonial.author}</h4>
+                        <p className="text-gray-600">
+                          {testimonial.position} at <span className="font-medium">{testimonial.company}</span>
+                        </p>
+                        
+                        {/* Star rating */}
+                        <div className="flex mt-2">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star 
+                              key={i} 
+                              size={16}
+                              className="text-yellow-500 fill-yellow-500 mr-0.5" 
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Testimonial content */}
+                    <div className="relative">
+                      <Quote size={32} className="text-gray-200 absolute top-0 left-0 transform -translate-x-1 -translate-y-2" />
+                      <blockquote className="pl-8 pr-2 text-gray-700 italic text-lg sm:text-xl leading-relaxed">
+                        {testimonial.content}
+                      </blockquote>
+                    </div>
+                  </div>
+                </motion.div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          
+          {/* Custom navigation buttons */}
+          <div className="flex justify-center mt-10 gap-6">
+            <motion.button
+              ref={prevRef}
+              className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-gray-100"
+              whileHover={{ scale: 1.1, backgroundColor: "#FFD700" }}
+              whileTap={{ scale: 0.9 }}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft size={20} />
+            </motion.button>
+            
+            <div className="flex items-center gap-2">
+              {testimonials.map((_, index) => (
+                <motion.div
+                  key={index}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === activeIndex ? "w-8 bg-black" : "w-2 bg-gray-300"
+                  }`}
+                  whileHover={{
+                    backgroundColor: index === activeIndex ? "#000" : "#999"
+                  }}
                 />
               ))}
             </div>
             
-            <button
-              onClick={handleNext}
-              className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+            <motion.button
+              ref={nextRef}
+              className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-gray-100"
+              whileHover={{ scale: 1.1, backgroundColor: "#FFD700" }}
+              whileTap={{ scale: 0.9 }}
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
+              aria-label="Next testimonial"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
+              <ChevronRight size={20} />
+            </motion.button>
+          </div>
+          
+          {/* Help text */}
+          <div className="text-center mt-6">
+            <motion.p 
+              className="text-sm text-gray-500"
+              initial={{ opacity: 0 }}
+              animate={sectionInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ delay: 1 }}
+            >
+              Swipe or use the arrow buttons to see more testimonials
+            </motion.p>
           </div>
         </div>
       </div>
