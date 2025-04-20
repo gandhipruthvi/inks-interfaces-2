@@ -64,17 +64,17 @@ export const metadata: Metadata = {
 const filsonPro = localFont({
   src: [
     {
-      path: '../fonts/FilsonProRegular.woff2',
+      path: '../fonts/FilsonProRegular.otf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../fonts/FilsonProMedium.woff2',
+      path: '../fonts/FilsonProMedium.otf',
       weight: '500',
       style: 'normal',
     },
     {
-      path: '../fonts/FilsonProBold.woff2',
+      path: '../fonts/FilsonProBold.otf',
       weight: '700',
       style: 'normal',
     },
