@@ -102,23 +102,21 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100">
       {/* Top section with logo and company info */}
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-12">
-        <div className="flex flex-col md:flex-row items-start justify-between gap-10">
-          {/* Logo and mission statement */}
-          <div className="max-w-md">
-            <div className="flex items-center gap-2 mb-6">
+      <div className="w-full">
+        <div className="flex flex-col md:flex-row items-stretch justify-between gap-0 md:gap-0 overflow-hidden relative w-full">
+          {/* Left side: Logo, mission, socials */}
+          <div className="flex-1 bg-white flex flex-col justify-center z-10">
+            <div className="flex items-center gap-2 mb-6 p-8 md:p-12 pb-0">
               <div className="h-10 w-10 bg-black rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">I</span>
               </div>
               <span className="font-bold text-xl">Inks & Interfaces</span>
             </div>
-            
-            <p className="text-gray-600 mb-6 sm:mb-8">
+            <p className="text-gray-600 mb-6 sm:mb-8 px-8 md:px-12">
               We transform ideas into exceptional digital experiences through thoughtful design
               and strategic creativity. Elevating brands with pixel-perfect precision and purpose.
             </p>
-
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 px-8 md:px-12 pb-8 md:pb-12">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.name}
@@ -126,15 +124,8 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 text-gray-500 hover:text-white transition-colors duration-300"
-                  style={{ 
-                    backgroundColor: "rgba(249, 250, 251, 0.8)" 
-                  }}
-                  whileHover={{ 
-                    backgroundColor: social.color,
-                    scale: 1.1,
-                    color: "#FFFFFF",
-                    y: -3
-                  }}
+                  style={{ backgroundColor: "rgba(249, 250, 251, 0.8)" }}
+                  whileHover={{ backgroundColor: social.color, scale: 1.1, color: "#FFFFFF", y: -3 }}
                   whileTap={{ scale: 0.95 }}
                   title={social.name}
                 >
@@ -144,16 +135,44 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* CTA Button for Start Your Project */}
-          <div className="flex flex-col items-start justify-center">
-            <h4 className="text-lg font-bold mb-4">Ready to get started?</h4>
-            <motion.button
-              className="px-8 py-4 bg-black text-white font-bold rounded-xl hover:bg-[#FFD700] hover:text-black transition-colors duration-300 shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Start Your Project
-            </motion.button>
+          {/* Blending gradient divider */}
+          <div className="hidden md:block w-12 flex-shrink-0 relative z-20">
+            <div className="absolute inset-0 h-full w-full" style={{ background: "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.0) 50%, rgba(17,17,17,1) 100%)" }} />
+          </div>
+
+          {/* Right side: Global CTA */}
+          <div className="flex-1 bg-black text-white flex flex-col justify-center z-10">
+            <div className="text-center md:text-left px-8 md:px-12">
+              <motion.h2 
+                className="text-3xl md:text-4xl font-bold mb-6 mt-8 md:mt-12"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                Ready to Transform Your Brand?
+              </motion.h2>
+              <motion.p
+                className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                Let's create something extraordinary together. Our team is ready to bring your vision to life.
+              </motion.p>
+              <motion.button
+                className="px-8 py-4 bg-[#FFD700] text-black font-bold rounded-xl text-lg md:text-xl shadow-lg hover:scale-105 transition-all duration-300 mb-8 md:mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                whileHover={{ scale: 1.05, boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Start Your Project
+              </motion.button>
+            </div>
           </div>
         </div>
       </div>

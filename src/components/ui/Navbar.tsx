@@ -70,10 +70,11 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
       {/* Logo */}
       <div className="absolute top-6 left-5 sm:top-8 sm:left-12 z-30">
         <Link href="/">
-          <div 
-            className="flex items-center gap-2"
+          <div
+            className="backdrop-blur-md bg-white/40 border border-white/60 shadow-lg rounded-xl px-3 py-2 flex items-center gap-2"
             onMouseEnter={() => setIsHovering?.(true)}
             onMouseLeave={() => setIsHovering?.(false)}
+            style={{ boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)' }}
           >
             <div className="h-10 w-10 bg-black rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">I</span>

@@ -62,9 +62,10 @@ export default function Cursor({ position, isHovering }: CursorProps) {
         }}
         transition={{
           type: "spring",
-          damping: 35,
-          stiffness: 300,
-          mass: 0.3,
+          damping: 18,
+          stiffness: 120,
+          mass: 0.7,
+          restDelta: 0.2,
         }}
       />
       
@@ -78,9 +79,10 @@ export default function Cursor({ position, isHovering }: CursorProps) {
         }}
         transition={{
           type: "spring",
-          damping: 60,
-          stiffness: 300,
-          mass: 0.5,
+          damping: 30,
+          stiffness: 80,
+          mass: 1.1,
+          restDelta: 0.3,
         }}
       />
     </>

@@ -124,13 +124,15 @@ function HorizontalScrollCarousel() {
       style={{ height: sectionHeight }}
     >
       <div className="sticky top-0 h-screen flex items-center justify-center">
-        <motion.div style={{ x }} className="flex w-full">
-          {steps.map((step, i) => (
-            <div key={step.id} className="flex-shrink-0 w-full flex items-center justify-center">
-              <ProcessCard step={step} active={i === activeCardIndex} />
-            </div>
-          ))}
-        </motion.div>
+        <div className="horizontal-scroll w-full">
+          <motion.div style={{ x }} className="flex w-full">
+            {steps.map((step, i) => (
+              <div key={step.id} className="flex-shrink-0 w-full flex items-center justify-center">
+                <ProcessCard step={step} active={i === activeCardIndex} />
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

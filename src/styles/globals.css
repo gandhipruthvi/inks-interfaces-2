@@ -130,23 +130,45 @@
     @apply font-filson font-bold;
   }
   
-  /* Custom scrollbar */
+  /* Minimal & small vertical scrollbar (global) */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
+    background: transparent;
   }
-  
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
   ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
+    background: #b0b0b0;
+    border-radius: 3px;
+    transition: background 0.2s;
   }
-  
   ::-webkit-scrollbar-thumb:hover {
     background: #FFD700;
   }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Hide horizontal scrollbar for .horizontal-scroll containers, keep scrolling */
+  .horizontal-scroll::-webkit-scrollbar {
+    height: 0px;
+  }
+  .horizontal-scroll {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  .horizontal-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .horizontal-scroll::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  /* Firefox vertical scrollbar (global) */
+  html, body {
+    scrollbar-width: thin;
+    scrollbar-color: #b0b0b0 transparent;
+  }
+
 
   svg path {
     stroke: currentcolor;
@@ -417,7 +439,7 @@
 }
 
 /* Smooth Scrolling for Sticky Cards */
-html {
+html, body {
   scroll-behavior: smooth;
 }
 
