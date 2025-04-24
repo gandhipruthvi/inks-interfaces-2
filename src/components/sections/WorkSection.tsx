@@ -122,13 +122,13 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
         {/* Project cards container with sticky scrolling behavior */}
         <div 
           ref={containerRef} 
-          className="relative"
+          className="relative mb-16 sm:mb-16 lg:mb-24"
           style={{
             height: `calc(${cardsCount} * ${cardHeight})`,
             paddingBottom: `calc(${cardsCount} * ${cardTopPadding})`,
           }}
         >
-          <ul className="flex flex-col gap-10">
+          <ul className="flex flex-col gap-32">
             {caseStudies.map((project, index) => {
               return (
                 <motion.li
@@ -144,14 +144,14 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
                   <motion.div
-                    className="relative w-full rounded-xl sm:rounded-2xl shadow-lg overflow-hidden bg-white"
+                    className="relative w-full rounded-xl sm:rounded-2xl shadow-lg overflow-hidden bg-white min-h-[70vh] flex flex-col"
                     whileHover={{ 
                       boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
                     }}
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
                   >
-                    <div className="flex flex-col lg:flex-row h-full">
+                    <div className="flex flex-col lg:flex-row h-full flex-grow">
                       {/* Left side - Project image */}
                       <div className="lg:w-1/2 h-48 sm:h-64 lg:h-auto overflow-hidden relative">
                         <motion.div
@@ -170,7 +170,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                       </div>
                       
                       {/* Right side - Project details */}
-                      <div className="lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-between">
+                      <div className="lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-between flex-grow">
                         <div>
                           {/* Project category and tags */}
                           <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
@@ -234,11 +234,11 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
         
         {/* Call to action */}
         <motion.div 
-           className="flex justify-center pt-12 pb-16"
-           initial={{ opacity: 0, y: 30 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex justify-center pt-12 pb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
         >
           <motion.a
             href="/imaginations"
