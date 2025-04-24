@@ -90,17 +90,28 @@ export default function HeroSection({ setIsHovering }: HeroSectionProps) {
       <div className="relative z-10 max-w-4xl mx-auto">
         {/* Animated headline */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 overflow-visible">
-          {heroText.split("").map((letter, i) => (
-            <motion.span
-              key={i}
-              custom={i}
-              variants={letterVariants}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              className="inline-block"
+          {heroText.split(" ").map((word, wi) => (
+            <span
+              key={wi}
+              className="inline-block whitespace-nowrap mr-2"
             >
-              {letter === " " ? "\u00A0" : letter}
-            </motion.span>
+              {word.split("").map((letter, li) => {
+                // Calculate unique index for animation delay
+                const i = heroText.split(" ").slice(0, wi).join(" ").length + wi + li;
+                return (
+                  <motion.span
+                    key={li}
+                    custom={i}
+                    variants={letterVariants}
+                    initial="hidden"
+                    animate={inView ? "visible" : "hidden"}
+                    className="inline-block"
+                  >
+                    {letter}
+                  </motion.span>
+                );
+              })}
+            </span>
           ))}
         </h1>
         

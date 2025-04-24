@@ -11,7 +11,7 @@ const steps = [
     icon: <Search className="w-12 h-12 text-indigo-600" />,
     progress: 0,
     deliverables: [
-      "Brand questionnaire & discovery workshop",
+      "Brand questionnaire & discovery",
       "Target audience analysis",
       "Project scope & timeline planning",
     ],
@@ -140,8 +140,6 @@ function HorizontalScrollCarousel() {
 
 // Individual Card
 function ProcessCard({ step, active }: { step: typeof steps[number]; active: boolean }) {
-  const duration = step.id === 1 || step.id === 6 ? "1-2 weeks" : "2-3 weeks";
-
   return (
     <div className="group relative h-[500px] max-w-[90vw] bg-white rounded-3xl shadow-xl border p-8 flex flex-col">
       <div className="absolute top-6 right-6">
@@ -178,8 +176,6 @@ function ProcessCard({ step, active }: { step: typeof steps[number]; active: boo
           ))}
         </ul>
       </div>
-
-      <div className="mt-6 text-sm text-neutral-500">This phase typically takes {duration} to complete.</div>
     </div>
   );
 }
