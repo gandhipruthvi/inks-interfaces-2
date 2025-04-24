@@ -33,44 +33,44 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
   // Case studies data - kept to 4 projects as per requirements
   const caseStudies: CaseStudy[] = [
     {
-      id: "bloom-cafe",
-      title: "Bloom Café Rebrand",
-      subtitle: "Brand Identity",
-      description: "Revitalizing a local coffee chain with a fresh, nature-inspired identity system that resonates with younger demographics while honoring quality traditions.",
-      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
-      color: "#68A691",
-      tags: ["Branding", "Identity", "Packaging"],
-      content: "Bloom Café needed a brand refresh that would appeal to a younger demographic while maintaining their reputation for quality. The solution was a vibrant, nature-inspired identity system with playful illustrations and a warm color palette. The rebrand resulted in a 30% increase in foot traffic and significant social media engagement."
+      id: "gomiles",
+      title: "Go Miles Website Redesign",
+      subtitle: "UI/UX Design",
+      description: "Revamping the Go Miles website to improve user experience and visual appeal. The new design focuses on making travel planning easier, with a cleaner layout, better navigation, and a more modern look that speaks to today’s travelers.",
+      image: "/assets/gomiles.png",
+      color: "#e4ba88",
+      tags: ["Responsive Design", "Travel", "UI/UX Design"],
+      content: "Go Miles needed a website that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new site received positive feedback and helped the company attract more customers."
     },
     {
-      id: "mindful-app",
-      title: "Mindful Mobile App",
-      subtitle: "UX/UI Design",
-      description: "Creating an intuitive interface for mental wellness tracking that combines calming aesthetics with thoughtful interactions to improve user engagement.",
-      image: "https://images.unsplash.com/photo-1616469829941-c7200edec809?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
-      color: "#E86343",
-      tags: ["UX/UI", "Mobile", "Wellness"],
-      content: "Mindful needed an intuitive interface that would make mental health tracking accessible and engaging. The design focused on calming visuals, thoughtful micro-interactions, and a streamlined user flow. Post-launch metrics showed a 45% increase in daily active users and an average session time of 12 minutes."
+      id: "zestee",
+      title: "Zestee Logo",
+      subtitle: "Brand Identity Design",
+      description: "Created a fresh and energetic brand identity for Zestee Café, including logo design and complete visual branding. The new look reflects the café’s vibrant personality and creates a memorable experience for its customers.",
+      image: "/assets/zestee.png",
+      color: "#FDB91A",
+      tags: ["Logo Design", "Café Branding", "Premium"],
+      content: "Zestee needed a brand identity that would reflect its premium, upscale café experience. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the café stand out in a competitive market."
     },
     {
-      id: "finance-dashboard",
-      title: "FinTrack Dashboard",
-      subtitle: "Data Visualization",
-      description: "Simplifying complex financial information through intuitive data visualizations and a clean interface that improves user comprehension and task completion.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      id: "lcm",
+      title: "LCM Logo and UI/UX",
+      subtitle: "UI/UX Design",
+      description: "Designed an inclusive, responsive website and brand identity for Lab Coat Media — a platform built with accessibility at its core, ensuring equal digital experiences for everyone, regardless of disability.",
+      image: "/assets/lcm.png",
       color: "#3A506B",
-      tags: ["Dashboard", "Finance", "Data"],
-      content: "FinTrack needed a dashboard that would make complex financial data accessible to non-expert users. The solution included intuitive charts, customizable widgets, and a clean, focused interface. User testing showed a 60% improvement in task completion rates compared to the previous version."
+      tags: ["Logo Design", "Accessibility", "Responsive Design"],
+      content: "Lab Coat Media needed a brand identity that would reflect its commitment to accessibility and inclusivity. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the company stand out in a competitive market."
     },
     {
-      id: "nomad-apparel",
-      title: "Nomad Apparel",
-      subtitle: "Global Brand Identity",
-      description: "Developing a cohesive identity for an international fashion brand that balances global appeal with local cultural sensibilities across markets.",
-      image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      id: "globetap",
+      title: "GlobeTap App UI Design",
+      subtitle: "Mobile UI/UX Design",
+      description: "Designed a modern, intuitive mobile interface for GlobeTap — a travel app that helps users explore new destinations, plan trips effortlessly, and connect with global experiences on the go.",
+      image: "/assets/globetap.png",
       color: "#B07156",
-      tags: ["Fashion", "Branding", "Global"],
-      content: "Nomad Apparel wanted to position itself as a global brand with local sensibilities. The identity system incorporated elements from various cultures while maintaining a cohesive, contemporary aesthetic. The brand launch generated significant press coverage and exceeded first-quarter sales projections by 25%."
+      tags: ["Mobile Experience", "Travel", "UI/UX Design"],
+      content: "GlobeTap needed a mobile interface that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new app resonated with customers and helped the company attract more users."
     },
   ];
   

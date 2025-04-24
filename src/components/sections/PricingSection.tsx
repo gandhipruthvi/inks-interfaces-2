@@ -52,70 +52,82 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
   // Pricing data with integrated icons
   const pricingPlans: PricingPlan[] = [
     {
-      id: "ui-audit",
-      title: "UI Audit",
+      id: "logo-design",
+      title: "Logo Design",
       price: "$1,500",
-      description: "Comprehensive review of your interface to identify opportunities for improvement",
+      description: "Crafted brand marks that are timeless, memorable, and scalable across all mediums.",
       features: [
         { 
-          text: "Usability Assessment",
+          text: "Strategic Discovery Call",
           icon: <UserCheck size={18} className="flex-shrink-0" />
         },
         { 
-          text: "Visual Design Review", 
+          text: "Moodboard & Style Exploration", 
           icon: <Palette size={18} className="flex-shrink-0" /> 
         },
         { 
-          text: "Accessibility Check",
+          text: "3 Logo Concepts",
           icon: <Users size={18} className="flex-shrink-0" />
         },
         { 
-          text: "Conversion Optimization", 
+          text: "3 Rounds of Revisions", 
           icon: <LineChart size={18} className="flex-shrink-0" />
         },
         { 
-          text: "Detailed Report & Recommendations",
+          text: "Final Logo in Multiple Formats (SVG, PNG, PDF)",
           icon: <FileText size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Light Brand Guide (color codes, font usage)",
+          icon: <Zap size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Social Media Profile Assets",
+          icon: <Zap size={18} className="flex-shrink-0" />
         }
       ],
       popular: false,
       accentColor: "#4F46E5", // Indigo
-      ctaText: "Schedule Audit"
+      ctaText: "Design My Logo"
     },
     {
-      id: "ui-design-system",
-      title: "UI Design System",
+      id: "branding",
+      title: "Brand Identity",
       price: "$4,500",
-      description: "Cohesive, scalable design system that ensures consistency across your product",
+      description: "A holistic brand identity system tailored to tell your story and stand out in a crowded market.",
       features: [
         { 
-          text: "Component Library",
+          text: "Brand Discovery & Strategy",
           icon: <Layers size={18} className="flex-shrink-0" /> 
         },
         { 
-          text: "Style Guide & Design Tokens",
+          text: "Logo Suite + Variations",
           icon: <Palette size={18} className="flex-shrink-0" /> 
         },
         { 
-          text: "Responsive Design Patterns", 
+          text: "Brand Color Palette", 
           icon: <Layout size={18} className="flex-shrink-0" /> 
         },
         { 
-          text: "Interactive Documentation",
+          text: "Typography System",
           icon: <FileText size={18} className="flex-shrink-0" /> 
         },
         { 
-          text: "Figma/Sketch Design Files", 
+          text: "Visual Style Direction (patterns, icons, mockups)", 
           icon: <Figma size={18} className="flex-shrink-0" /> 
         },
         { 
-          text: "Developer Handoff & Support",
+          text: "Brand Guidelines (PDF & Web)",
           icon: <Code size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Social Media Templates",
+          icon: <Zap size={18} className="flex-shrink-0" />
         }
       ],
       popular: true,
       accentColor: "#8B5CF6", // Purple
-      ctaText: "Start Your Design System"
+      ctaText: "Build My Brand"
     },
     {
       id: "full-uxui-project",
@@ -184,7 +196,7 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl font-bold mb-6">UI/UX Design Services</h2>
+          <h2 className="text-5xl font-bold mb-6">Design Tiers</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Transform your digital product with our premium design services. Choose the package that best fits your needs or contact us for a custom solution.
           </p>
