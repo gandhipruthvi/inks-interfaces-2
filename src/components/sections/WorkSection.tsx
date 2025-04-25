@@ -75,7 +75,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
   ];
   
   // Calculate dynamic values for the sticky effect
-  const cardHeight = "80vh";
+  const cardHeight = "70vh";
   const cardTopPadding = "1.5em";
   const cardMargin = "4vw";
   const cardsCount = caseStudies.length;
@@ -94,7 +94,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
   return (
     <section 
       ref={ref}
-      className="relative py-16 sm:py-24 lg:py-32 bg-gray-50 overflow-visible"
+      className="relative py-16 sm:py-24 lg:py-32 bg-gray-50 overflow-visible "
       id="work"
     >
       {/* Background elements */}
@@ -122,13 +122,13 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
         {/* Project cards container with sticky scrolling behavior */}
         <div 
           ref={containerRef} 
-          className="relative mb-16 sm:mb-16 lg:mb-24"
+          className="relative mb-[30rem]"
           style={{
             height: `calc(${cardsCount} * ${cardHeight})`,
             paddingBottom: `calc(${cardsCount} * ${cardTopPadding})`,
           }}
         >
-          <ul className="flex flex-col gap-32">
+          <ul className="flex flex-col gap-32 px-4 sm:px-6 md:px-0">
             {caseStudies.map((project, index) => {
               return (
                 <motion.li
@@ -145,6 +145,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                 >
                   <motion.div
                     className="relative w-full rounded-xl sm:rounded-2xl shadow-lg overflow-hidden bg-white min-h-[70vh] flex flex-col"
+                    style={{ marginBottom: 24 }} // Add bottom margin to each card
                     whileHover={{ 
                       boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
                     }}
@@ -234,7 +235,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
         
         {/* Call to action */}
         <motion.div 
-            className="flex justify-center pt-12 pb-16"
+            className="flex justify-center pt-12 pb-24 sm:pb-20 lg:pb-24 px-4 mt-24 sm:mt-20 lg:mt-28"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

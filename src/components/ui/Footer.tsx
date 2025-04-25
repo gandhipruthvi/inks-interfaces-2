@@ -31,6 +31,8 @@ interface FooterLink {
   }[];
 }
 
+import { useState, useEffect } from "react";
+
 export default function Footer() {
   // Social media links with branded colors
   const socialLinks: SocialLink[] = [
@@ -98,6 +100,23 @@ export default function Footer() {
       ]
     }
   ];
+
+  // State for showing/hiding the Back to Top button
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  // Show button after scrolling down 200px
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 200);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Smooth scroll to top handler
+  const handleBackToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <footer className="bg-white border-t border-gray-100">
@@ -263,18 +282,31 @@ export default function Footer() {
         </div>
       </div>
       
-      {/* Back to top button */}
-      <motion.a
-        href="#top"
-        className="fixed bottom-6 right-5 sm:bottom-8 sm:right-8 z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-full shadow-lg touch-target"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <ArrowUpRight size={20} />
-      </motion.a>
+      {/* Back to top button with animation and smooth scroll */}
+      {showBackToTop && (
+        <motion.button
+          type="button"
+          aria-label="Back to top"
+          onClick={handleBackToTop}
+          className="fixed bottom-6 right-5 sm:bottom-8 sm:right-8 z-50 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-black text-white rounded-full shadow-lg touch-target focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 40 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+          whileHover={{ scale: 1.15, rotate: -45, boxShadow: '0 8px 24px rgba(0,0,0,0.18)' }}
+          // The icon's rotation is handled separately below
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.span
+            animate={{ rotate: 45 }}
+            whileHover={{ rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="flex"
+          >
+            <ArrowUpRight size={24} />
+          </motion.span>
+        </motion.button>
+      )}
     </footer>
   );
 }
