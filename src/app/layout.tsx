@@ -12,6 +12,9 @@ import {
 import { GlobalErrorHandler } from "@/utils/global-error-handler";
 import Footer from "@/components/ui/Footer";
 
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 // Create a proper React component wrapper
 const ErrorBoundaryWrapper: React.FC<{ children: React.ReactNode }> = (
   props,
@@ -92,6 +95,8 @@ export default function RootLayout({
         <DOMInspector>
           <ErrorBoundaryWrapper>
             {children}
+            <Analytics />
+            <SpeedInsights />
             <Footer />
             <Branding />
           </ErrorBoundaryWrapper>
