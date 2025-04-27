@@ -181,72 +181,73 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
             {testimonials.map((testimonial) => (
               <SwiperSlide key={testimonial.id} className="py-12 px-2">
                 <motion.div
-                  className="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-300 mx-auto max-w-2xl"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
-                >
-                  <div className="p-8 sm:p-10">
-                    {/* Content */}
-                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start sm:items-center mb-6">
-                      {/* Author image */}
-                      <div className="flex-shrink-0">
-                        <div className="w-20 h-20 sm:w-24 sm:h-24 relative">
-                          <motion.div 
-                            className="absolute inset-0 rounded-full"
-                            style={{
-                              background: `conic-gradient(from 180deg at 50% 50%, #FFD700 0deg, transparent 60deg, #FFD700 360deg)`,
-                            }}
-                            animate={{ rotate: 360 }}
-                            transition={{ 
-                              duration: 8, 
-                              repeat: Infinity, 
-                              ease: "linear",
-                            }}
-                          />
-                          <div className="absolute inset-[2px] rounded-full overflow-hidden border-2 border-white">
-                            <img
-                              src={testimonial.image}
-                              alt={`Portrait of ${testimonial.author}`}
-                              className="w-full h-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Author info */}
-                      <div>
-                        <h4 className="font-bold text-xl">{testimonial.author}</h4>
-                        <p className="text-gray-600">
-                          {testimonial.position} at <span className="font-medium">{testimonial.company}</span>
-                        </p>
-                        
-                        {/* Star rating */}
-                        <div className="flex mt-2">
-                          {[...Array(testimonial.rating)].map((_, i) => (
-                            <Star 
-                              key={i} 
-                              size={16}
-                              className="text-yellow-500 fill-yellow-500 mr-0.5" 
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Testimonial content */}
-                    <div className="relative">
-                      <Quote size={32} className="text-gray-200 absolute top-0 left-0 transform -translate-x-1 -translate-y-2" />
-                      <blockquote className="pl-8 pr-2 text-gray-700 italic text-lg sm:text-xl leading-relaxed">
-                        {testimonial.content}
-                      </blockquote>
-                    </div>
-                  </div>
-                </motion.div>
+  className="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-300 mx-auto max-w-2xl"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
+  onMouseEnter={() => setIsHovering(true)}
+  onMouseLeave={() => setIsHovering(false)}
+>
+  <div className="p-8 sm:p-10">
+    {/* Content */}
+    <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start sm:items-center mb-6">
+      {/* Author image */}
+      <div className="flex-shrink-0">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 relative">
+          <motion.div 
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: `conic-gradient(from 180deg at 50% 50%, #FFD700 0deg, transparent 60deg, #FFD700 360deg)`,
+            }}
+            animate={{ rotate: 360 }}
+            transition={{ 
+              duration: 8, 
+              repeat: Infinity, 
+              ease: "linear",
+            }}
+          />
+          <div className="absolute inset-[2px] rounded-full overflow-hidden border-2 border-white">
+            <img
+              src={testimonial.image}
+              alt={`Portrait of ${testimonial.author}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+      
+      {/* Author info */}
+      <div>
+        <h4 className="font-bold text-xl">{testimonial.author}</h4>
+        <p className="text-gray-600">
+          {testimonial.position} at <span className="font-medium">{testimonial.company}</span>
+        </p>
+        
+        {/* Star rating */}
+        <div className="flex mt-2">
+          {[...Array(testimonial.rating)].map((_, i) => (
+            <Star 
+              key={i} 
+              size={16}
+              className="text-yellow-500 fill-yellow-500 mr-0.5" 
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+    
+    {/* Testimonial content */}
+    <div className="relative">
+      <Quote size={32} className="text-gray-200 absolute top-0 left-0 transform -translate-x-1 -translate-y-2" />
+      <blockquote className="pl-8 pr-2 text-gray-700 italic text-lg sm:text-xl leading-relaxed">
+        {testimonial.content}
+      </blockquote>
+    </div>
+  </div>
+</motion.div>
+
               </SwiperSlide>
             ))}
           </Swiper>

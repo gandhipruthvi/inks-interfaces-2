@@ -37,46 +37,36 @@ const WaveDivider = ({ color }: { color: string }) => (
 );
 
 // Service card component
-const ServiceCard = ({ 
-  title, 
-  description, 
-  icon, 
-  bgColor, 
-  glowColor,
-  setIsHovering 
-}: { 
-  title: string, 
-  description: string, 
-  icon: React.ReactNode, 
-  bgColor: string, 
-  glowColor: string,
-  setIsHovering: (isHovering: boolean) => void 
+import styles from './WaveCard.module.css';
+
+const ServiceCard = ({
+  title,
+  description,
+  icon,
+  setIsHovering
+}: {
+  title: string,
+  description: string,
+  icon: React.ReactNode,
+  setIsHovering: (isHovering: boolean) => void
 }) => (
-  <motion.div
-    className="rounded-[20px] overflow-hidden shadow-md transition-all duration-300 h-full flex flex-col"
-    whileHover={{ 
-      scale: 1.03,
-      boxShadow: `0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 0 15px 2px ${glowColor}`
-    }}
+  <div
+    className={styles['wave-card']}
     onMouseEnter={() => setIsHovering(true)}
     onMouseLeave={() => setIsHovering(false)}
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
+    style={{ background: '#fff' }}
   >
-    <div className={`relative h-52 p-8 flex items-center justify-center ${bgColor}`}>
-      <div className="text-white z-10 scale-150">
-        {icon}
-      </div>
-      <WaveDivider color="white" />
+    <div className={styles['wave-card-shape']}></div>
+    <div className={styles['wave-card-shape']}></div>
+    <div className={styles['wave-card-shape']}></div>
+    <div style={{ position: 'absolute', left: 0, right: 0, top: 24, zIndex: 20, display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+      <div style={{ fontSize: 44, color: '#555', marginBottom: 2 }}>{icon}</div>
+      <h3 className={styles['wave-card-title']} style={{ fontSize: 22, fontWeight: 700, marginTop: 2, marginBottom: 8, background: 'rgba(255,255,255,0.85)', borderRadius: 6, padding: '0 8px' }}>{title}</h3>
     </div>
-    <div className="bg-white p-8 flex-grow">
-      <h3 className="text-2xl font-bold mb-4">{title}</h3>
-      <p className="text-gray-700">{description}</p>
-    </div>
-  </motion.div>
+    <p style={{ position: 'relative', zIndex: 10, fontSize: 15, color: '#444', textAlign: 'center', margin: '0 16px 30px 16px', minHeight: 48 }}>{description}</p>
+  </div>
 );
+
 
 export default function CraftingIdentitiesSection({ setIsHovering }: CraftingIdentitiesSectionProps) {
   const [ref, inView] = useInView({
@@ -110,37 +100,29 @@ export default function CraftingIdentitiesSection({ setIsHovering }: CraftingIde
         </motion.div>
         
         {/* Services Cards - Horizontal responsive layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* UI/UX Design Card */}
-          <ServiceCard 
-            title="UI/UX Design"
-            description="Beautiful, intuitive interfaces that make digital products a joy to use. I create user-centered experiences that delight and engage."
-            icon={<Layout size={48} strokeWidth={1.5} />}
-            bgColor="bg-gradient-to-br from-blue-300 to-blue-500"
-            glowColor="rgba(96, 165, 250, 0.4)"
-            setIsHovering={setIsHovering}
-          />
-          
-          {/* Branding Card */}
-          <ServiceCard 
-            title="Branding"
-            description="Comprehensive visual systems that bring consistency and recognition to your brand. From logos to complete identity packages."
-            icon={<PenTool size={48} strokeWidth={1.5} />}
-            bgColor="bg-gradient-to-br from-amber-300 to-yellow-500"
-            glowColor="rgba(251, 191, 36, 0.4)"
-            setIsHovering={setIsHovering}
-          />
-          
-          {/* Graphic Design Card */}
-          <ServiceCard 
-            title="Graphic Design"
-            description="Eye-catching visuals that tell your story across any medium. Print, digital, and everything in between - designed with purpose."
-            icon={<Layers size={48} strokeWidth={1.5} />}
-            bgColor="bg-gradient-to-br from-green-300 to-green-500"
-            glowColor="rgba(34, 197, 94, 0.4)"
-            setIsHovering={setIsHovering}
-          />
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {/* Consultation Card */}
+  <ServiceCard
+    title="UI/UX Design"
+    description="Beautiful, intuitive interfaces that make digital products a joy to use. We create user-centered experiences that delight and engage."
+    icon={<PenTool size={32} strokeWidth={1.5} />}
+    setIsHovering={setIsHovering}
+  />
+  {/* Develop Card */}
+  <ServiceCard
+    title="Branding"
+    description="Comprehensive visual systems that bring consistency and recognition to your brand. From logos to complete identity packages. Your brand story, visually unified."
+    icon={<Layout size={32} strokeWidth={1.5} />}
+    setIsHovering={setIsHovering}
+  />
+  {/* Design Card */}
+  <ServiceCard
+    title="Graphic Design"
+    description="Eye-catching visuals that tell your story across any medium. Print, digital, and everything in between - designed with purpose."
+    icon={<Layers size={32} strokeWidth={1.5} />}
+    setIsHovering={setIsHovering}
+  />
+</div>
       </div>
     </section>
   );

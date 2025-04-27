@@ -27,7 +27,9 @@ import {
   RotateCwIcon,
   TypeOutline,
   FilePen,
-  LayoutTemplate
+  LayoutTemplate,
+  Smartphone,
+  Calendar
 } from "lucide-react";
 
 interface PricingSectionProps {
@@ -62,7 +64,7 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
     {
       id: "logo-design",
       title: "Logo Design",
-      price: "$1,500",
+      price: "$300",
       description: "Crafted brand marks that are timeless, memorable, and scalable across all mediums.",
       features: [
         { 
@@ -92,16 +94,20 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
         { 
           text: "Social Media Profile Assets",
           icon: <Instagram size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Delivery time: Less than a week",
+          icon: <Calendar size={18} className="flex-shrink-0" />
         }
       ],
       popular: false,
-      accentColor: "#4F46E5", // Indigo
+      accentColor: "#F15B54", 
       ctaText: "Design My Logo"
     },
     {
       id: "branding",
       title: "Brand Identity",
-      price: "$4,500",
+      price: "$500",
       description: "A holistic brand identity system tailored to tell your story and stand out in a crowded market.",
       features: [
         { 
@@ -131,16 +137,20 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
         { 
           text: "Social Media Templates",
           icon: <LayoutTemplate size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Delivery time: A week or more",
+          icon: <Calendar size={18} className="flex-shrink-0" />
         }
       ],
       popular: true,
-      accentColor: "#8B5CF6", // Purple
+      accentColor: "#ffd602",
       ctaText: "Start Your Design System"
     },
     {
       id: "full-uxui-project",
-      title: "Full UX/UI Design Project",
-      price: "$8,000+",
+      title: "UI/UX Design Project",
+      price: "$750",
       description: "End-to-end design process from research to high-fidelity prototypes ready for development",
       features: [
         { 
@@ -156,8 +166,12 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
           icon: <PencilRuler size={18} className="flex-shrink-0" /> 
         },
         { 
-          text: "High-fidelity UI Design",
+          text: "High-fidelity UI Design (Figma file)",
           icon: <PenTool size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "4-6 key screens",
+          icon: <Smartphone size={18} className="flex-shrink-0" /> 
         },
         { 
           text: "Interactive Prototyping",
@@ -174,11 +188,15 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
         { 
           text: "Implementation Support",
           icon: <Zap size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Delivery time: 2 weeks",
+          icon: <Calendar size={18} className="flex-shrink-0" />
         }
       ],
       popular: false,
-      accentColor: "#EC4899", // Pink
-      ctaText: "Get Full Project Quote"
+      accentColor: "#F15B54", 
+      ctaText: "Get Project Quote"
     }
   ];
   
@@ -215,8 +233,8 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
           {pricingPlans.map((plan, index) => (
             <motion.div
               key={plan.id}
-              className={`relative bg-white rounded-xl overflow-hidden ${
-                plan.popular ? "ring-2 ring-opacity-80" : "border border-gray-200"
+              className={`relative bg-white rounded-xl overflow-hidden border border-gray-200 ${
+                plan.popular ? "ring-2 ring-opacity-80" : ""
               } shadow-lg transition-all duration-300`}
               style={{
                 ["--tw-ring-color" as any]: plan.popular ? plan.accentColor : 'transparent',

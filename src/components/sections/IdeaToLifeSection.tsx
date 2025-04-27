@@ -127,7 +127,8 @@ function HorizontalScrollCarousel() {
       className="relative overflow-visible bg-gradient-to-br from-neutral-100 via-white to-indigo-50"
       style={{ height: sectionHeight }}
     >
-      <div className="sticky top-0 h-screen flex items-center justify-center">
+
+      <div className="sticky top-0 h-screen flex items-center justify-center z-10">
         <div className="horizontal-scroll w-full">
           <motion.div style={{ x }} className="flex w-full">
             {steps.map((step, i) => (
@@ -145,7 +146,7 @@ function HorizontalScrollCarousel() {
 // Individual Card
 function ProcessCard({ step, active }: { step: typeof steps[number]; active: boolean }) {
   return (
-    <div className="group relative h-[500px] max-w-[90vw] bg-white rounded-3xl shadow-xl border p-8 flex flex-col">
+    <div className="group relative h-[420px] max-w-[90vw] bg-white rounded-3xl shadow-2xl border p-8 flex flex-col" style={{boxShadow: '0 8px 32px 0 rgba(241,91,84,0.10), 0 1.5px 6px 0 rgba(80,80,80,0.07)'}}>
       <div className="absolute top-6 right-6">
         <div className="w-12 h-12 rounded-full flex items-center justify-center bg-gray-50 border">
           <span className="text-sm font-semibold">{step.id}/6</span>
@@ -162,7 +163,7 @@ function ProcessCard({ step, active }: { step: typeof steps[number]; active: boo
 
       <div className="w-full h-2 bg-gray-100 rounded-full mb-6">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"
+          className="h-full rounded-full bg-gradient-to-r from-[#F15B54] to-[#FBB97B]"
           style={{ width: `${step.progress * 100}%` }}
         />
       </div>
@@ -175,7 +176,7 @@ function ProcessCard({ step, active }: { step: typeof steps[number]; active: boo
               <div className="min-w-6 h-6 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-700 mr-3 mt-0.5">
                 <CheckIcon />
               </div>
-              <span className="text-neutral-700">{item}</span>
+              <span className="text-neutral-700 text-[1.13rem] md:text-lg font-medium">{item}</span>
             </li>
           ))}
         </ul>

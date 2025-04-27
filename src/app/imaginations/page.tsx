@@ -271,14 +271,6 @@ export default function ImaginationsPage() {
                     <ArrowRight size={16} />
                   </motion.button>
                 </div>
-                
-                {/* Project number indicator */}
-                <div 
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white"
-                  style={{ backgroundColor: project.color }}
-                >
-                  {index + 1}
-                </div>
               </motion.div>
             ))}
           </div>
