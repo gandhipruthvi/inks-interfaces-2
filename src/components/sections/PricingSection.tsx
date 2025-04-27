@@ -19,7 +19,15 @@ import {
   PencilRuler,
   Workflow,
   BarChart4,
-  PenTool
+  PenTool,
+  PhoneCall,
+  SquareStack,
+  FileImage,
+  Instagram,
+  RotateCwIcon,
+  TypeOutline,
+  FilePen,
+  LayoutTemplate
 } from "lucide-react";
 
 interface PricingSectionProps {
@@ -59,7 +67,7 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
       features: [
         { 
           text: "Strategic Discovery Call",
-          icon: <UserCheck size={18} className="flex-shrink-0" />
+          icon: <PhoneCall size={18} className="flex-shrink-0" />
         },
         { 
           text: "Moodboard & Style Exploration", 
@@ -67,23 +75,23 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
         },
         { 
           text: "3 Logo Concepts",
-          icon: <Users size={18} className="flex-shrink-0" />
+          icon: <SquareStack size={18} className="flex-shrink-0" />
         },
         { 
           text: "3 Rounds of Revisions", 
-          icon: <LineChart size={18} className="flex-shrink-0" />
+          icon: <RotateCwIcon size={18} className="flex-shrink-0" />
         },
         { 
           text: "Final Logo in Multiple Formats (SVG, PNG, PDF)",
-          icon: <FileText size={18} className="flex-shrink-0" />
+          icon: <FileImage size={18} className="flex-shrink-0" />
         },
         { 
           text: "Light Brand Guide (color codes, font usage)",
-          icon: <Zap size={18} className="flex-shrink-0" />
+          icon: <FileText size={18} className="flex-shrink-0" />
         },
         { 
           text: "Social Media Profile Assets",
-          icon: <Zap size={18} className="flex-shrink-0" />
+          icon: <Instagram size={18} className="flex-shrink-0" />
         }
       ],
       popular: false,
@@ -102,15 +110,15 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
         },
         { 
           text: "Logo Suite + Variations",
-          icon: <Palette size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Brand Color Palette", 
           icon: <Layout size={18} className="flex-shrink-0" /> 
         },
         { 
+          text: "Brand Color Palette", 
+          icon: <Palette size={18} className="flex-shrink-0" /> 
+        },
+        { 
           text: "Typography System",
-          icon: <FileText size={18} className="flex-shrink-0" /> 
+          icon: <TypeOutline size={18} className="flex-shrink-0" /> 
         },
         { 
           text: "Visual Style Direction (patterns, icons, mockups)", 
@@ -118,16 +126,16 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
         },
         { 
           text: "Brand Guidelines (PDF & Web)",
-          icon: <Code size={18} className="flex-shrink-0" />
+          icon: <FilePen size={18} className="flex-shrink-0" />
         },
         { 
           text: "Social Media Templates",
-          icon: <Zap size={18} className="flex-shrink-0" />
+          icon: <LayoutTemplate size={18} className="flex-shrink-0" />
         }
       ],
       popular: true,
       accentColor: "#8B5CF6", // Purple
-      ctaText: "Build My Brand"
+      ctaText: "Start Your Design System"
     },
     {
       id: "full-uxui-project",

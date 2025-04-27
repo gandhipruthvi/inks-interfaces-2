@@ -19,6 +19,7 @@ interface CaseStudy {
   tags: string[];
   content: string;
   link?: string;
+  gallery?: string[]; // Array of image URLs for bento grid
 }
 
 export default function WorkSection({ setIsHovering }: WorkSectionProps) {
@@ -37,40 +38,44 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
       title: "Go Miles Website Redesign",
       subtitle: "UI/UX Design",
       description: "Revamping the Go Miles website to improve user experience and visual appeal. The new design focuses on making travel planning easier, with a cleaner layout, better navigation, and a more modern look that speaks to today’s travelers.",
-      image: "/assets/gomiles.png",
+      image: "/assets/gomiles/gomiles.webp",
       color: "#e4ba88",
-      tags: ["Responsive Design", "Travel", "UI/UX Design"],
-      content: "Go Miles needed a website that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new site received positive feedback and helped the company attract more customers."
+      tags: ["Responsive Design", "Travel", "User-Friendly"],
+      content: "Go Miles needed a website that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new site received positive feedback and helped the company attract more customers.",
+      gallery: ["/assets/gomiles/gomileslanding.webp", "/assets/gomiles/gomileseurope.webp", "/assets/gomiles/gomilesabout.webp", "/assets/gomiles/gomilesblogs.webp", "/assets/gomiles/gomilesposts.webp"] // Add your images here later
     },
     {
       id: "zestee",
       title: "Zestee Logo",
       subtitle: "Brand Identity Design",
       description: "Created a fresh and energetic brand identity for Zestee Café, including logo design and complete visual branding. The new look reflects the café’s vibrant personality and creates a memorable experience for its customers.",
-      image: "/assets/zestee.png",
+      image: "/assets/zestee/zestee.webp",
       color: "#FDB91A",
       tags: ["Logo Design", "Café Branding", "Premium"],
-      content: "Zestee needed a brand identity that would reflect its premium, upscale café experience. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the café stand out in a competitive market."
+      content: "Zestee needed a brand identity that would reflect its premium, upscale café experience. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the café stand out in a competitive market.",
+      gallery: ["/assets/zestee/cafe.webp","/assets/zestee/coffeecup.webp","/assets/zestee/ig.webp","/assets/zestee/packet.webp","/assets/zestee/apron.webp","/assets/zestee/board.webp"]
     },
     {
       id: "lcm",
       title: "LCM Logo and UI/UX",
       subtitle: "UI/UX Design",
       description: "Designed an inclusive, responsive website and brand identity for Lab Coat Media — a platform built with accessibility at its core, ensuring equal digital experiences for everyone, regardless of disability.",
-      image: "/assets/lcm.png",
+      image: "/assets/lcm/lcm.webp",
       color: "#3A506B",
       tags: ["Logo Design", "Accessibility", "Responsive Design"],
-      content: "Lab Coat Media needed a brand identity that would reflect its commitment to accessibility and inclusivity. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the company stand out in a competitive market."
+      content: "Lab Coat Media needed a brand identity that would reflect its commitment to accessibility and inclusivity. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the company stand out in a competitive market.",
+      gallery: ["/assets/lcm/lcmlanding.webp","/assets/lcm/blog.webp","/assets/lcm/detail.webp"]
     },
     {
       id: "globetap",
       title: "GlobeTap App UI Design",
       subtitle: "Mobile UI/UX Design",
       description: "Designed a modern, intuitive mobile interface for GlobeTap — a travel app that helps users explore new destinations, plan trips effortlessly, and connect with global experiences on the go.",
-      image: "/assets/globetap.png",
+      image: "/assets/globetap/globetap.webp",
       color: "#B07156",
-      tags: ["Mobile Experience", "Travel", "UI/UX Design"],
-      content: "GlobeTap needed a mobile interface that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new app resonated with customers and helped the company attract more users."
+      tags: ["App Design", "Travel", "User-Friendly"],
+      content: "GlobeTap needed a mobile interface that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new app resonated with customers and helped the company attract more users.",
+      gallery: ["/assets/globetap/allscreens.webp","/assets/globetap/twophones.webp","/assets/globetap/black.webp","/assets/globetap/stairs.webp","/assets/globetap/liephone.webp"]
     },
   ];
   
@@ -347,6 +352,44 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                   <p className="text-lg text-gray-700">
                     The final design not only met but exceeded expectations, resulting in improved user engagement, brand recognition, and business metrics. The client was thrilled with the outcome and has since implemented the design across their entire product line.
                   </p>
+
+                  {/* Project images grid: bento for branding/logo, simple grid otherwise */}
+                  {selectedCaseStudy.gallery && selectedCaseStudy.gallery.length > 0 && (
+                    (selectedCaseStudy.subtitle?.toLowerCase().includes("brand") || selectedCaseStudy.subtitle?.toLowerCase().includes("logo")) ? (
+                      // Bento grid for branding/logo projects
+                      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[180px]">
+                        {selectedCaseStudy.gallery.map((img, i) => (
+                          <div
+                            key={i}
+                            className={`rounded-xl overflow-hidden shadow-lg ${i % 5 === 0 ? "row-span-2 col-span-2" : ""}`}
+                          >
+                            <img
+                              src={img}
+                              alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      // Simple 2-column grid for regular projects
+                      <div className="mt-10 grid grid-cols-2 gap-4">
+                        {selectedCaseStudy.gallery.map((img, i) => (
+                          <div
+                            key={i}
+                            className="rounded-xl overflow-hidden shadow-lg"
+                          >
+                            <img
+                              src={img}
+                              alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  )}
+
                 </div>
                 
                 {/* Call to action */}

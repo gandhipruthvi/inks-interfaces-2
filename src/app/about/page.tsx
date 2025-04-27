@@ -325,48 +325,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section - Simplified */}
-      <section
-        className="py-20 bg-black text-white"
-        ref={ctaRef}
-      >
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.h2 
-            className="text-4xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-          >
-            Ready to Start Your Project?
-          </motion.h2>
-          
-          <motion.p
-            className="text-xl text-gray-300 mb-10 max-w-xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Let's create something extraordinary together
-          </motion.p>
-          
-          <motion.button
-            className="px-10 py-4 bg-[#FFD700] text-black font-bold rounded-lg text-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            <span className="flex items-center gap-2">
-              Contact Us
-              <ArrowRight size={20} />
-            </span>
-          </motion.button>
-        </div>
-      </section>
     </main>
   );
 }

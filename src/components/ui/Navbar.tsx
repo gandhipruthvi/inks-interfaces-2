@@ -76,10 +76,11 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
             onMouseLeave={() => setIsHovering?.(false)}
             style={{ boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)' }}
           >
-            <div className="h-10 w-10 bg-black rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">I</span>
-            </div>
-            <span className="font-bold text-xl">Inks & Interfaces</span>
+            <img
+              src="/assets/inksinterfaces/logo.png"
+              alt="Inks & Interfaces Logo"
+              className="h-12 w-auto object-contain"
+            />
           </div>
         </Link>
       </div>

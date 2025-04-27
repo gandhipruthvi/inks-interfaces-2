@@ -17,6 +17,7 @@ interface CaseStudy {
   tags: string[];
   content: string;
   link?: string;
+  gallery?: string[];
 }
 
 export default function ImaginationsPage() {
@@ -45,85 +46,93 @@ export default function ImaginationsPage() {
   // Case studies data - kept to 4 projects
   const caseStudies: CaseStudy[] = [
     {
-      id: "bloom-cafe",
-      title: "Bloom Café Rebrand",
-      subtitle: "Brand Identity",
-      description: "Revitalizing a local coffee chain with a fresh, nature-inspired identity system that resonates with younger demographics while honoring quality traditions.",
-      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
-      color: "#68A691",
-      tags: ["Branding", "Identity", "Packaging"],
-      content: "Bloom Café needed a brand refresh that would appeal to a younger demographic while maintaining their reputation for quality. The solution was a vibrant, nature-inspired identity system with playful illustrations and a warm color palette. The rebrand resulted in a 30% increase in foot traffic and significant social media engagement."
+      id: "go-miles",
+      title: "Go Miles Website Redesign",
+      subtitle: "UI/UX Design",
+      description: "Revamping the Go Miles website to improve user experience and visual appeal. The new design focuses on making travel planning easier, with a cleaner layout, better navigation, and a more modern look that speaks to today’s travelers.",
+      image: "/assets/gomiles/gomiles.webp",
+      color: "#e4ba88",
+      tags: ["Responsive Design", "Travel", "User-Friendly"],
+      content: "Go Miles needed a website that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new site received positive feedback and helped the company attract more customers.",
+      gallery: ["/assets/gomiles/gomileslanding.webp", "/assets/gomiles/gomileseurope.webp", "/assets/gomiles/gomilesabout.webp", "/assets/gomiles/gomilesblogs.webp", "/assets/gomiles/gomilesposts.webp"] // Add your images here later
     },
     {
-      id: "mindful-app",
-      title: "Mindful Mobile App",
-      subtitle: "UX/UI Design",
-      description: "Creating an intuitive interface for mental wellness tracking that combines calming aesthetics with thoughtful interactions to improve user engagement.",
-      image: "https://images.unsplash.com/photo-1616469829941-c7200edec809?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
-      color: "#E86343",
-      tags: ["UX/UI", "Mobile", "Wellness"],
-      content: "Mindful needed an intuitive interface that would make mental health tracking accessible and engaging. The design focused on calming visuals, thoughtful micro-interactions, and a streamlined user flow. Post-launch metrics showed a 45% increase in daily active users and an average session time of 12 minutes."
+      id: "zestee",
+      title: "Zestee Logo",
+      subtitle: "Brand Identity Design",
+      description: "Created a fresh and energetic brand identity for Zestee Café, including logo design and complete visual branding. The new look reflects the café’s vibrant personality and creates a memorable experience for its customers.",
+      image: "/assets/zestee/zestee.webp",
+      color: "#FDB91A",
+      tags: ["Logo Design", "Café Branding", "Premium"],
+      content: "Zestee needed a brand identity that would reflect its premium, upscale café experience. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the café stand out in a competitive market.",
+      gallery: ["/assets/zestee/cafe.webp","/assets/zestee/coffeecup.webp","/assets/zestee/ig.webp","/assets/zestee/packet.webp","/assets/zestee/apron.webp","/assets/zestee/board.webp"]
     },
     {
-      id: "finance-dashboard",
-      title: "FinTrack Dashboard",
-      subtitle: "Data Visualization",
-      description: "Simplifying complex financial information through intuitive data visualizations and a clean interface that improves user comprehension and task completion.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      id: "lcm",
+      title: "Lab Coat Media Logo and UI/UX",
+      subtitle: "UI/UX Design",
+      description: "Designed an inclusive, responsive website and brand identity for Lab Coat Media — a platform built with accessibility at its core, ensuring equal digital experiences for everyone, regardless of disability.",
+      image: "/assets/lcm/lcm.webp",
       color: "#3A506B",
-      tags: ["Dashboard", "Finance", "Data"],
-      content: "FinTrack needed a dashboard that would make complex financial data accessible to non-expert users. The solution included intuitive charts, customizable widgets, and a clean, focused interface. User testing showed a 60% improvement in task completion rates compared to the previous version."
+      tags: ["Logo Design", "Accessibility", "Responsive Design"],
+      content: "Lab Coat Media needed a brand identity that would reflect its commitment to accessibility and inclusivity. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the company stand out in a competitive market.",
+      gallery: ["/assets/lcm/lcmlanding.webp","/assets/lcm/blog.webp","/assets/lcm/detail.webp"]
     },
     {
-      id: "nomad-apparel",
-      title: "Nomad Apparel",
-      subtitle: "Global Brand Identity",
-      description: "Developing a cohesive identity for an international fashion brand that balances global appeal with local cultural sensibilities across markets.",
-      image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
+      id: "globe-tap",
+      title: "GlobeTap App UI Design",
+      subtitle: "Mobile UI/UX Design",
+      description: "Designed a modern, intuitive mobile interface for GlobeTap — a travel app that helps users explore new destinations, plan trips effortlessly, and connect with global experiences on the go.",
+      image: "/assets/globetap/globetap.webp",
       color: "#B07156",
-      tags: ["Fashion", "Branding", "Global"],
-      content: "Nomad Apparel wanted to position itself as a global brand with local sensibilities. The identity system incorporated elements from various cultures while maintaining a cohesive, contemporary aesthetic. The brand launch generated significant press coverage and exceeded first-quarter sales projections by 25%."
+      tags: ["App Design", "Travel", "User-Friendly"],
+      content: "GlobeTap needed a mobile interface that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new app resonated with customers and helped the company attract more users.",
+      gallery: ["/assets/globetap/allscreens.webp","/assets/globetap/twophones.webp","/assets/globetap/black.webp","/assets/globetap/stairs.webp","/assets/globetap/liephone.webp"]
     },
     {
-      id: "eco-travel-platform",
-      title: "EcoTravel Platform",
-      subtitle: "Web App Design",
-      description: "A comprehensive travel platform focused on sustainable tourism options with carbon footprint tracking and eco-friendly accommodations.",
-      image: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
-      color: "#2A9D8F",
-      tags: ["Web Design", "Sustainability", "User Experience"],
-      content: "EcoTravel needed a platform that would make sustainable travel choices attractive and accessible. We designed an interface that highlights eco-friendly options while maintaining a sense of adventure and discovery. The platform saw 200,000 signups within the first three months of launch."
+      id: "satori-bites",
+      title: "Satori Bites Branding",
+      subtitle: "Brand Identity Design",
+      description: "Developed a complete brand identity for Satori Bites, a modern Asian fine dining restaurant. The project included logo design, visual branding, and brand strategy, capturing the perfect balance between tradition and contemporary luxury. The new identity enhances the restaurant’s upscale image while creating an inviting and memorable experience for guests.",
+      image: "/assets/satoribites/satoribites.webp",
+      color: "#d53e40",
+      tags: ["Logo Design", "Asian Culinary", "Luxury"],
+      content: "Satori Bites blends the rich heritage of Asian cuisine with a modern luxury dining experience. The full branding project focused on creating a sophisticated yet approachable visual identity that reflects elegance, authenticity, and warmth. From the refined logo to the color palette, typography, and supporting visuals, every detail was crafted to resonate with the restaurant’s philosophy of mindful dining. The branding elevated Satori Bites’ market presence, making it a distinguished name in upscale culinary circles.",
+      gallery: ["/assets/satoribites/bag.webp","/assets/satoribites/box.webp","/assets/satoribites/apron.webp","/assets/satoribites/plate.webp","/assets/satoribites/tissue.webp","/assets/satoribites/card.webp"]
     },
     {
-      id: "future-city",
-      title: "Future City Campaign",
-      subtitle: "Interactive Experience",
-      description: "An immersive digital experience showcasing urban planning innovations and sustainable development for future smart cities.",
-      image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
-      color: "#4059AD",
-      tags: ["Interactive", "3D", "Campaign"],
-      content: "The Future City Campaign needed to make complex urban planning concepts accessible and engaging for the general public. Our solution was an interactive 3D experience that allowed users to explore different aspects of sustainable city design. The campaign reached over 1 million unique visitors and was featured in several international design publications."
+      id: "golden-crust",
+      title: "Golden Crust Branding",
+      subtitle: "Brand Identity Design",
+      description: "Crafted a complete brand identity for Golden Crust, a premium boutique bakery. The project included logo design, brand visuals, and strategic brand positioning, blending artisanal charm with a luxurious feel. The new identity highlights the bakery’s commitment to quality, craftsmanship, and a warm, upscale experience for every customer.",
+      image: "/assets/goldencrust/hoarding.webp",
+      color: "#ffb0ae",
+      tags: ["Logo Design", "Artisanal Bakery", "Premium"],
+      content: "Golden Crust embodies the spirit of artisanal baking with a premium twist. Through a full branding project, we created a visual identity that feels handcrafted yet refined — from the elegant logo featuring natural elements to the soft, inviting color palette. Every design decision was aimed at expressing the bakery’s dedication to using the finest ingredients and delivering unforgettable taste experiences. The refreshed branding elevated Golden Crust’s presence, making it a standout destination for bakery lovers who seek both authenticity and sophistication.",
+      gallery: ["/assets/goldencrust/bread.webp","/assets/goldencrust/banner.webp","/assets/goldencrust/menu.webp","/assets/goldencrust/crossaint.webp","/assets/goldencrust/tape.webp","/assets/goldencrust/store.webp"]
     },
     {
-      id: "culinary-app",
-      title: "Culinary Connection",
-      subtitle: "Social Platform",
-      description: "A social platform connecting home chefs with food enthusiasts for shared dining experiences, recipe exchanges, and culinary education.",
-      image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
-      color: "#D62828",
-      tags: ["Social", "Food", "Community"],
-      content: "Culinary Connection wanted to create a platform where passion for food could become a social experience. We designed an interface that makes discovering and connecting with fellow food enthusiasts intuitive and engaging. The app gained 50,000 active users within six months and has facilitated over 10,000 in-person dining events."
+      id: "pure-sip",
+      title: "Pure Sip Branding",
+      subtitle: "Packaging Design",
+      description: "Designed a vibrant and refreshing packaging identity for PureSip, a natural fruit beverage brand. The packaging reflects the product’s purity and flavor, combining bold geometric visuals with organic elements to appeal to health-conscious, modern consumers.",
+      image: "/assets/puresip/can.webp",
+      color: "#8cc751",
+      tags: ["Product Design", "Fruit Beverage", "Organic"],
+      content: "PureSip is a 100% natural fruit drink that celebrates real ingredients and clean living — and the packaging needed to communicate just that. The design approach focused on creating a fresh, modern, and health-forward visual identity that reflects the brand’s values.",
+      gallery: ["/assets/puresip/lemon.webp","/assets/puresip/halfgrape.webp","/assets/puresip/strawberry.webp","/assets/puresip/halfpear.webp","/assets/puresip/grapes.webp","/assets/puresip/pear.webp"]
     },
     {
-      id: "wellness-retreat",
-      title: "Serenity Spaces",
-      subtitle: "Brand Experience",
-      description: "A comprehensive brand identity and digital presence for a luxury wellness retreat focusing on mindfulness and holistic health.",
-      image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80",
-      color: "#457B9D",
-      tags: ["Branding", "Wellness", "Luxury"],
-      content: "Serenity Spaces needed a brand identity that communicated both exclusivity and approachability. The design system uses natural textures, a calming color palette, and thoughtful typography to create a sense of tranquility and premium quality. Booking rates increased by 65% after the rebrand launch."
-    }
+      id: "vanya-luxe",
+      title: "Vanya Luxe Branding",
+      subtitle: "Brand Identity Design",
+      description: "Created an elegant and organic brand identity for Vanya Luxe, a premium beauty brand rooted in luxury and purity. The design reflects a harmonious blend of nature and sophistication, perfectly aligning with its organic and chemical-free philosophy.",
+      image: "/assets/vanyaluxe/tin.webp",
+      color: "#af8359",
+      tags: ["Logo Variations", "Beauty Brand", "Luxury"],
+      content: "The branding captures the essence of organic sophistication, using earthy tones, delicate botanicals, and minimalistic elegance to represent the brand’s commitment to chemical-free, premium beauty solutions.",
+      gallery: ["/assets/vanyaluxe/tube.webp","/assets/vanyaluxe/dropper.webp","/assets/vanyaluxe/nailpolish.webp","/assets/vanyaluxe/bag.webp"]
+    },
   ];
 
   // Handle case study click
@@ -330,6 +339,7 @@ export default function ImaginationsPage() {
               
               {/* Modal content */}
               <div className="p-10">
+                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-8">
                   {selectedCaseStudy.tags.map((tag) => (
                     <span 
@@ -363,6 +373,43 @@ export default function ImaginationsPage() {
                     The final design not only met but exceeded expectations, resulting in improved user engagement, brand recognition, and business metrics. The client was thrilled with the outcome and has since implemented the design across their entire product line.
                   </p>
                 </div>
+
+                {/* Gallery images (after Results section) */}
+                {selectedCaseStudy.gallery && selectedCaseStudy.gallery.length > 0 && (
+                  (selectedCaseStudy.subtitle?.toLowerCase().includes("brand") || selectedCaseStudy.subtitle?.toLowerCase().includes("logo")) ? (
+                    // Bento grid for branding/logo projects
+                    <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[180px]">
+                      {selectedCaseStudy.gallery.map((img, i) => (
+                        <div
+                          key={i}
+                          className={`rounded-xl overflow-hidden shadow-lg ${i % 5 === 0 ? "row-span-2 col-span-2" : ""}`}
+                        >
+                          <img
+                            src={img}
+                            alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    // Simple 2-column grid for regular projects
+                    <div className="mt-10 grid grid-cols-2 gap-4">
+                      {selectedCaseStudy.gallery.map((img, i) => (
+                        <div
+                          key={i}
+                          className="rounded-xl overflow-hidden shadow-lg"
+                        >
+                          <img
+                            src={img}
+                            alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )
+                )}
                 
                 {/* Call to action */}
                 <div className="mt-12 flex justify-center">
@@ -383,44 +430,6 @@ export default function ImaginationsPage() {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Global CTA */}
-      <section className="py-16 bg-black text-white">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <motion.h2 
-            className="text-4xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Ready to Transform Your Brand?
-          </motion.h2>
-          
-          <motion.p
-            className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Let's create something extraordinary together. Our team is ready to bring your vision to life.
-          </motion.p>
-          
-          <motion.button
-            className="px-10 py-5 bg-[#FFD700] text-black font-bold rounded-xl text-xl shadow-lg hover:scale-105 transition-all duration-300"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
-            whileTap={{ scale: 0.98 }}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-          >
-            Start Your Project
-          </motion.button>
-        </div>
-      </section>
     </main>
   );
 }

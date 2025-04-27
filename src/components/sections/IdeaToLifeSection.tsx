@@ -2,6 +2,10 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue, animate } from "framer-motion";
 import { Search, Lightbulb, LayoutGrid, PaintBucket, MessageCircle, Package } from "lucide-react";
 
+interface IdeaToLifeSectionProps {
+  setIsHovering: (isHovering: boolean) => void;
+}
+
 // Step Data
 const steps = [
   {

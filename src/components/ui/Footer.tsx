@@ -73,11 +73,8 @@ export default function Footer() {
     {
       title: "Company",
       links: [
-        { label: "About", href: "#about" },
-        { label: "Services", href: "#services" },
-        { label: "Work", href: "#work" },
-        { label: "Careers", href: "#careers" },
-        { label: "Contact", href: "#contact" }
+        { label: "Imaginations", href: "/imaginations" },
+        { label: "About", href: "/about" },
       ]
     },
     {
@@ -85,9 +82,7 @@ export default function Footer() {
       links: [
         { label: "UI/UX Design", href: "#ui-ux" },
         { label: "Brand Identity", href: "#branding" },
-        { label: "Web Development", href: "#development" },
-        { label: "Motion Design", href: "#motion" },
-        { label: "Design Strategy", href: "#strategy" }
+        { label: "Graphic Design", href: "#development" },
       ]
     },
     {
@@ -95,8 +90,6 @@ export default function Footer() {
       links: [
         { label: "Privacy Policy", href: "#privacy" },
         { label: "Terms of Service", href: "#terms" },
-        { label: "Cookie Policy", href: "#cookies" },
-        { label: "Accessibility", href: "#accessibility" }
       ]
     }
   ];
@@ -126,10 +119,11 @@ export default function Footer() {
           {/* Left side: Logo, mission, socials */}
           <div className="flex-1 bg-white flex flex-col justify-center z-10">
             <div className="flex items-center gap-2 mb-6 p-8 md:p-12 pb-0">
-              <div className="h-10 w-10 bg-black rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">I</span>
-              </div>
-              <span className="font-bold text-xl">Inks & Interfaces</span>
+              <img
+                src="/assets/inksinterfaces/logo.png"
+                alt="Inks & Interfaces Logo"
+                className="h-12 w-auto object-contain"
+              />
             </div>
             <p className="text-gray-600 mb-6 sm:mb-8 px-8 md:px-12">
               We transform ideas into exceptional digital experiences through thoughtful design
@@ -227,25 +221,25 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
                 <a 
-                  href="mailto:hello@inksandinterfaces.com" 
+                  href="mailto:letscreate.inksandinterfaces@gmail.com" 
                   className="text-gray-600 hover:text-black transition-colors flex items-center gap-2"
                 >
                   <Mail size={16} />
-                  <span>hello@inksandinterfaces.com</span>
+                  <span>letscreate.inksandinterfaces@gmail.com</span>
                 </a>
               </li>
               <li>
                 <a 
-                  href="tel:+12125551234" 
+                  href="tel:+919429997631" 
                   className="text-gray-600 hover:text-black transition-colors flex items-center gap-2"
                 >
                   <Phone size={16} />
-                  <span>+1 (212) 555-1234</span>
+                  <span>+91 9429997631</span>
                 </a>
               </li>
               <li className="flex items-start gap-2 text-gray-600">
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
-                <span>123 Design Avenue<br />New York, NY 10001</span>
+                <span>Surat, Gujarat, India</span>
               </li>
             </ul>
           </div>
@@ -271,12 +265,6 @@ export default function Footer() {
               className="text-sm text-gray-500 hover:text-black transition-colors"
             >
               Terms of Service
-            </Link>
-            <Link 
-              href="#sitemap" 
-              className="text-sm text-gray-500 hover:text-black transition-colors"
-            >
-              Sitemap
             </Link>
           </div>
         </div>
