@@ -97,7 +97,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
   };
   
   return (
-    <section 
+    <section
       ref={ref}
       className="relative py-16 sm:py-24 lg:py-32 bg-gray-50 overflow-visible "
       id="work"
@@ -125,8 +125,8 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
         </div>
         
         {/* Project cards container with sticky scrolling behavior */}
-        <div 
-          ref={containerRef} 
+        <div
+          ref={containerRef}
           className="relative mb-[30rem]"
           style={{
             height: `calc(${cardsCount} * ${cardHeight})`,
@@ -143,15 +143,12 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                     top: `${peekHeight}px`,
                     zIndex: index + 1
                   }}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  // Removed initial, whileInView, and transition props for fade-in effect
                 >
                   <motion.div
                     className="relative w-full rounded-xl sm:rounded-2xl shadow-lg overflow-hidden bg-white min-h-[70vh] flex flex-col"
                     style={{ marginBottom: 24 }} // Add bottom margin to each card
-                    whileHover={{ 
+                    whileHover={{
                       boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
                     }}
                     onMouseEnter={() => setIsHovering(true)}
