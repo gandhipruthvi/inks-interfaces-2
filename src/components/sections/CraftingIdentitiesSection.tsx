@@ -43,7 +43,7 @@ const ServiceCard = ({
         alignItems: "center",
         pointerEvents: "none",
         paddingTop: "48px",
-        marginBottom: "32px",
+        marginBottom: "48px", // Increased space below title
       }}
     >
       <div style={{ fontSize: "64px", color: "#555", marginBottom: "16px" }}>
@@ -66,12 +66,12 @@ const ServiceCard = ({
       style={{
         position: "relative",
         zIndex: 10,
-        fontSize: "18px",
+        fontSize: "20px", // Increased font size
         color: "#444",
         textAlign: "center",
         margin: "0 32px 48px 32px",
         minHeight: "80px",
-        lineHeight: 1.6,
+        lineHeight: 1.7,
       }}
     >
       {description}

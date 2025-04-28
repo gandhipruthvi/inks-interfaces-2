@@ -55,15 +55,15 @@
 
 /* Card 2 - Branding */
 .wave-card:nth-child(2) .wave-card-shape:nth-child(1) {
-  background: linear-gradient(45deg, #4ECDC4 0%, #45B7AF 100%);
+  background: linear-gradient(45deg, #FFE066 0%, #FFD600 100%);
 }
 
 .wave-card:nth-child(2) .wave-card-shape:nth-child(2) {
-  background: linear-gradient(45deg, #3DBDB4 0%, #35A79F 100%);
+  background: linear-gradient(45deg, #FFEB99 0%, #FFE066 100%);
 }
 
 .wave-card:nth-child(2) .wave-card-shape:nth-child(3) {
-  background: linear-gradient(45deg, #2DADA4 0%, #25978F 100%);
+  background: linear-gradient(45deg, #FFD600 0%, #FFEB99 100%);
 }
 
 /* Card 3 - Graphic Design */

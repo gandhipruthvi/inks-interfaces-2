@@ -27,58 +27,91 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
     triggerOnce: false,
     threshold: 0.1,
   });
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
-  
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(
+    null,
+  );
+
   // Case studies data - kept to 4 projects as per requirements
   const caseStudies: CaseStudy[] = [
     {
       id: "gomiles",
       title: "Go Miles Website Redesign",
       subtitle: "UI/UX Design",
-      description: "Revamping the Go Miles website to improve user experience and visual appeal. The new design focuses on making travel planning easier, with a cleaner layout, better navigation, and a more modern look that speaks to today’s travelers.",
+      description:
+        "Revamping the Go Miles website to improve user experience and visual appeal. The new design focuses on making travel planning easier, with a cleaner layout, better navigation, and a more modern look that speaks to today’s travelers.",
       image: "/assets/gomiles/gomiles.webp",
       color: "#e4ba88",
       tags: ["Responsive Design", "Travel", "User-Friendly"],
-      content: "Go Miles needed a website that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new site received positive feedback and helped the company attract more customers.",
-      gallery: ["/assets/gomiles/gomileslanding.webp", "/assets/gomiles/gomileseurope.webp", "/assets/gomiles/gomilesabout.webp", "/assets/gomiles/gomilesblogs.webp", "/assets/gomiles/gomilesposts.webp"] // Add your images here later
+      content:
+        "Go Miles needed a website that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new site received positive feedback and helped the company attract more customers.",
+      gallery: [
+        "/assets/gomiles/gomileslanding.webp",
+        "/assets/gomiles/gomileseurope.webp",
+        "/assets/gomiles/gomilesabout.webp",
+        "/assets/gomiles/gomilesblogs.webp",
+        "/assets/gomiles/gomilesposts.webp",
+      ], // Add your images here later
     },
     {
       id: "zestee",
       title: "Zestee Logo",
       subtitle: "Brand Identity Design",
-      description: "Created a fresh and energetic brand identity for Zestee Café, including logo design and complete visual branding. The new look reflects the café’s vibrant personality and creates a memorable experience for its customers.",
+      description:
+        "Created a fresh and energetic brand identity for Zestee Café, including logo design and complete visual branding. The new look reflects the café’s vibrant personality and creates a memorable experience for its customers.",
       image: "/assets/zestee/zestee.webp",
       color: "#FDB91A",
       tags: ["Logo Design", "Café Branding", "Premium"],
-      content: "Zestee needed a brand identity that would reflect its premium, upscale café experience. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the café stand out in a competitive market.",
-      gallery: ["/assets/zestee/cafe.webp","/assets/zestee/coffeecup.webp","/assets/zestee/ig.webp","/assets/zestee/packet.webp","/assets/zestee/apron.webp","/assets/zestee/board.webp"]
+      content:
+        "Zestee needed a brand identity that would reflect its premium, upscale café experience. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the café stand out in a competitive market.",
+      gallery: [
+        "/assets/zestee/cafe.webp",
+        "/assets/zestee/coffeecup.webp",
+        "/assets/zestee/ig.webp",
+        "/assets/zestee/packet.webp",
+        "/assets/zestee/apron.webp",
+        "/assets/zestee/board.webp",
+      ],
     },
     {
       id: "lcm",
       title: "LCM Logo and UI/UX",
       subtitle: "UI/UX Design",
-      description: "Designed an inclusive, responsive website and brand identity for Lab Coat Media — a platform built with accessibility at its core, ensuring equal digital experiences for everyone, regardless of disability.",
+      description:
+        "Designed an inclusive, responsive website and brand identity for Lab Coat Media — a platform built with accessibility at its core, ensuring equal digital experiences for everyone, regardless of disability.",
       image: "/assets/lcm/lcm.webp",
       color: "#3A506B",
       tags: ["Logo Design", "Accessibility", "Responsive Design"],
-      content: "Lab Coat Media needed a brand identity that would reflect its commitment to accessibility and inclusivity. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the company stand out in a competitive market.",
-      gallery: ["/assets/lcm/lcmlanding.webp","/assets/lcm/blog.webp","/assets/lcm/detail.webp"]
+      content:
+        "Lab Coat Media needed a brand identity that would reflect its commitment to accessibility and inclusivity. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the company stand out in a competitive market.",
+      gallery: [
+        "/assets/lcm/lcmlanding.webp",
+        "/assets/lcm/blog.webp",
+        "/assets/lcm/detail.webp",
+      ],
     },
     {
       id: "globetap",
       title: "GlobeTap App UI Design",
       subtitle: "Mobile UI/UX Design",
-      description: "Designed a modern, intuitive mobile interface for GlobeTap — a travel app that helps users explore new destinations, plan trips effortlessly, and connect with global experiences on the go.",
+      description:
+        "Designed a modern, intuitive mobile interface for GlobeTap — a travel app that helps users explore new destinations, plan trips effortlessly, and connect with global experiences on the go.",
       image: "/assets/globetap/globetap.webp",
       color: "#B07156",
       tags: ["App Design", "Travel", "User-Friendly"],
-      content: "GlobeTap needed a mobile interface that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new app resonated with customers and helped the company attract more users.",
-      gallery: ["/assets/globetap/allscreens.webp","/assets/globetap/twophones.webp","/assets/globetap/black.webp","/assets/globetap/stairs.webp","/assets/globetap/liephone.webp"]
+      content:
+        "GlobeTap needed a mobile interface that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new app resonated with customers and helped the company attract more users.",
+      gallery: [
+        "/assets/globetap/allscreens.webp",
+        "/assets/globetap/twophones.webp",
+        "/assets/globetap/black.webp",
+        "/assets/globetap/stairs.webp",
+        "/assets/globetap/liephone.webp",
+      ],
     },
   ];
-  
+
   // Calculate dynamic values for the sticky effect
   const cardHeight = "70vh";
   const cardTopPadding = "1.5em";
@@ -87,43 +120,45 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
   // How much of the previous card should peek from the top
   const peekHeight = 150; // px
 
-
   const handleCaseStudyClick = (caseStudy: CaseStudy) => {
     setSelectedCaseStudy(caseStudy);
   };
-  
+
   const closeModal = () => {
     setSelectedCaseStudy(null);
   };
-  
+
   return (
     <section
       ref={ref}
-      className="relative py-16 sm:py-24 lg:py-32 bg-gray-50 overflow-visible "
+      className="relative overflow-visible bg-gray-50 py-16 sm:py-24 lg:py-32"
       id="work"
     >
       {/* Background elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent" />
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute left-0 top-0 h-32 w-full bg-gradient-to-b from-white to-transparent" />
+        <div className="absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-white to-transparent" />
       </div>
-      
+
       {/* Main content */}
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="px-4 sm:px-8 mb-12 sm:mb-16 lg:mb-24">
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="mb-12 px-4 sm:mb-16 sm:px-8 lg:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">Work Worth Watching</h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto">
-              Scroll through our featured projects to see how strategic design thinking translates into business success.
+            <h2 className="mb-4 text-4xl font-bold sm:mb-6 sm:text-5xl lg:text-6xl">
+              Work Worth Watching
+            </h2>
+            <p className="mx-auto max-w-3xl text-base text-gray-700 sm:text-lg lg:text-xl">
+              Scroll through our featured projects to see how strategic design
+              thinking translates into business success.
             </p>
           </motion.div>
         </div>
-        
+
         {/* Project cards container with sticky scrolling behavior */}
         <div
           ref={containerRef}
@@ -141,12 +176,12 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                   className="sticky"
                   style={{
                     top: `${peekHeight}px`,
-                    zIndex: index + 1
+                    zIndex: index + 1,
                   }}
                   // Removed initial, whileInView, and transition props for fade-in effect
                 >
                   <motion.div
-                    className="relative w-full rounded-xl sm:rounded-2xl shadow-lg overflow-hidden bg-white min-h-[70vh] flex flex-col"
+                    className="relative flex min-h-[70vh] w-full flex-col overflow-hidden rounded-xl bg-white shadow-lg sm:rounded-2xl"
                     style={{ marginBottom: 24 }} // Add bottom margin to each card
                     whileHover={{
                       boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
@@ -154,76 +189,81 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
                   >
-                    <div className="flex flex-col lg:flex-row h-full flex-grow">
+                    <div className="flex h-full flex-grow flex-col lg:flex-row">
                       {/* Left side - Project image */}
-                      <div className="lg:w-1/2 h-48 sm:h-64 lg:h-auto overflow-hidden relative">
+                      <div className="relative h-48 overflow-hidden sm:h-64 lg:h-auto lg:w-1/2">
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-br"
-                          style={{ backgroundColor: project.color, opacity: 0.1 }}
+                          style={{
+                            backgroundColor: project.color,
+                            opacity: 0.1,
+                          }}
                           whileHover={{ opacity: 0.2 }}
                           transition={{ duration: 0.3 }}
                         />
                         <motion.img
                           src={project.image}
                           alt={project.title}
-                          className="w-full h-full object-cover object-center"
+                          className="h-full w-full object-cover object-center"
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.6 }}
                         />
                       </div>
-                      
+
                       {/* Right side - Project details */}
-                      <div className="lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-between flex-grow">
+                      <div className="flex flex-grow flex-col justify-between p-6 sm:p-8 lg:w-1/2 lg:p-12">
                         <div>
                           {/* Project category and tags */}
-                          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                            <span 
-                              className="inline-block px-3 py-1 text-sm font-medium rounded-full"
-                              style={{ 
+                          <div className="mb-4 flex flex-wrap items-center gap-2 sm:mb-6 sm:gap-3">
+                            <span
+                              className="inline-block rounded-full px-3 py-1 text-sm font-medium"
+                              style={{
                                 backgroundColor: `${project.color}20`,
-                                color: project.color
+                                color: project.color,
                               }}
                             >
                               {project.subtitle}
                             </span>
-                            
-                            {project.tags.slice(0, 2).map(tag => (
-                              <span 
-                                key={tag} 
-                                className="inline-block px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full"
+
+                            {project.tags.slice(0, 2).map((tag) => (
+                              <span
+                                key={tag}
+                                className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600"
                               >
                                 {tag}
                               </span>
                             ))}
                           </div>
-                          
+
                           {/* Project title and description */}
-                          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-4">{project.title}</h3>
-                          <p className="text-gray-700 mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base md:text-lg leading-relaxed">
+                          <h2 className="mb-2 text-xl font-bold sm:mb-4 sm:text-2xl md:text-3xl">
+                            {project.title}
+                          </h2>
+                          <p className="mb-4 text-base leading-relaxed text-gray-700 sm:text-xl md:text-2xl">
                             {project.description}
                           </p>
                         </div>
-                        
+
                         {/* CTA Button */}
                         <motion.button
-                          className="flex items-center gap-2 text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg font-medium text-base sm:text-lg touch-target"
+                          className="touch-target flex items-center gap-2 rounded-lg px-5 py-2.5 text-base font-medium text-white sm:px-6 sm:py-3 sm:text-lg"
                           style={{ backgroundColor: project.color }}
-                          whileHover={{ 
+                          whileHover={{
                             scale: 1.02,
-                            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" 
+                            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
                           }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => handleCaseStudyClick(project)}
                         >
-                          View Case Study 
+                          View Case Study
                           <ArrowRight size={18} />
                         </motion.button>
                       </div>
                     </div>
-                    
+
                     {/* Project number indicator */}
-                    <div 
-                      className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center font-bold text-white"
+                    <div
+                      className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full font-bold text-white"
                       style={{ backgroundColor: project.color }}
                     >
                       {index + 1}
@@ -234,21 +274,22 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
             })}
           </ul>
         </div>
-        
+
         {/* Call to action */}
-        <motion.div 
-            className="flex justify-center pt-12 pb-24 sm:pb-20 lg:pb-24 px-4 mt-24 sm:mt-20 lg:mt-28"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+        <motion.div
+          className="mt-24 flex justify-center px-4 pb-24 pt-12 sm:mt-20 sm:pb-20 lg:mt-28 lg:pb-24"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           <motion.a
             href="/imaginations"
-            className="inline-flex items-center gap-2 bg-black text-white px-10 py-5 rounded-xl font-bold text-lg shadow-lg"
-            whileHover={{ 
-              scale: 1.05, 
-              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" 
+            className="inline-flex items-center gap-2 rounded-xl bg-black px-10 py-5 text-lg font-bold text-white shadow-lg"
+            whileHover={{
+              scale: 1.05,
+              boxShadow:
+                "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
             }}
             whileTap={{ scale: 0.98 }}
             onMouseEnter={() => setIsHovering(true)}
@@ -259,111 +300,162 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
           </motion.a>
         </motion.div>
       </div>
-      
+
       {/* Case study modal */}
       <AnimatePresence>
         {selectedCaseStudy && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black bg-opacity-75 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-6 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
           >
             <motion.div
-              className="relative bg-white rounded-2xl max-w-5xl w-full max-h-[85vh] overflow-y-auto"
+              className="relative max-h-[85vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white"
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Modal header */}
-              <div 
-                className="h-72 relative"
+              <div
+                className="h-76 relative sm:h-72" // Increased height for mobile
                 style={{ backgroundColor: selectedCaseStudy.color }}
               >
-                <img 
-                  src={selectedCaseStudy.image} 
+                <img
+                  src={selectedCaseStudy.image}
                   alt={selectedCaseStudy.title}
-                  className="w-full h-full object-cover object-center mix-blend-multiply"
+                  className="h-full w-full object-cover object-center mix-blend-multiply"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-10">
-                  <span 
-                    className="inline-block px-3 py-1 mb-3 text-sm font-medium rounded-full bg-white/90"
+                <div className="absolute bottom-0 left-0 p-6 sm:p-10">
+                  {" "}
+                  {/* Adjusted padding for mobile */}
+                  <span
+                    className="mb-2 inline-block rounded-full bg-white/90 px-3 py-1 text-sm font-medium sm:mb-3"
                     style={{ color: selectedCaseStudy.color }}
                   >
                     {selectedCaseStudy.subtitle}
                   </span>
-                  <h2 className="text-4xl font-bold text-white mb-2">{selectedCaseStudy.title}</h2>
-                  <p className="text-white/90 text-lg max-w-2xl">{selectedCaseStudy.description}</p>
+                  <h2 className="mb-2 text-2xl font-bold text-white sm:text-4xl">
+                    {" "}
+                    {/* Responsive font size */}
+                    {selectedCaseStudy.title}
+                  </h2>
+                  <p className="max-w-2xl text-base text-white/90 sm:text-lg">
+                    {" "}
+                    {/* Responsive font size */}
+                    {selectedCaseStudy.description}
+                  </p>
                 </div>
-                
+
                 {/* Close button */}
                 <motion.button
-                  className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-colors"
+                  className="absolute right-6 top-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/25 text-white backdrop-blur-md transition-colors hover:bg-white/40"
                   onClick={closeModal}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => setIsHovering(false)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18 6L6 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M6 6L18 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </motion.button>
               </div>
-              
+
               {/* Modal content */}
               <div className="p-10">
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="mb-8 flex flex-wrap gap-2">
                   {selectedCaseStudy.tags.map((tag) => (
-                    <span 
+                    <span
                       key={tag}
-                      className="px-4 py-1.5 rounded-full text-sm font-medium"
-                      style={{ 
+                      className="rounded-full px-4 py-1.5 text-sm font-medium"
+                      style={{
                         backgroundColor: `${selectedCaseStudy.color}15`,
-                        color: selectedCaseStudy.color
+                        color: selectedCaseStudy.color,
                       }}
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                
+
                 <div className="prose prose-lg max-w-none">
-                  <p className="text-xl leading-relaxed text-gray-800">{selectedCaseStudy.content}</p>
-                  
-                  <h3 className="text-2xl font-bold mt-10 mb-4">The Challenge</h3>
-                  <p className="text-lg text-gray-700">
-                    Every great project starts with a challenge. For {selectedCaseStudy.title}, the challenge was to create a design that would stand out in a crowded market while maintaining usability and brand consistency.
+                  <p className="text-xl leading-relaxed text-gray-800">
+                    {selectedCaseStudy.content}
                   </p>
-                  
-                  <h3 className="text-2xl font-bold mt-10 mb-4">The Approach</h3>
+
+                  <h3 className="mb-4 mt-10 text-2xl font-bold">
+                    The Challenge
+                  </h3>
                   <p className="text-lg text-gray-700">
-                    Through extensive research and iterative design, we developed a solution that balanced aesthetic appeal with functional requirements. The process involved stakeholder interviews, competitive analysis, and multiple rounds of user testing.
+                    Every great project starts with a challenge. For{" "}
+                    {selectedCaseStudy.title}, the challenge was to create a
+                    design that would stand out in a crowded market while
+                    maintaining usability and brand consistency.
                   </p>
-                  
-                  <h3 className="text-2xl font-bold mt-10 mb-4">The Results</h3>
+
+                  <h3 className="mb-4 mt-10 text-2xl font-bold">
+                    The Approach
+                  </h3>
                   <p className="text-lg text-gray-700">
-                    The final design not only met but exceeded expectations, resulting in improved user engagement, brand recognition, and business metrics. The client was thrilled with the outcome and has since implemented the design across their entire product line.
+                    Through extensive research and iterative design, we
+                    developed a solution that balanced aesthetic appeal with
+                    functional requirements. The process involved stakeholder
+                    interviews, competitive analysis, and multiple rounds of
+                    user testing.
+                  </p>
+
+                  <h3 className="mb-4 mt-10 text-2xl font-bold">The Results</h3>
+                  <p className="text-lg text-gray-700">
+                    The final design not only met but exceeded expectations,
+                    resulting in improved user engagement, brand recognition,
+                    and business metrics. The client was thrilled with the
+                    outcome and has since implemented the design across their
+                    entire product line.
                   </p>
 
                   {/* Project images grid: bento for branding/logo, simple grid otherwise */}
-                  {selectedCaseStudy.gallery && selectedCaseStudy.gallery.length > 0 && (
-                    (selectedCaseStudy.subtitle?.toLowerCase().includes("brand") || selectedCaseStudy.subtitle?.toLowerCase().includes("logo")) ? (
+                  {selectedCaseStudy.gallery &&
+                    selectedCaseStudy.gallery.length > 0 &&
+                    (selectedCaseStudy.subtitle
+                      ?.toLowerCase()
+                      .includes("brand") ||
+                    selectedCaseStudy.subtitle
+                      ?.toLowerCase()
+                      .includes("logo") ? (
                       // Bento grid for branding/logo projects
-                      <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[180px]">
+                      <div className="mt-10 grid auto-rows-[180px] grid-cols-2 gap-4 md:grid-cols-4">
                         {selectedCaseStudy.gallery.map((img, i) => (
                           <div
                             key={i}
-                            className={`rounded-xl overflow-hidden shadow-lg ${i % 5 === 0 ? "row-span-2 col-span-2" : ""}`}
+                            className={`overflow-hidden rounded-xl shadow-lg ${i % 5 === 0 ? "col-span-2 row-span-2" : ""}`}
                           >
                             <img
                               src={img}
                               alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
-                              className="w-full h-full object-cover"
+                              className="h-full w-full object-cover"
                             />
                           </div>
                         ))}
@@ -374,27 +466,28 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                         {selectedCaseStudy.gallery.map((img, i) => (
                           <div
                             key={i}
-                            className="rounded-xl overflow-hidden shadow-lg"
+                            className="overflow-hidden rounded-xl shadow-lg"
                           >
                             <img
                               src={img}
                               alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
-                              className="w-full h-full object-cover"
+                              className="h-full w-full object-cover"
                             />
                           </div>
                         ))}
                       </div>
-                    )
-                  )}
-
+                    ))}
                 </div>
-                
+
                 {/* Call to action */}
                 <div className="mt-12 flex justify-center">
                   <motion.button
-                    className="px-8 py-4 rounded-xl font-bold text-white flex items-center gap-2"
+                    className="flex items-center gap-2 rounded-xl px-8 py-4 font-bold text-white"
                     style={{ backgroundColor: selectedCaseStudy.color }}
-                    whileHover={{ scale: 1.05, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
+                    }}
                     whileTap={{ scale: 0.98 }}
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
