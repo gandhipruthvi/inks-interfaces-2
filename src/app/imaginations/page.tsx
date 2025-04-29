@@ -16,6 +16,9 @@ interface CaseStudy {
   color: string;
   tags: string[];
   content: string;
+  challenge: string;
+  approach: string;
+  results: string;
   link?: string;
   gallery?: string[];
 }
@@ -54,6 +57,9 @@ export default function ImaginationsPage() {
       color: "#e4ba88",
       tags: ["Responsive Design", "Travel", "User-Friendly"],
       content: "Go Miles needed a website that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new site received positive feedback and helped the company attract more customers.",
+      challenge: "Every great project starts with a challenge. For Go Miles Website Redesign, the challenge was to create a design that would stand out in a crowded market while maintaining usability and brand consistency.",
+      approach: "Through extensive research and iterative design, we developed a solution that balanced aesthetic appeal with functional requirements. The process involved stakeholder interviews, competitive analysis, and multiple rounds of user testing.",
+      results: "The final design not only met but exceeded expectations, resulting in improved user engagement, brand recognition, and business metrics. The client was thrilled with the outcome and has since implemented the design across their entire product line.",
       gallery: ["/assets/gomiles/gomileslanding.webp", "/assets/gomiles/gomileseurope.webp", "/assets/gomiles/gomilesabout.webp", "/assets/gomiles/gomilesblogs.webp", "/assets/gomiles/gomilesposts.webp"] // Add your images here later
     },
     {
@@ -65,6 +71,9 @@ export default function ImaginationsPage() {
       color: "#FDB91A",
       tags: ["Logo Design", "Café Branding", "Premium"],
       content: "Zestee needed a brand identity that would reflect its premium, upscale café experience. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the café stand out in a competitive market.",
+      challenge: "Zestee Café was entering a crowded market filled with both boutique and franchise coffee shops. The challenge was to create a brand identity that not only captured the café’s energetic and youthful spirit but also conveyed a sense of premium quality. The brand needed to appeal to a diverse clientele, from students to professionals, and stand out visually on everything from signage to social media.",
+      approach: "We began with in-depth market and competitor research to understand what would resonate with Zestee’s target audience. Multiple moodboards and color explorations led us to a palette that balances vibrancy with sophistication. The logo was designed to be playful yet modern, with custom typography and iconography that could be adapted for packaging, merchandise, and digital platforms, ensuring strong brand recognition at every touchpoint.",
+      results: "The new identity gave Zestee a distinctive presence in its locale, making it instantly recognizable and Instagrammable. Customer engagement increased both in-store and online, and the café quickly became known for its lively atmosphere and unique brand personality. The cohesive branding also enabled Zestee to expand its merchandise line and attract new collaborations.",
       gallery: ["/assets/zestee/cafe.webp","/assets/zestee/coffeecup.webp","/assets/zestee/ig.webp","/assets/zestee/packet.webp","/assets/zestee/apron.webp","/assets/zestee/board.webp"]
     },
     {
@@ -76,6 +85,9 @@ export default function ImaginationsPage() {
       color: "#3A506B",
       tags: ["Logo Design", "Accessibility", "Responsive Design"],
       content: "Lab Coat Media needed a brand identity that would reflect its commitment to accessibility and inclusivity. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the company stand out in a competitive market.",
+      challenge: "Lab Coat Media’s mission was to make digital content accessible to all, but its existing brand and website fell short of modern accessibility standards and failed to communicate inclusivity. The challenge was to overhaul both the visual identity and the user experience, ensuring the brand would resonate with a broad spectrum of users, including those with disabilities.",
+      approach: "We collaborated closely with accessibility consultants and real users to identify pain points and opportunities for improvement. The new logo and color system were designed for maximum contrast and legibility, while the website layout was restructured for keyboard navigation and screen reader compatibility. User testing was conducted at every stage, and WCAG guidelines were strictly followed to guarantee compliance.",
+      results: "Lab Coat Media’s new brand and website received praise from both users and industry experts for their clarity and inclusiveness. Accessibility scores improved dramatically, and the company reported a noticeable uptick in client inquiries from organizations prioritizing inclusive design. The project set a new internal standard for accessibility on all future work.",
       gallery: ["/assets/lcm/lcmlanding.webp","/assets/lcm/blog.webp","/assets/lcm/detail.webp"]
     },
     {
@@ -87,6 +99,9 @@ export default function ImaginationsPage() {
       color: "#B07156",
       tags: ["App Design", "Travel", "User-Friendly"],
       content: "GlobeTap needed a mobile interface that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new app resonated with customers and helped the company attract more users.",
+      challenge: "GlobeTap wanted to empower travelers to easily discover and book experiences on the go, but their app’s previous interface was cluttered and unintuitive. The challenge was to rethink the mobile experience to make it effortlessly navigable, visually appealing, and efficient for users planning trips in real time.",
+      approach: "We mapped out the most common travel user journeys, prioritizing speed and ease of use. The design process included wireframing, prototyping, and multiple rounds of user testing with actual travelers. We introduced a bold, travel-inspired color palette and icon set, and focused on streamlining actions like search, booking, and itinerary management to minimize friction.",
+      results: "The app’s relaunch resulted in a significant increase in downloads and daily active users. Travelers praised the intuitive interface and the app’s ability to help them plan trips quickly, even in unfamiliar destinations. GlobeTap’s App Store rating improved, and the brand gained recognition as a modern, user-focused travel solution.",
       gallery: ["/assets/globetap/allscreens.webp","/assets/globetap/twophones.webp","/assets/globetap/black.webp","/assets/globetap/stairs.webp","/assets/globetap/liephone.webp"]
     },
     {
@@ -98,6 +113,9 @@ export default function ImaginationsPage() {
       color: "#d53e40",
       tags: ["Logo Design", "Asian Culinary", "Luxury"],
       content: "Satori Bites blends the rich heritage of Asian cuisine with a modern luxury dining experience. The full branding project focused on creating a sophisticated yet approachable visual identity that reflects elegance, authenticity, and warmth. From the refined logo to the color palette, typography, and supporting visuals, every detail was crafted to resonate with the restaurant’s philosophy of mindful dining. The branding elevated Satori Bites’ market presence, making it a distinguished name in upscale culinary circles.",
+      challenge: "Satori Bites sought to position itself as a modern Asian fine dining destination, but its existing branding didn’t reflect the restaurant’s upscale experience or its blend of tradition and innovation. The challenge was to create a brand identity that honored Asian heritage while appealing to a discerning, contemporary clientele.",
+      approach: "We immersed ourselves in Asian art and culinary traditions, drawing inspiration for motifs, patterns, and color schemes. The logo and supporting visuals were crafted to evoke both elegance and warmth, with a refined yet approachable look. The new identity was applied across menus, packaging, signage, and digital platforms for a seamless guest experience.",
+      results: "The refreshed branding elevated Satori Bites’ reputation, attracting a broader range of guests and earning positive reviews for both cuisine and ambiance. The restaurant saw an increase in reservations and repeat business, and the cohesive visual identity helped establish Satori Bites as a leader in the upscale dining scene.",
       gallery: ["/assets/satoribites/bag.webp","/assets/satoribites/box.webp","/assets/satoribites/apron.webp","/assets/satoribites/plate.webp","/assets/satoribites/tissue.webp","/assets/satoribites/card.webp"]
     },
     {
@@ -109,6 +127,9 @@ export default function ImaginationsPage() {
       color: "#ffb0ae",
       tags: ["Logo Design", "Artisanal Bakery", "Premium"],
       content: "Golden Crust embodies the spirit of artisanal baking with a premium twist. Through a full branding project, we created a visual identity that feels handcrafted yet refined — from the elegant logo featuring natural elements to the soft, inviting color palette. Every design decision was aimed at expressing the bakery’s dedication to using the finest ingredients and delivering unforgettable taste experiences. The refreshed branding elevated Golden Crust’s presence, making it a standout destination for bakery lovers who seek both authenticity and sophistication.",
+      challenge: "Golden Crust needed to differentiate itself in a competitive boutique bakery market, where authenticity and quality are paramount. The challenge was to create a brand that communicated artisanal craftsmanship while also feeling premium and inviting to a wide audience.",
+      approach: "We developed a brand story centered on handcrafted quality, using natural textures and a soft, inviting color palette. The logo and packaging were designed to evoke warmth and nostalgia, while still feeling fresh and modern. Every touchpoint, from store signage to bakery boxes, was considered for a consistent customer experience.",
+      results: "The new branding resonated with both loyal and new customers, leading to increased foot traffic and sales. Golden Crust became known as a must-visit destination for bakery lovers, and the brand’s visual assets were frequently shared on social media, further boosting its reach and reputation.",
       gallery: ["/assets/goldencrust/bread.webp","/assets/goldencrust/banner.webp","/assets/goldencrust/menu.webp","/assets/goldencrust/crossaint.webp","/assets/goldencrust/tape.webp","/assets/goldencrust/store.webp"]
     },
     {
@@ -120,6 +141,9 @@ export default function ImaginationsPage() {
       color: "#8cc751",
       tags: ["Product Design", "Fruit Beverage", "Organic"],
       content: "PureSip is a 100% natural fruit drink that celebrates real ingredients and clean living — and the packaging needed to communicate just that. The design approach focused on creating a fresh, modern, and health-forward visual identity that reflects the brand’s values.",
+      challenge: "Pure Sip wanted packaging that would instantly communicate its all-natural, healthy positioning and stand out in the crowded beverage aisle. The challenge was to create a look that was both eye-catching and reflective of the brand’s commitment to real ingredients.",
+      approach: "We used bold, organic shapes and a vibrant color palette to create a sense of freshness and energy. The packaging design was tested on shelves to ensure visibility, and all elements—from typography to illustrations—were crafted to reinforce the product’s natural and health-forward appeal.",
+      results: "The new packaging dramatically improved shelf presence, leading to increased product trials and repeat purchases. Pure Sip gained traction with health-conscious shoppers and expanded its distribution to new retailers, supported by positive feedback on the brand’s refreshed look.",
       gallery: ["/assets/puresip/lemon.webp","/assets/puresip/halfgrape.webp","/assets/puresip/strawberry.webp","/assets/puresip/halfpear.webp","/assets/puresip/grapes.webp","/assets/puresip/pear.webp"]
     },
     {
@@ -131,6 +155,9 @@ export default function ImaginationsPage() {
       color: "#af8359",
       tags: ["Logo Variations", "Beauty Brand", "Luxury"],
       content: "The branding captures the essence of organic sophistication, using earthy tones, delicate botanicals, and minimalistic elegance to represent the brand’s commitment to chemical-free, premium beauty solutions.",
+      challenge: "Vanya Luxe needed a brand identity that would convey both purity and luxury, appealing to discerning beauty buyers looking for organic, chemical-free products. The challenge was to balance a sense of natural simplicity with high-end sophistication.",
+      approach: "We combined delicate botanical illustrations with a minimalist, elegant layout, using earthy tones and premium finishes for packaging. The visual identity was designed to work across a range of products, from skincare to cosmetics, and to communicate trust and exclusivity at every touchpoint.",
+      results: "The new look attracted a loyal, high-end customer base and set Vanya Luxe apart in the competitive beauty market. The brand saw increased engagement on social media and positive feedback from influencers, helping to drive both sales and brand awareness.",
       gallery: ["/assets/vanyaluxe/tube.webp","/assets/vanyaluxe/dropper.webp","/assets/vanyaluxe/nailpolish.webp","/assets/vanyaluxe/bag.webp"]
     },
   ];
@@ -352,17 +379,17 @@ export default function ImaginationsPage() {
                   
                   <h3 className="text-2xl font-bold mt-10 mb-4">The Challenge</h3>
                   <p className="text-lg text-gray-700">
-                    Every great project starts with a challenge. For {selectedCaseStudy.title}, the challenge was to create a design that would stand out in a crowded market while maintaining usability and brand consistency.
+                    {selectedCaseStudy.challenge}
                   </p>
                   
                   <h3 className="text-2xl font-bold mt-10 mb-4">The Approach</h3>
                   <p className="text-lg text-gray-700">
-                    Through extensive research and iterative design, we developed a solution that balanced aesthetic appeal with functional requirements. The process involved stakeholder interviews, competitive analysis, and multiple rounds of user testing.
+                    {selectedCaseStudy.approach}
                   </p>
                   
                   <h3 className="text-2xl font-bold mt-10 mb-4">The Results</h3>
                   <p className="text-lg text-gray-700">
-                    The final design not only met but exceeded expectations, resulting in improved user engagement, brand recognition, and business metrics. The client was thrilled with the outcome and has since implemented the design across their entire product line.
+                    {selectedCaseStudy.results}
                   </p>
                 </div>
 

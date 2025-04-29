@@ -18,6 +18,9 @@ interface CaseStudy {
   color: string;
   tags: string[];
   content: string;
+  challenge: string;
+  approach: string;
+  results: string;
   link?: string;
   gallery?: string[]; // Array of image URLs for bento grid
 }
@@ -42,6 +45,9 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
       color: "#e4ba88",
       tags: ["Responsive Design", "Travel", "User-Friendly"],
       content: "Go Miles needed a website that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new site received positive feedback and helped the company attract more customers.",
+      challenge: "Every great project starts with a challenge. For Go Miles Website Redesign, the challenge was to create a design that would stand out in a crowded market while maintaining usability and brand consistency.",
+      approach: "Through extensive research and iterative design, we developed a solution that balanced aesthetic appeal with functional requirements. The process involved stakeholder interviews, competitive analysis, and multiple rounds of user testing.",
+      results: "The final design not only met but exceeded expectations, resulting in improved user engagement, brand recognition, and business metrics. The client was thrilled with the outcome and has since implemented the design across their entire product line.",
       gallery: ["/assets/gomiles/gomileslanding.webp", "/assets/gomiles/gomileseurope.webp", "/assets/gomiles/gomilesabout.webp", "/assets/gomiles/gomilesblogs.webp", "/assets/gomiles/gomilesposts.webp"] // Add your images here later
     },
     {
@@ -53,6 +59,9 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
       color: "#FDB91A",
       tags: ["Logo Design", "Café Branding", "Premium"],
       content: "Zestee needed a brand identity that would reflect its premium, upscale café experience. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the café stand out in a competitive market.",
+      challenge: "Zestee Café was entering a crowded market filled with both boutique and franchise coffee shops. The challenge was to create a brand identity that not only captured the café’s energetic and youthful spirit but also conveyed a sense of premium quality. The brand needed to appeal to a diverse clientele, from students to professionals, and stand out visually on everything from signage to social media.",
+      approach: "We began with in-depth market and competitor research to understand what would resonate with Zestee’s target audience. Multiple moodboards and color explorations led us to a palette that balances vibrancy with sophistication. The logo was designed to be playful yet modern, with custom typography and iconography that could be adapted for packaging, merchandise, and digital platforms, ensuring strong brand recognition at every touchpoint.",
+      results: "The new identity gave Zestee a distinctive presence in its locale, making it instantly recognizable and Instagrammable. Customer engagement increased both in-store and online, and the café quickly became known for its lively atmosphere and unique brand personality. The cohesive branding also enabled Zestee to expand its merchandise line and attract new collaborations.",
       gallery: ["/assets/zestee/cafe.webp","/assets/zestee/coffeecup.webp","/assets/zestee/ig.webp","/assets/zestee/packet.webp","/assets/zestee/apron.webp","/assets/zestee/board.webp"]
     },
     {
@@ -64,6 +73,9 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
       color: "#3A506B",
       tags: ["Logo Design", "Accessibility", "Responsive Design"],
       content: "Lab Coat Media needed a brand identity that would reflect its commitment to accessibility and inclusivity. The design focused on a bold, modern aesthetic with a touch of luxury, using rich colors and premium materials. The new look resonated with customers and helped the company stand out in a competitive market.",
+      challenge: "Lab Coat Media’s mission was to make digital content accessible to all, but its existing brand and website fell short of modern accessibility standards and failed to communicate inclusivity. The challenge was to overhaul both the visual identity and the user experience, ensuring the brand would resonate with a broad spectrum of users, including those with disabilities.",
+      approach: "We collaborated closely with accessibility consultants and real users to identify pain points and opportunities for improvement. The new logo and color system were designed for maximum contrast and legibility, while the website layout was restructured for keyboard navigation and screen reader compatibility. User testing was conducted at every stage, and WCAG guidelines were strictly followed to guarantee compliance.",
+      results: "Lab Coat Media’s new brand and website received praise from both users and industry experts for their clarity and inclusiveness. Accessibility scores improved dramatically, and the company reported a noticeable uptick in client inquiries from organizations prioritizing inclusive design. The project set a new internal standard for accessibility on all future work.",
       gallery: ["/assets/lcm/lcmlanding.webp","/assets/lcm/blog.webp","/assets/lcm/detail.webp"]
     },
     {
@@ -75,6 +87,9 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
       color: "#B07156",
       tags: ["App Design", "Travel", "User-Friendly"],
       content: "GlobeTap needed a mobile interface that would make travel planning easier and more enjoyable. The design focused on a clean, modern aesthetic with intuitive navigation and a focus on user experience. The new app resonated with customers and helped the company attract more users.",
+      challenge: "GlobeTap wanted to empower travelers to easily discover and book experiences on the go, but their app’s previous interface was cluttered and unintuitive. The challenge was to rethink the mobile experience to make it effortlessly navigable, visually appealing, and efficient for users planning trips in real time.",
+      approach: "We mapped out the most common travel user journeys, prioritizing speed and ease of use. The design process included wireframing, prototyping, and multiple rounds of user testing with actual travelers. We introduced a bold, travel-inspired color palette and icon set, and focused on streamlining actions like search, booking, and itinerary management to minimize friction.",
+      results: "The app’s relaunch resulted in a significant increase in downloads and daily active users. Travelers praised the intuitive interface and the app’s ability to help them plan trips quickly, even in unfamiliar destinations. GlobeTap’s App Store rating improved, and the brand gained recognition as a modern, user-focused travel solution.",
       gallery: ["/assets/globetap/allscreens.webp","/assets/globetap/twophones.webp","/assets/globetap/black.webp","/assets/globetap/stairs.webp","/assets/globetap/liephone.webp"]
     },
   ];
@@ -340,17 +355,17 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                   
                   <h3 className="text-2xl font-bold mt-10 mb-4">The Challenge</h3>
                   <p className="text-lg text-gray-700">
-                    Every great project starts with a challenge. For {selectedCaseStudy.title}, the challenge was to create a design that would stand out in a crowded market while maintaining usability and brand consistency.
+                    {selectedCaseStudy.challenge}
                   </p>
                   
                   <h3 className="text-2xl font-bold mt-10 mb-4">The Approach</h3>
                   <p className="text-lg text-gray-700">
-                    Through extensive research and iterative design, we developed a solution that balanced aesthetic appeal with functional requirements. The process involved stakeholder interviews, competitive analysis, and multiple rounds of user testing.
+                    {selectedCaseStudy.approach}
                   </p>
                   
                   <h3 className="text-2xl font-bold mt-10 mb-4">The Results</h3>
                   <p className="text-lg text-gray-700">
-                    The final design not only met but exceeded expectations, resulting in improved user engagement, brand recognition, and business metrics. The client was thrilled with the outcome and has since implemented the design across their entire product line.
+                    {selectedCaseStudy.results}
                   </p>
 
                   {/* Project images grid: bento for branding/logo, simple grid otherwise */}

@@ -46,13 +46,14 @@ export default function AnimatedBackground({
       
       particles = [];
       for (let i = 0; i < particleCount; i++) {
+        const opacity = Math.random() * 0.7 + 0.1;
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 5 + 1,
+          size: Math.random() * 12 + 8,
           speedX: (Math.random() - 0.5) * 1.5,
           speedY: (Math.random() - 0.5) * 1.5,
-          opacity: Math.random() * 0.7 + 0.1,
+          opacity,
           color: Math.random() > 0.7 ? secondaryColor : color,
         });
       }
@@ -64,10 +65,13 @@ export default function AnimatedBackground({
       particles.forEach((particle, index) => {
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color === color 
-          ? `rgba(0, 0, 0, ${particle.opacity})` 
-          : `rgba(255, 215, 0, ${particle.opacity})`;
+        let fillColor = `rgb(255, 191, 0)`;
+        ctx.fillStyle = fillColor;
         ctx.fill();
+        // Add a subtle outline for visibility
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+        ctx.stroke();
         
         // Connect nearby particles
         for (let j = index + 1; j < particles.length; j++) {

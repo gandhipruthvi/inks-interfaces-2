@@ -17,6 +17,7 @@ import {
 import Navbar from "@/components/ui/Navbar";
 import Cursor from "@/components/ui/Cursor";
 import TypewriterText from "@/components/ui/TypewriterText";
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import ValueCard from "@/components/ui/ValueCard";
 
 export default function AboutPage() {
@@ -120,8 +121,10 @@ export default function AboutPage() {
       {/* Hero Section - Simplified */}
       <section
         ref={heroRef}
-        className="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 bg-gray-50"
+        className="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 bg-gray-50 overflow-hidden"
       >
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 z-0 pointer-events-none animated-gradient4" />
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <motion.div
             style={{ y: heroTitleY }}
@@ -133,7 +136,7 @@ export default function AboutPage() {
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7 }}
             >
-              Our <span className="text-[#FFD700]">Story</span>
+              Our <span className="stroke-title">Story</span>
             </motion.h1>
 
             <motion.div
@@ -143,11 +146,12 @@ export default function AboutPage() {
               transition={{ duration: 0.7, delay: 0.3 }}
             >
               <TypewriterText
-                text="Excellence in design since 2015."
+                text="Excellence in design since 2021."
                 speed={40}
                 delay={800}
                 className="inline"
               />
+
             </motion.div>
             
             <motion.p
@@ -158,6 +162,8 @@ export default function AboutPage() {
             >
               At Inks & Interfaces, we believe design is more than aesthetics—it's about crafting meaningful experiences that drive business success.
             </motion.p>
+
+
           </motion.div>
 
           {/* Company statistics */}
@@ -167,12 +173,11 @@ export default function AboutPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.5 }}
           >
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-3 gap-6">
               {[
-                { number: "8+", label: "Years of Excellence" },
-                { number: "120+", label: "Projects Delivered" },
-                { number: "50+", label: "Happy Clients" },
-                { number: "15", label: "Creative Experts" }
+                { number: "4+", label: "Years of Excellence" },
+                { number: "100+", label: "Projects Delivered" },
+                { number: "50+", label: "Happy Clients" }
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -188,27 +193,19 @@ export default function AboutPage() {
             </div>
           </motion.div>
           
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={heroInView ? { 
-              opacity: [0.5, 1, 0.5], 
-              y: [10, 20, 10] 
-            } : {}}
-            transition={{ 
-              duration: 2,
-              delay: 1.8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2"
-          >
-            <p className="text-sm text-gray-600">Scroll to explore</p>
-            <ChevronDown className="h-6 w-6" />
-          </motion.div>
         </div>
       </section>
       
+      {/* The Heart Behind the Interface Section */}
+      <section className="mt-20 mb-8 relative overflow-hidden">
+        <div className="absolute inset-0 z-0 animated-radial-bg pointer-events-none" />
+        <h2 className="text-4xl font-bold text-center mb-6 relative z-10">The Heart Behind the Interface</h2>
+        <div className="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed text-center relative z-10">
+          At Inks & Interfaces, we believe in the power of blending art with innovation. We are a creative and technology-driven studio passionate about building brands, crafting beautiful designs, and delivering intuitive digital experiences.<br /><br />
+          Our name says it all — "Inks" represents creativity, imagination, and design, while "Interfaces" reflects technology, function, and digital evolution. Together, they create a seamless bridge between ideas and execution, vision and experience, brands and people.
+        </div>
+      </section>
+
       {/* Mission & Vision - Simplified */}
       <section className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-6">
@@ -257,7 +254,7 @@ export default function AboutPage() {
             animate={valuesInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="text-4xl font-bold mb-4">Our Core Values</h2>
+            <h2 className="text-4xl font-bold mb-4">Our Code of Creativity</h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               The principles that guide our work and relationships
             </p>
@@ -279,7 +276,7 @@ export default function AboutPage() {
       </section>
       
       {/* Team Section - Simplified */}
-      <section className="py-24 bg-white" ref={teamRef}>
+      {/* <section className="py-24 bg-white" ref={teamRef}>
         <div className="max-w-5xl mx-auto px-6">
           <motion.div
             className="text-center mb-16"
@@ -304,7 +301,7 @@ export default function AboutPage() {
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
               >
                 {/* Team member image */}
-                <div className="h-52 overflow-hidden">
+                {/* <div className="h-52 overflow-hidden">
                   <motion.img
                     src={member.image}
                     alt={member.name}
@@ -315,16 +312,16 @@ export default function AboutPage() {
                 </div>
                 
                 {/* Team member info */}
-                <div className="p-6">
+                {/* <div className="p-6">
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                   <div className="text-[#FFD700] font-medium mb-3">{member.role}</div>
                   <p className="text-gray-600 text-sm line-clamp-3">{member.bio}</p>
                 </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+            ))} */}
+          {/* </div> */}
+      {/* //   </div> */} 
+      {/* // </section> */} 
     </main>
   );
 }

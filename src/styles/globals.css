@@ -176,6 +176,30 @@
 }
 
 @layer components {
+  .stroke-title {
+    color: transparent;
+    -webkit-text-stroke: 2px #111;
+    text-stroke: 2px #111;
+    font-weight: bold;
+  }
+
+  .animated-gradient4 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(120deg, #fffbe7 0%, #fde998 20%, #ffec7d 50%);
+    background-size: 200% 200%;
+    animation: gradient4move 10s ease-in-out infinite;
+    opacity: 0.85;
+  }
+
+  @keyframes gradient4move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   .sticker {
     @apply relative inline-block transform transition-transform duration-300;
   }
