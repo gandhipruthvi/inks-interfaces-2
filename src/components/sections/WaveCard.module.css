@@ -1,67 +1,121 @@
-@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
-
 .wave-card {
-    width : 340px;
-    height : 320px;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-end;
-    align-items: center;
-    position : relative;
-    box-shadow: 11px 17px 48px #e5e5e5;
-    border-radius : 14px;
-    overflow : hidden;
-    background: #fff;
-    margin-left: auto;
-    margin-right: auto;
-}
-.wave-card-shape {
-  position : absolute;
-  width : 400px;
-  height : 400px;
-  z-index : 1;
-  opacity : 0.6;
-  top : -250px;
-  left : -100px;
-  border-radius : 150px;
-  background: #ffd600;
-  filter: blur(3px);
-  animation : rotate 18s linear infinite;
-}
-.wave-card-shape:nth-child(2) {
-  top : -240px;
-  opacity : 0.3;
-  z-index : 3;
-  animation : rotate 32s linear infinite;
-}
-.wave-card-shape:nth-child(3) {
-  top : -260px;
-  opacity : 0.4;
-  z-index : 2;
-  animation : rotate 25s linear infinite;
-}
-.wave-card-title {
   position: relative;
-  z-index: 10;
-  margin-bottom: 0.5rem;
-  margin-top: -16px;
-  font-size: 1.4rem;
-  font-family: 'Alata', sans-serif;
+  width: 100%;
+  min-height: 420px;
+  padding: 40px 24px;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
+
+.wave-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+.wave-card-shape {
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  left: -40%;
+  animation: waveAnimation 15s infinite linear;
+  border-radius: 40%;
+  opacity: 0.15;
+}
+
+.wave-card-shape:nth-child(1) {
+  top: -100%;
+  animation-delay: 0s;
+}
+
+.wave-card-shape:nth-child(2) {
+  top: -90%;
+  animation-delay: -5s;
+}
+
+.wave-card-shape:nth-child(3) {
+  top: -80%;
+  animation-delay: -10s;
+}
+
+/* Card 1 - UI/UX Design */
+.wave-card:nth-child(1) .wave-card-shape:nth-child(1) {
+  background: linear-gradient(45deg, #FF6B6B 0%, #FF8E8E 100%);
+}
+
+.wave-card:nth-child(1) .wave-card-shape:nth-child(2) {
+  background: linear-gradient(45deg, #FF5252 0%, #FF7676 100%);
+}
+
+.wave-card:nth-child(1) .wave-card-shape:nth-child(3) {
+  background: linear-gradient(45deg, #FF4242 0%, #FF6666 100%);
+}
+
+/* Card 2 - Branding */
+.wave-card:nth-child(2) .wave-card-shape:nth-child(1) {
+  background: linear-gradient(45deg, #FFE066 0%, #FFD600 100%);
+}
+
+.wave-card:nth-child(2) .wave-card-shape:nth-child(2) {
+  background: linear-gradient(45deg, #FFEB99 0%, #FFE066 100%);
+}
+
+.wave-card:nth-child(2) .wave-card-shape:nth-child(3) {
+  background: linear-gradient(45deg, #FFD600 0%, #FFEB99 100%);
+}
+
+/* Card 3 - Graphic Design */
+.wave-card:nth-child(3) .wave-card-shape:nth-child(1) {
+  background: linear-gradient(45deg, #6C5CE7 0%, #8F7FF7 100%);
+}
+
+.wave-card:nth-child(3) .wave-card-shape:nth-child(2) {
+  background: linear-gradient(45deg, #5C4CD7 0%, #7F6FE7 100%);
+}
+
+.wave-card:nth-child(3) .wave-card-shape:nth-child(3) {
+  background: linear-gradient(45deg, #4C3CC7 0%, #6F5FD7 100%);
+}
+
+@keyframes waveAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wave-card-title {
+  color: #2d3748;
+  text-align: center;
+  position: relative;
+  font-size: 28px;
+  font-weight: 700;
+  padding: 6px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
+}
+
 .wave-card-subtitle {
   position: relative;
   z-index: 10;
-  margin-bottom : 30px;
-  font-size: 1rem;
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+  line-height: 1.6;
   color: #444;
   font-family: 'Alata', sans-serif;
 }
 
 @keyframes rotate {
   from {
-     transform : rotate(0)
+     transform: rotate(0)
   }
   to {
-    transform : rotate(1turn);
+    transform: rotate(1turn);
   }
 }
