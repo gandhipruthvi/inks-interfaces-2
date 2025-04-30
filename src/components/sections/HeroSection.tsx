@@ -125,24 +125,23 @@ export default function HeroSection({ setIsHovering }: HeroSectionProps) {
         </motion.p>
         
         {/* CTA Button with ink fill animation */}
-        <motion.button
+        <motion.a
+          href="/imaginations"
           className="relative overflow-hidden bg-black text-white font-bold py-3 px-8 sm:py-4 sm:px-10 rounded-full shadow-lg hover:shadow-xl transition-shadow touch-target"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 1, duration: 0.5 }}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{
+            scale: 1.05,
+            boxShadow:
+              "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+          }}
           whileTap={{ scale: 0.98 }}
         >
           <span className="relative z-10">Tap Into My Imagination</span>
-          <motion.div
-            className="absolute inset-0 bg-[#FFD700]"
-            initial={{ x: "-100%" }}
-            whileHover={{ x: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          />
-        </motion.button>
+        </motion.a>
       </div>
       
       {/* No feature images as per request */}
