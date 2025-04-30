@@ -332,7 +332,7 @@ export default function ImaginationsPage() {
             onClick={closeModal}
           >
             <motion.div
-              className="scrollbar-thin scrollbar-thumb-gray-300 relative max-h-[85vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white"
+              className="relative max-h-[85vh] w-full max-w-5xl overflow-y-auto rounded-2xl bg-white"
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
@@ -340,7 +340,7 @@ export default function ImaginationsPage() {
             >
               {/* Modal header */}
               <div
-                className="h-76 relative sm:h-72"
+                className="relative w-full min-h-[240px] sm:min-h-[288px] flex flex-col justify-end"
                 style={{ backgroundColor: selectedCaseStudy.color }}
               >
                 <img
@@ -349,17 +349,23 @@ export default function ImaginationsPage() {
                   className="h-full w-full object-cover object-center mix-blend-multiply"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-10">
+                <div className="absolute bottom-0 left-0 p-6 sm:p-10">
+                  {" "}
+                  {/* Adjusted padding for mobile */}
                   <span
-                    className="mb-3 inline-block rounded-full bg-white/90 px-3 py-1 text-sm font-medium"
+                    className="mb-2 inline-block rounded-full bg-white/90 px-3 py-1 text-sm font-medium sm:mb-3"
                     style={{ color: selectedCaseStudy.color }}
                   >
                     {selectedCaseStudy.subtitle}
                   </span>
-                  <h2 className="mb-2 text-4xl font-bold text-white">
+                  <h2 className="mb-2 text-2xl font-bold text-white sm:text-4xl">
+                    {" "}
+                    {/* Responsive font size */}
                     {selectedCaseStudy.title}
                   </h2>
-                  <p className="max-w-2xl text-lg text-white/90">
+                  <p className="max-w-2xl text-base text-white/90 sm:text-lg">
+                    {" "}
+                    {/* Responsive font size */}
                     {selectedCaseStudy.description}
                   </p>
                 </div>
@@ -373,13 +379,33 @@ export default function ImaginationsPage() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <X size={24} />
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18 6L6 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M6 6L18 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </motion.button>
               </div>
 
               {/* Modal content */}
               <div className="p-10">
-                {/* Tags */}
                 <div className="mb-8 flex flex-wrap gap-2">
                   {selectedCaseStudy.tags.map((tag) => (
                     <span
@@ -412,62 +438,67 @@ export default function ImaginationsPage() {
                   <p className="text-lg text-gray-700">
                     {selectedCaseStudy.results}
                   </p>
-                </div>
 
-                {/* Gallery images (after Results section) */}
-                {selectedCaseStudy.gallery &&
-                  selectedCaseStudy.gallery.length > 0 &&
-                  (selectedCaseStudy.subtitle
-                    ?.toLowerCase()
-                    .includes("brand") ||
-                  selectedCaseStudy.subtitle?.toLowerCase().includes("logo") ? (
-                    // Bento grid for branding/logo projects
-                    <div className="mt-10 grid auto-rows-[180px] grid-cols-2 gap-4 md:grid-cols-4">
-                      {selectedCaseStudy.gallery.map((img, i) => (
-                        <div
-                          key={i}
-                          className={`overflow-hidden rounded-xl shadow-lg ${i % 5 === 0 ? "col-span-2 row-span-2" : ""}`}
-                        >
-                          <img
-                            src={img}
-                            alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    // Simple 2-column grid for regular projects
-                    <div className="mt-10 grid grid-cols-2 gap-4">
-                      {selectedCaseStudy.gallery.map((img, i) => (
-                        <div
-                          key={i}
-                          className="overflow-hidden rounded-xl shadow-lg"
-                        >
-                          <img
-                            src={img}
-                            alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+                  {/* Project images grid: bento for branding/logo, simple grid otherwise */}
+                  {selectedCaseStudy.gallery &&
+                    selectedCaseStudy.gallery.length > 0 &&
+                    (selectedCaseStudy.subtitle
+                      ?.toLowerCase()
+                      .includes("brand") ||
+                    selectedCaseStudy.subtitle
+                      ?.toLowerCase()
+                      .includes("logo") ? (
+                      // Bento grid for branding/logo projects
+                      <div className="mt-10 grid auto-rows-[180px] grid-cols-2 gap-4 md:grid-cols-4">
+                        {selectedCaseStudy.gallery.map((img, i) => (
+                          <div
+                            key={i}
+                            className={`overflow-hidden rounded-xl shadow-lg ${i % 5 === 0 ? "col-span-2 row-span-2" : ""}`}
+                          >
+                            <img
+                              src={img}
+                              alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      // Simple 2-column grid for regular projects
+                      <div className="mt-10 grid grid-cols-2 gap-4">
+                        {selectedCaseStudy.gallery.map((img, i) => (
+                          <div
+                            key={i}
+                            className="overflow-hidden rounded-xl shadow-lg"
+                          >
+                            <img
+                              src={img}
+                              alt={`${selectedCaseStudy.title} screenshot ${i + 1}`}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                </div>
 
                 {/* Call to action */}
                 <div className="mt-12 flex justify-center">
-                  <motion.a
-                    href="mailto:letscreate.inksandinterfaces@gmail.com?subject=Similar%20Project%20Inquiry"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <motion.button
                     className="flex items-center gap-2 rounded-xl px-8 py-4 font-bold text-white"
                     style={{ backgroundColor: selectedCaseStudy.color }}
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
+                    }}
+                    whileTap={{ scale: 0.98 }}
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
+                    onClick={() => window.open('mailto:letscreate.inksandinterfaces@gmail.com')}
                   >
                     <span>Contact for Similar Project</span>
                     <ArrowRight size={20} />
-                  </motion.a>
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
