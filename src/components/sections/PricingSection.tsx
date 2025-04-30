@@ -96,7 +96,7 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
           icon: <Instagram size={18} className="flex-shrink-0" />
         },
         { 
-          text: "Delivery time: Less than a week",
+          text: "Turnaround time: Less than a week",
           icon: <Calendar size={18} className="flex-shrink-0" />
         }
       ],
@@ -139,7 +139,7 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
           icon: <LayoutTemplate size={18} className="flex-shrink-0" />
         },
         { 
-          text: "Delivery time: A week or more",
+          text: "Turnaround time: A week or more",
           icon: <Calendar size={18} className="flex-shrink-0" />
         }
       ],
@@ -190,7 +190,7 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
           icon: <Zap size={18} className="flex-shrink-0" /> 
         },
         { 
-          text: "Delivery time: 2 weeks",
+          text: "Turnaround time: 2 weeks",
           icon: <Calendar size={18} className="flex-shrink-0" />
         }
       ],
