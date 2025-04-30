@@ -385,7 +385,7 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
         </motion.div>
         
         {/* Guarantee section */}
-        <div className="mt-16 text-center">
+        {/* <div className="mt-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -395,7 +395,7 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
             <CheckCircle size={18} />
             <span>14-day satisfaction guarantee on all projects</span>
           </motion.div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

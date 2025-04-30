@@ -39,26 +39,20 @@ export default function Footer() {
     {
       name: "Instagram",
       icon: <Instagram size={20} />,
-      href: "https://instagram.com",
+      href: "https://www.instagram.com/inks.and.interfaces/",
       color: "#E1306C"
-    },
-    {
-      name: "Twitter",
-      icon: <Twitter size={20} />,
-      href: "https://twitter.com",
-      color: "#1DA1F2"
     },
     {
       name: "LinkedIn",
       icon: <Linkedin size={20} />,
-      href: "https://linkedin.com",
+      href: "https://www.linkedin.com/in/shivani-rotliwala",
       color: "#0A66C2"
     },
     {
-      name: "Dribbble",
-      icon: <Dribbble size={20} />,
-      href: "https://dribbble.com",
-      color: "#EA4C89"
+      name: "Behance",
+      icon: <img src="/assets/behance.png" alt="Behance" style={{ height: 20, width: 20 }} />,
+      href: "https://www.behance.net/shivanirotliwala",
+      color: "#0057ff"
     },
     {
       name: "GitHub",
@@ -85,13 +79,13 @@ export default function Footer() {
         { label: "Graphic Design", href: "#development" },
       ]
     },
-    {
-      title: "Legal",
-      links: [
-        { label: "Privacy Policy", href: "#privacy" },
-        { label: "Terms of Service", href: "#terms" },
-      ]
-    }
+    // {
+    //   title: "Legal",
+    //   links: [
+    //     { label: "Privacy Policy", href: "#privacy" },
+    //     { label: "Terms of Service", href: "#terms" },
+    //   ]
+    // }
   ];
 
   // State for showing/hiding the Back to Top button

@@ -227,7 +227,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                           <h2 className="mb-2 text-xl font-bold sm:mb-4 sm:text-2xl md:text-3xl">
                             {project.title}
                           </h2>
-                          <p className="mb-4 text-base leading-relaxed text-gray-700 sm:text-xl md:text-2xl">
+                          <p className="mb-4 text-base leading-relaxed text-gray-700 sm:text-lg md:text-xl">
                             {project.description}
                           </p>
                         </div>

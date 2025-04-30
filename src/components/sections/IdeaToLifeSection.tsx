@@ -184,7 +184,7 @@ function ProcessCard({
 }) {
   return (
     <div
-      className="group relative flex h-[500px] max-w-[90vw] flex-col rounded-3xl border bg-white p-8 shadow-2xl"
+      className="group relative flex max-w-[90vw] flex-col rounded-3xl border bg-white p-8 shadow-2xl"
       style={{
         boxShadow:
           "0 8px 32px 0 rgba(241,91,84,0.10), 0 1.5px 6px 0 rgba(80,80,80,0.07)",
@@ -219,7 +219,7 @@ function ProcessCard({
               <div className="mr-3 mt-0.5 flex h-6 min-w-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-700">
                 <CheckIcon />
               </div>
-              <span className="text-[1.13rem] font-medium text-neutral-700 md:text-lg">
+              <span className="text-[1.13rem] font-normal text-neutral-700 md:text-lg">
                 {item}
               </span>
             </li>
