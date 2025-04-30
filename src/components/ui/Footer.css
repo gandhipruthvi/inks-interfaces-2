@@ -1,0 +1,6 @@
+.behance-icon-anchor img {
+  transition: filter 0.3s;
+}
+.behance-icon-anchor:hover img {
+  filter: brightness(0) invert(1);
+}

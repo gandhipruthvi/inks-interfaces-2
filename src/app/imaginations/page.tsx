@@ -456,20 +456,18 @@ export default function ImaginationsPage() {
 
                 {/* Call to action */}
                 <div className="mt-12 flex justify-center">
-                  <motion.button
+                  <motion.a
+                    href="mailto:letscreate.inksandinterfaces@gmail.com?subject=Similar%20Project%20Inquiry"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 rounded-xl px-8 py-4 font-bold text-white"
                     style={{ backgroundColor: selectedCaseStudy.color }}
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
-                    }}
-                    whileTap={{ scale: 0.98 }}
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
                   >
                     <span>Contact for Similar Project</span>
                     <ArrowRight size={20} />
-                  </motion.button>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>

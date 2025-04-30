@@ -323,26 +323,43 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
                   ))}
                 </ul>
                 
-                <motion.button
-                  className="w-full py-3.5 px-6 rounded-lg font-bold text-white transition-all duration-300 relative overflow-hidden"
-                  style={{ 
-                    backgroundColor: hoveredCard === plan.id 
-                      ? plan.accentColor 
-                      : plan.accentColor + "CC"
-                  }}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <motion.span
-                    className="absolute inset-0 w-full h-full bg-black opacity-0"
-                    animate={hoveredCard === plan.id ? 
-                      { opacity: 0.1, scale: 1 } : 
-                      { opacity: 0, scale: 0.9 }
-                    }
-                    transition={{ duration: 0.4 }}
-                  />
-                  <span className="relative z-10">{plan.ctaText}</span>
-                </motion.button>
+                <motion.a
+                   href={(() => {
+                     if (plan.ctaText === "Design My Logo") {
+                       return "mailto:letscreate.inksandinterfaces@gmail.com?subject=Logo%20Design%20Inquiry";
+                     } else if (plan.ctaText === "Start Your Design System") {
+                       return "mailto:letscreate.inksandinterfaces@gmail.com?subject=Design%20System%20Project%20Inquiry";
+                     } else if (plan.ctaText === "Get Project Quote") {
+                       return "mailto:letscreate.inksandinterfaces@gmail.com?subject=Project%20Quote%20Request";
+                     } else {
+                       return "mailto:letscreate.inksandinterfaces@gmail.com";
+                     }
+                   })()}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="w-full block"
+                 >
+                   <motion.button
+                     className="w-full py-3.5 px-6 rounded-lg font-bold text-white transition-all duration-300 relative overflow-hidden"
+                     style={{ 
+                       backgroundColor: hoveredCard === plan.id 
+                         ? plan.accentColor 
+                         : plan.accentColor + "CC"
+                     }}
+                     whileHover={{ scale: 1.03 }}
+                     whileTap={{ scale: 0.98 }}
+                   >
+                     <motion.span
+                       className="absolute inset-0 w-full h-full bg-black opacity-0"
+                       animate={hoveredCard === plan.id ? 
+                         { opacity: 0.1, scale: 1 } : 
+                         { opacity: 0, scale: 0.9 }
+                       }
+                       transition={{ duration: 0.4 }}
+                     />
+                     <span className="relative z-10">{plan.ctaText}</span>
+                   </motion.button>
+                 </motion.a>
               </div>
             </motion.div>
           ))}
@@ -363,24 +380,30 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
               our team of UX/UI experts is ready to create a custom solution that perfectly fits your needs.
             </p>
             
-            <motion.button
-              className="bg-black text-white font-bold py-3 sm:py-4 px-6 sm:px-10 rounded-lg hover:bg-gray-800 transition-all duration-300 touch-target"
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.15)" 
-              }}
-              whileTap={{ scale: 0.98 }}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              <span className="flex items-center gap-2">
-                Contact for Custom Quote
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
-            </motion.button>
+            <motion.a
+               href="mailto:letscreate.inksandinterfaces@gmail.com?subject=Custom%20Quote%20Request"
+               target="_blank"
+               rel="noopener noreferrer"
+             >
+               <motion.button
+                 className="bg-black text-white font-bold py-3 sm:py-4 px-6 sm:px-10 rounded-lg hover:bg-gray-800 transition-all duration-300 touch-target"
+                 whileHover={{ 
+                   scale: 1.05,
+                   boxShadow: "0 15px 30px rgba(0, 0, 0, 0.15)" 
+                 }}
+                 whileTap={{ scale: 0.98 }}
+                 onMouseEnter={() => setIsHovering(true)}
+                 onMouseLeave={() => setIsHovering(false)}
+               >
+                 <span className="flex items-center gap-2">
+                   Contact for Custom Quote
+                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                     <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                   </svg>
+                 </span>
+               </motion.button>
+             </motion.a>
           </div>
         </motion.div>
         

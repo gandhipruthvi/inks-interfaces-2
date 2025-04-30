@@ -23,7 +23,7 @@ interface Testimonial {
   position: string;
   company: string;
   rating: number;
-  image: string;
+
 }
 
 export default function TestimonialsSection({ setIsHovering }: TestimonialsSectionProps) {
@@ -32,11 +32,11 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
     triggerOnce: false,
     threshold: 0.1,
   });
-  
+
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  
+
   const testimonials: Testimonial[] = [
     {
       id: 1,
@@ -45,7 +45,7 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
       position: "CEO",
       company: "Elevate Solutions",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+      // image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     },
     {
       id: 2,
@@ -54,7 +54,7 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
       position: "Product Lead",
       company: "TechFlow",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+      // image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     },
     {
       id: 3,
@@ -63,7 +63,7 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
       position: "Marketing Director",
       company: "Visionworks",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+      // image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     },
     {
       id: 4,
@@ -72,7 +72,7 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
       position: "Founder",
       company: "Artisan Collective",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+      // image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     }
   ];
 
@@ -84,7 +84,7 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
       aria-labelledby="testimonials-heading"
     >
       {/* Background elements with enhanced parallax */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">        
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Left floating quote */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -93,8 +93,8 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
             y: [0, -15, 0],
             scale: [1, 1.05, 1]
           } : {}}
-          transition={{ 
-            repeat: Infinity, 
+          transition={{
+            repeat: Infinity,
             duration: 8,
             ease: "easeInOut"
           }}
@@ -102,7 +102,7 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
         >
           <Quote className="text-gray-200 w-32 h-32" strokeWidth={1} />
         </motion.div>
-        
+
         {/* Right floating quote */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -111,8 +111,8 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
             y: [0, 15, 0],
             rotate: [0, 5, 0]
           } : {}}
-          transition={{ 
-            repeat: Infinity, 
+          transition={{
+            repeat: Infinity,
             duration: 9,
             ease: "easeInOut",
             delay: 1.2
@@ -130,8 +130,8 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 
-            id="testimonials-heading" 
+          <h2
+            id="testimonials-heading"
             className="text-5xl font-bold mb-6 text-gray-900"
           >
             Client Testimonials
@@ -181,77 +181,53 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
             {testimonials.map((testimonial) => (
               <SwiperSlide key={testimonial.id} className="py-12 px-2">
                 <motion.div
-  className="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-300 mx-auto max-w-2xl"
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  viewport={{ once: true }}
-  whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
-  onMouseEnter={() => setIsHovering(true)}
-  onMouseLeave={() => setIsHovering(false)}
->
-  <div className="p-8 sm:p-10">
-    {/* Content */}
-    <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start sm:items-center mb-6">
-      {/* Author image */}
-      <div className="flex-shrink-0">
-        <div className="w-20 h-20 sm:w-24 sm:h-24 relative">
-          <motion.div 
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: `conic-gradient(from 180deg at 50% 50%, #FFD700 0deg, transparent 60deg, #FFD700 360deg)`,
-            }}
-            animate={{ rotate: 360 }}
-            transition={{ 
-              duration: 8, 
-              repeat: Infinity, 
-              ease: "linear",
-            }}
-          />
-          <div className="absolute inset-[2px] rounded-full overflow-hidden border-2 border-white">
-            <img
-              src={testimonial.image}
-              alt={`Portrait of ${testimonial.author}`}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </div>
-      
-      {/* Author info */}
-      <div>
-        <h4 className="font-bold text-xl">{testimonial.author}</h4>
-        <p className="text-gray-600">
-          {testimonial.position} at <span className="font-medium">{testimonial.company}</span>
-        </p>
-        
-        {/* Star rating */}
-        <div className="flex mt-2">
-          {[...Array(testimonial.rating)].map((_, i) => (
-            <Star 
-              key={i} 
-              size={16}
-              className="text-yellow-500 fill-yellow-500 mr-0.5" 
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-    
-    {/* Testimonial content */}
-    <div className="relative">
-      <Quote size={32} className="text-gray-200 absolute top-0 left-0 transform -translate-x-1 -translate-y-2" />
-      <blockquote className="pl-8 pr-2 text-gray-700 italic text-lg sm:text-xl leading-relaxed">
-        {testimonial.content}
-      </blockquote>
-    </div>
-  </div>
-</motion.div>
+                  className="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-300 mx-auto max-w-2xl"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                >
+                  <div className="p-8 sm:p-10">
+                    {/* Content */}
+                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start sm:items-center mb-6">
+                      {/* Author image */}
+                      
+                      {/* Author info */}
+                      <div>
+                        <h4 className="font-bold text-xl">{testimonial.author}</h4>
+                        <p className="text-gray-600">
+                          {testimonial.position} at <span className="font-medium">{testimonial.company}</span>
+                        </p>
+
+                        {/* Star rating */}
+                        <div className="flex mt-2">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star
+                              key={i}
+                              size={16}
+                              className="text-yellow-500 fill-yellow-500 mr-0.5"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Testimonial content */}
+                    <div className="relative">
+                      <Quote size={32} className="text-gray-200 absolute top-0 left-0 transform -translate-x-1 -translate-y-2" />
+                      <blockquote className="pl-8 pr-2 text-gray-700 italic text-lg sm:text-xl leading-relaxed">
+                        {testimonial.content}
+                      </blockquote>
+                    </div>
+                  </div>
+                </motion.div>
 
               </SwiperSlide>
             ))}
           </Swiper>
-          
+
           {/* Custom navigation buttons */}
           <div className="flex justify-center mt-10 gap-6">
             <motion.button
@@ -265,21 +241,20 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
             >
               <ChevronLeft size={20} />
             </motion.button>
-            
+
             <div className="flex items-center gap-2">
               {testimonials.map((_, index) => (
                 <motion.div
                   key={index}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === activeIndex ? "w-8 bg-black" : "w-2 bg-gray-300"
-                  }`}
+                  className={`h-2 rounded-full transition-all duration-300 ${index === activeIndex ? "w-8 bg-black" : "w-2 bg-gray-300"
+                    }`}
                   whileHover={{
                     backgroundColor: index === activeIndex ? "#000" : "#999"
                   }}
                 />
               ))}
             </div>
-            
+
             <motion.button
               ref={nextRef}
               className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-gray-100"
@@ -292,10 +267,10 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
               <ChevronRight size={20} />
             </motion.button>
           </div>
-          
+
           {/* Help text */}
           <div className="text-center mt-6">
-            <motion.p 
+            <motion.p
               className="text-sm text-gray-500"
               initial={{ opacity: 0 }}
               animate={sectionInView ? { opacity: 1 } : { opacity: 0 }}

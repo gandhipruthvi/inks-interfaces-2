@@ -33,6 +33,8 @@ interface FooterLink {
 
 import { useState, useEffect } from "react";
 
+import './Footer.css';
+
 export default function Footer() {
   // Social media links with branded colors
   const socialLinks: SocialLink[] = [
@@ -53,20 +55,16 @@ export default function Footer() {
       icon: <img src="/assets/behance.png" alt="Behance" style={{ height: 20, width: 20 }} />,
       href: "https://www.behance.net/shivanirotliwala",
       color: "#0057ff"
-    },
-    {
-      name: "GitHub",
-      icon: <Github size={20} />,
-      href: "https://github.com",
-      color: "#333333"
     }
   ];
 
   // Footer navigation links
   const footerLinks: FooterLink[] = [
+    
     {
       title: "Company",
       links: [
+        { label: "Home", href: "/" },
         { label: "Imaginations", href: "/imaginations" },
         { label: "About", href: "/about" },
       ]
@@ -124,21 +122,25 @@ export default function Footer() {
               and strategic creativity. Elevating brands with pixel-perfect precision and purpose.
             </p>
             <div className="flex flex-wrap gap-3 px-8 md:px-12 pb-8 md:pb-12">
-              {socialLinks.map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 text-gray-500 hover:text-white transition-colors duration-300"
-                  style={{ backgroundColor: "rgba(249, 250, 251, 0.8)" }}
-                  whileHover={{ backgroundColor: social.color, scale: 1.1, color: "#FFFFFF", y: -3 }}
-                  whileTap={{ scale: 0.95 }}
-                  title={social.name}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
+              {socialLinks.map((social) => {
+  // Add a custom class for Behance icon anchor
+  const isBehance = social.name === "Behance";
+  return (
+    <motion.a
+      key={social.name}
+      href={social.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 text-gray-500 hover:text-white transition-colors duration-300${isBehance ? ' behance-icon-anchor' : ''}`}
+      style={{ backgroundColor: "rgba(249, 250, 251, 0.8)" }}
+      whileHover={{ backgroundColor: social.color, scale: 1.1, color: "#FFFFFF", y: -3 }}
+      whileTap={{ scale: 0.95 }}
+      title={social.name}
+    >
+      {social.icon}
+    </motion.a>
+  );
+})}
             </div>
           </div>
 
@@ -188,26 +190,36 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-8 sm:py-12 border-t border-gray-100">
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
           {footerLinks.map((category) => (
-            <div key={category.title}>
-              <h5 className="font-bold text-lg mb-5">{category.title}</h5>
-              <ul className="space-y-3">
-                {category.links.map((link) => (
-                  <li key={link.label} className="touch-target">
-                    <Link 
-                      href={link.href}
-                      className="text-gray-600 hover:text-black transition-colors flex items-center group py-1.5"
-                    >
-                      <ChevronRight 
-                        size={16} 
-                        className="mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" 
-                      />
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+  <div key={category.title}>
+    <h5 className="font-bold text-lg mb-5">{category.title}</h5>
+    <ul className="space-y-3">
+      {category.links.map((link) => (
+        <li key={link.label} className="touch-target">
+          {category.title === "Services" ? (
+            <div className="text-gray-600 flex items-center py-1.5">
+              <ChevronRight 
+                size={16}
+                className="mr-1 opacity-0 -ml-5 transition-all duration-300" 
+              />
+              {link.label}
             </div>
-          ))}
+          ) : (
+            <Link 
+              href={link.href}
+              className="text-gray-600 hover:text-black transition-colors flex items-center group py-1.5"
+            >
+              <ChevronRight 
+                size={16} 
+                className="mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" 
+              />
+              {link.label}
+            </Link>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+))}
           
           {/* Contact information */}
           <div>
@@ -247,7 +259,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Inks & Interfaces. All rights reserved.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+          {/* <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
             <Link 
               href="#privacy" 
               className="text-sm text-gray-500 hover:text-black transition-colors"
@@ -260,7 +272,7 @@ export default function Footer() {
             >
               Terms of Service
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
       

@@ -462,6 +462,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                     whileTap={{ scale: 0.98 }}
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
+                    onClick={() => window.open('mailto:letscreate.inksandinterfaces@gmail.com')}
                   >
                     <span>Contact for Similar Project</span>
                     <ArrowRight size={20} />
