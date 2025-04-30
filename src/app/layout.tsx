@@ -91,7 +91,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${filsonPro.variable} scroll-smooth`}>
       <body className="antialiased font-filson">
-        {/* <GlobalErrorHandler />
+        <GlobalErrorHandler />
         <DOMInspector>
           <ErrorBoundaryWrapper>
             {children}
@@ -101,9 +101,9 @@ export default function RootLayout({
             <Branding />
           </ErrorBoundaryWrapper>
           <AnalyticsTracker siteKey="${siteKey}" />
-        </DOMInspector> */}
+        </DOMInspector>
 
-        <img
+        {/* <img
           src="/Beige and Pink Website Coming Soon Instagram Post.svg"
           alt="Coming Soon"
           style={{
@@ -112,7 +112,7 @@ export default function RootLayout({
             objectFit: 'cover',
             display: 'block',
           }}
-        />
+        /> */}
       </body>
     </html>
   );

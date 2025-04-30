@@ -71,7 +71,7 @@ export default function AboutPage() {
       },
       {
         title: "Integrity",
-        description: "We maintain transparency throughout our process and take responsibility for the impact of our work.",
+        description: "We maintain complete transparency throughout our process and take full responsibility for the impact of our work.",
         icon: <Shield size={32} />,
         color: "#F43F5E"
       }

@@ -178,6 +178,7 @@ export default function Footer() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 whileHover={{ scale: 1.05, boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => window.open('mailto:letscreate.inksandinterfaces@gmail.com')}
               >
                 Start Your Project
               </motion.button>
@@ -190,36 +191,36 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-8 sm:py-12 border-t border-gray-100">
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
           {footerLinks.map((category) => (
-  <div key={category.title}>
-    <h5 className="font-bold text-lg mb-5">{category.title}</h5>
-    <ul className="space-y-3">
-      {category.links.map((link) => (
-        <li key={link.label} className="touch-target">
-          {category.title === "Services" ? (
-            <div className="text-gray-600 flex items-center py-1.5">
-              <ChevronRight 
-                size={16}
-                className="mr-1 opacity-0 -ml-5 transition-all duration-300" 
-              />
-              {link.label}
+            <div key={category.title}>
+              <h5 className="font-bold text-lg mb-5">{category.title}</h5>
+              <ul className="space-y-3">
+                {category.links.map((link) => (
+                  <li key={link.label} className="touch-target">
+                    {category.title === "Services" ? (
+                      <div className="text-gray-600 flex items-center py-1.5">
+                        <ChevronRight 
+                          size={16}
+                          className="mr-1 opacity-0 -ml-5 transition-all duration-300" 
+                        />
+                        {link.label}
+                      </div>
+                    ) : (
+                      <Link 
+                        href={link.href}
+                        className="text-gray-600 hover:text-black transition-colors flex items-center group py-1.5"
+                      >
+                        <ChevronRight 
+                          size={16} 
+                          className="mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" 
+                        />
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ) : (
-            <Link 
-              href={link.href}
-              className="text-gray-600 hover:text-black transition-colors flex items-center group py-1.5"
-            >
-              <ChevronRight 
-                size={16} 
-                className="mr-1 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" 
-              />
-              {link.label}
-            </Link>
-          )}
-        </li>
-      ))}
-    </ul>
-  </div>
-))}
+          ))}
           
           {/* Contact information */}
           <div>
@@ -228,13 +229,14 @@ export default function Footer() {
               <li>
                 <a 
                   href="mailto:letscreate.inksandinterfaces@gmail.com" 
-                  className="text-gray-600 hover:text-black transition-colors flex items-center gap-2"
+                  className="text-gray-600 hover:text-black transition-colors flex items-center gap-3"
+                  style={{ minWidth: 0 }}
                 >
-                  <Mail size={16} />
-                  <span>letscreate.inksandinterfaces@gmail.com</span>
+                  <span style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}><Mail size={16} /></span>
+                  <span style={{ overflowWrap: 'anywhere', wordBreak: 'break-all' }}>letscreate.inksandinterfaces@gmail.com</span>
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a 
                   href="tel:+919429997631" 
                   className="text-gray-600 hover:text-black transition-colors flex items-center gap-2"
@@ -242,10 +244,10 @@ export default function Footer() {
                   <Phone size={16} />
                   <span>+91 9429997631</span>
                 </a>
-              </li>
+              </li> */}
               <li className="flex items-start gap-2 text-gray-600">
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
-                <span>Surat, Gujarat, India</span>
+                <span>India</span>
               </li>
             </ul>
           </div>
