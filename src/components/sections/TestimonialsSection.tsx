@@ -41,36 +41,36 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
     {
       id: 1,
       content: "Working with this design team transformed our brand identity completely. Their attention to detail and innovative approach exceeded our expectations at every stage of the project.",
-      author: "Sarah Johnson",
+      author: "Aniket",
       position: "CEO",
-      company: "Elevate Solutions",
+      company: "Go Miles",
       rating: 5,
       // image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     },
     {
       id: 2,
-      content: "The UI designs were not only visually stunning but incredibly functional. User engagement increased by 40% after launch, and our customers repeatedly praise the intuitive interface.",
-      author: "Michael Chen",
-      position: "Product Lead",
-      company: "TechFlow",
+      content: "Working with you was a great experience. The quality of work was solid, and you did an excellent job translating my ideas into a clean, thoughtful design. I'm really happy with how everything turned out.",
+      author: "Paul",
+      position: "Founder",
+      company: "LCM",
       rating: 5,
       // image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     },
     {
       id: 3,
-      content: "From concept to execution, the process was seamless. The animated elements and sophisticated design language elevated our brand to a completely new level in our industry.",
-      author: "Alex Rivera",
-      position: "Marketing Director",
-      company: "Visionworks",
+      content: "From concept to execution, the branding process was seamless. The refined design language and thoughtfully integrated visuals brought a cohesive, elevated identity to our brand—setting us apart in our industry.",
+      author: "Alex",
+      position: "CEO",
+      company: "Satori Bites",
       rating: 5,
       // image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     },
     {
       id: 4,
-      content: "The design team's collaborative approach made the entire project enjoyable. They took the time to understand our unique challenges and delivered solutions that perfectly aligned with our vision.",
-      author: "Jordan Taylor",
+      content: "The designer's collaborative approach made the entire cosmetic branding project a pleasure to work on. They truly took the time to understand our brand’s essence and challenges, delivering visually stunning solutions that perfectly captured our vision and appeal.",
+      author: "Jordan",
       position: "Founder",
-      company: "Artisan Collective",
+      company: "Vanya Luxe",
       rating: 5,
       // image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
     }
