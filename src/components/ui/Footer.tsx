@@ -123,24 +123,24 @@ export default function Footer() {
             </p>
             <div className="flex flex-wrap gap-3 px-8 md:px-12 pb-8 md:pb-12">
               {socialLinks.map((social) => {
-  // Add a custom class for Behance icon anchor
-  const isBehance = social.name === "Behance";
-  return (
-    <motion.a
-      key={social.name}
-      href={social.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 text-gray-500 hover:text-white transition-colors duration-300${isBehance ? ' behance-icon-anchor' : ''}`}
-      style={{ backgroundColor: "rgba(249, 250, 251, 0.8)" }}
-      whileHover={{ backgroundColor: social.color, scale: 1.1, color: "#FFFFFF", y: -3 }}
-      whileTap={{ scale: 0.95 }}
-      title={social.name}
-    >
-      {social.icon}
-    </motion.a>
-  );
-})}
+                // Add a custom class for Behance icon anchor
+                const isBehance = social.name === "Behance";
+                return (
+                  <motion.a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 text-gray-500 hover:text-white transition-colors duration-300${isBehance ? ' behance-icon-anchor' : ''}`}
+                    style={{ backgroundColor: "rgba(249, 250, 251, 0.8)" }}
+                    whileHover={{ backgroundColor: social.color, scale: 1.1, color: "#FFFFFF", y: -3 }}
+                    whileTap={{ scale: 0.95 }}
+                    title={social.name}
+                  >
+                    {social.icon}
+                  </motion.a>
+                );
+              })}
             </div>
           </div>
 
@@ -293,14 +293,18 @@ export default function Footer() {
           // The icon's rotation is handled separately below
           whileTap={{ scale: 0.95 }}
         >
-          <motion.span
-            animate={{ rotate: 45 }}
-            whileHover={{ rotate: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="flex"
-          >
-            <ArrowUpRight size={24} />
-          </motion.span>
+          <span className="flex sm:hidden">
+  {/* On mobile, always show up arrow */}
+  <ArrowUpRight size={24} style={{ transform: 'rotate(-45deg)' }} />
+</span>
+<motion.span
+  className="hidden sm:flex"
+  animate={{ rotate: 45 }}
+  whileHover={{ rotate: 0 }}
+  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+>
+  <ArrowUpRight size={24} />
+</motion.span>
         </motion.button>
       )}
     </footer>
