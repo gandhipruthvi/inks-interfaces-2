@@ -200,7 +200,7 @@ export default function AboutPage() {
       <section className="mt-20 mb-8 relative overflow-hidden">
         <div className="absolute inset-0 z-0 animated-radial-bg pointer-events-none" />
         <h2 className="text-4xl font-bold text-center mb-6 relative z-10">The Heart Behind the Interface</h2>
-        <div className="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed text-center relative z-10">
+        <div className="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed text-center relative z-10 p-4">
           At Inks & Interfaces, we believe in the power of blending art with innovation. We are a creative and technology-driven studio passionate about building brands, crafting beautiful designs, and delivering intuitive digital experiences.<br /><br />
           Our name says it all — "Inks" represents creativity, imagination, and design, while "Interfaces" reflects technology, function, and digital evolution. Together, they create a seamless bridge between ideas and execution, vision and experience, brands and people.
         </div>
@@ -209,7 +209,7 @@ export default function AboutPage() {
       {/* Mission & Vision - Simplified */}
       <section className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="grid grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <motion.div
               className="p-10 rounded-lg border border-gray-100"
               initial={{ opacity: 0, x: -50 }}
@@ -260,7 +260,7 @@ export default function AboutPage() {
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {companyOverview.values.map((value, index) => (
               <ValueCard
                 key={value.title}
