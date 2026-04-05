@@ -6,11 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
-interface NavbarProps {
-  setIsHovering?: (isHovering: boolean) => void;
-}
-
-export default function Navbar({ setIsHovering }: NavbarProps) {
+export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -66,14 +62,12 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50">
+    <header className="fixed top-0 left-0 w-full z-50 pointer-events-none">
       {/* Logo */}
-      <div className="absolute top-6 left-5 sm:top-8 sm:left-12 z-30">
+      <div className="absolute top-6 left-5 sm:top-8 sm:left-12 z-30 pointer-events-auto">
         <Link href="/">
           <div
             className="backdrop-blur-md bg-white/40 border border-white/60 shadow-lg rounded-xl px-3 py-2 flex items-center gap-2"
-            onMouseEnter={() => setIsHovering?.(true)}
-            onMouseLeave={() => setIsHovering?.(false)}
             style={{ boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)' }}
           >
             <img
@@ -87,20 +81,18 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
 
       {/* Mobile menu button */}
       <motion.button
-        className="fixed top-6 right-5 z-40 md:hidden bg-white/90 backdrop-blur-md w-10 h-10 rounded-full flex items-center justify-center shadow-lg touch-target"
+        className="fixed top-6 right-5 z-40 md:hidden bg-white/90 backdrop-blur-md w-10 h-10 rounded-full flex items-center justify-center shadow-lg touch-target pointer-events-auto"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        onMouseEnter={() => setIsHovering?.(true)}
-        onMouseLeave={() => setIsHovering?.(false)}
       >
         {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
       </motion.button>
       
       {/* Mobile menu overlay */}
       <motion.div 
-        className={`fixed inset-0 z-30 bg-black/60 backdrop-blur-sm flex items-center justify-center md:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}
+        className={`fixed inset-0 z-30 bg-black/60 backdrop-blur-sm flex items-center justify-center md:hidden pointer-events-auto ${mobileMenuOpen ? 'block' : 'hidden'}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: mobileMenuOpen ? 1 : 0 }}
         onClick={() => setMobileMenuOpen(false)}
@@ -129,8 +121,6 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
                     isActive(item) ? 'bg-gray-100 text-black font-bold' : 'text-gray-600'
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
-                  onMouseEnter={() => setIsHovering?.(true)}
-                  onMouseLeave={() => setIsHovering?.(false)}
                 >
                   {item}
                   {isActive(item) && (
@@ -148,7 +138,7 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
 
       {/* Desktop navigation */}
       <motion.nav
-        className={`fixed top-5 sm:top-8 right-4 transform -translate-x-1/2 z-30 bg-white/90 backdrop-blur-md px-1 py-1 rounded-full shadow-lg hidden md:flex items-center gap-1 sm:gap-2 transition-all duration-300 ${
+        className={`fixed top-5 sm:top-8 right-12 z-30 bg-white/90 backdrop-blur-md px-1 py-1 rounded-full shadow-lg hidden md:flex items-center gap-1 sm:gap-2 transition-all duration-300 pointer-events-auto ${
           scrolled ? 'py-2 px-2 scale-95 shadow-md' : ''
         }`}
         initial={{ opacity: 0, y: -20 }}
@@ -169,14 +159,12 @@ export default function Navbar({ setIsHovering }: NavbarProps) {
                     ? 'text-black font-bold' 
                     : 'text-gray-600 hover:bg-black hover:text-white'
                 }`}
-                onMouseEnter={() => setIsHovering?.(true)}
-                onMouseLeave={() => setIsHovering?.(false)}
               >
                 {item}
               </Link>
             </motion.div>
 
-            {/* Active indicator with border instead of underline */}
+            {/* Active indicator */}
             {isActive(item) && (
               <motion.div 
                 className="absolute inset-0 border-2 border-[#FFD700] rounded-full"

@@ -1,21 +1,32 @@
 "use client";
 
-import { useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { MousePointer, Frame } from "lucide-react";
 
-interface HeroSectionProps {
-  setIsHovering: (isHovering: boolean) => void;
-}
-
-export default function HeroSection({ setIsHovering }: HeroSectionProps) {
+export default function HeroSection() {
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
   
-  const playerRef = useRef(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth springs for tracking
+  const springConfig = { damping: 20, stiffness: 100 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
   const heroText = "Crafting Click-Worthy, Scroll-Stopping Stuff";
   
   // Text animation variants
@@ -32,71 +43,46 @@ export default function HeroSection({ setIsHovering }: HeroSectionProps) {
       },
     }),
   };
+
+  // Interaction: Spotlight mask
+  const background = useMotionTemplate`radial-gradient(650px circle at ${smoothX}px ${smoothY}px, rgba(255, 215, 0, 0.15), transparent 80%)`;
   
   return (
     <section 
       ref={ref}
-      className="relative min-h-screen flex flex-col items-start justify-center px-4 sm:px-8 lg:px-12 py-16 sm:py-24 pt-32 overflow-visible"
+      className="relative min-h-screen flex flex-col items-start justify-center px-4 sm:px-8 lg:px-12 py-16 sm:py-24 pt-32 overflow-hidden bg-white"
     >
-      {/* Geometric pattern background */}
-      <div className="absolute inset-0 z-0 opacity-5">
-        <div className="absolute inset-0 grid grid-cols-10 grid-rows-10">
-          {Array.from({ length: 100 }).map((_, i) => (
-            <div key={i} className={`border border-black ${i % 3 === 0 ? 'bg-[#FFD700]' : ''} ${i % 7 === 0 ? 'rounded-full' : ''}`}></div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-[#FFD700] opacity-20 blur-xl" />
-        <div className="absolute bottom-40 right-40 w-64 h-64 rounded-full bg-[#FFD700] opacity-10 blur-3xl" />
-      </div>
-      
-      {/* Decorative cursor element */}
+      {/* Dynamic Background Spotlight */}
       <motion.div 
-        className="absolute top-1/4 right-1/4 w-48 h-48 pointer-events-none z-0"
-        animate={{ 
-          rotate: [0, 10, -5, 0],
-          x: [0, -20, 10, 0],
-          y: [0, 15, -10, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 8,
-          ease: "easeInOut",
-        }}
-      >
-        <motion.div className="relative w-full h-full">
-          <Frame className="w-full h-full text-[#FFD700] opacity-70" />
-          <motion.div 
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            animate={{
-              rotate: [0, 360],
-              scale: [0.8, 1.2, 0.8]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 10,
-              ease: "linear"
-            }}
-          >
-            <MousePointer className="w-8 h-8 text-black opacity-40" />
-          </motion.div>
-        </motion.div>
-      </motion.div>
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{ background }}
+      />
+
+      {/* Modern Grid Overlay */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '40px 40px' }} 
+      />
       
       {/* Main content */}
       <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Brand Tag */}
+        <motion.div
+           initial={{ opacity: 0, x: -20 }}
+           animate={inView ? { opacity: 1, x: 0 } : {}}
+           className="flex items-center gap-2 mb-6"
+        >
+           <div className="w-8 h-1 bg-[#FFD700]" />
+           <span className="text-sm font-black uppercase tracking-widest text-gray-400">Inks & Interfaces</span>
+        </motion.div>
+
         {/* Animated headline */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 overflow-visible">
+        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black mb-8 leading-[0.9] tracking-tighter">
           {heroText.split(" ").map((word, wi) => (
             <span
               key={wi}
-              className="inline-block whitespace-nowrap mr-2"
+              className="inline-block whitespace-nowrap mr-3"
             >
               {word.split("").map((letter, li) => {
-                // Calculate unique index for animation delay
                 const i = heroText.split(" ").slice(0, wi).join(" ").length + wi + li;
                 return (
                   <motion.span
@@ -119,50 +105,35 @@ export default function HeroSection({ setIsHovering }: HeroSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.8, duration: 0.5 }}
-          className="text-lg sm:text-xl mb-8 sm:mb-12 text-gray-700"
+          className="text-xl sm:text-2xl mb-12 text-gray-500 max-w-2xl font-medium"
         >
-          Turning Bold Ideas into Beautiful Interfaces
+          Elevating digital experiences through bold design and intuitive human-centered interfaces.
         </motion.p>
         
-        {/* CTA Button with ink fill animation */}
+        {/* CTA Button */}
         <motion.a
           href="/imaginations"
-          className="relative overflow-hidden bg-black text-white font-bold py-3 px-8 sm:py-4 sm:px-10 rounded-full shadow-lg hover:shadow-xl transition-shadow touch-target"
+          className="group relative inline-flex items-center gap-4 bg-black text-white font-bold py-5 px-10 rounded-full overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 1, duration: 0.5 }}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-          whileHover={{
-            scale: 1.05,
-            boxShadow:
-              "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-          }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className="relative z-10">Tap Into My Imagination</span>
+          <div className="absolute inset-0 bg-[#FFD700] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+          <span className="relative z-10 group-hover:text-black transition-colors duration-500">View Our Portfolio</span>
+          <svg className="relative z-10 w-5 h-5 group-hover:text-black transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="ArrowRight: M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
         </motion.a>
       </div>
       
-      {/* No feature images as per request */}
-      
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        animate={{ 
-          y: [0, 10, 0],
-          opacity: [0.5, 1, 0.5],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 2,
-          ease: "easeInOut",
-        }}
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 5L12 19M12 19L19 12M12 19L5 12" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </motion.div>
+      {/* Modern bottom accent */}
+      <div className="absolute bottom-12 left-12 hidden lg:block">
+         <div className="text-[10px] font-bold text-gray-300 uppercase tracking-[0.3em] [writing-mode:vertical-lr]">
+            Based in New York & Remote
+         </div>
+      </div>
     </section>
   );
 }

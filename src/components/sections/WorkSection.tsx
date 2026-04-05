@@ -5,10 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ArrowRight, ExternalLink } from "lucide-react";
 
-interface WorkSectionProps {
-  setIsHovering: (isHovering: boolean) => void;
-}
-
 interface CaseStudy {
   id: string;
   title: string;
@@ -25,7 +21,7 @@ interface CaseStudy {
   gallery?: string[]; // Array of image URLs for bento grid
 }
 
-export default function WorkSection({ setIsHovering }: WorkSectionProps) {
+export default function WorkSection() {
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
@@ -107,7 +103,6 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
   // Calculate dynamic values for the sticky effect
   const cardHeight = "70vh";
   const cardTopPadding = "1.5em";
-  const cardMargin = "4vw";
   const cardsCount = caseStudies.length;
   // How much of the previous card should peek from the top
   const peekHeight = 150; // px
@@ -170,7 +165,6 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                     top: `${peekHeight}px`,
                     zIndex: index + 1,
                   }}
-                  // Removed initial, whileInView, and transition props for fade-in effect
                 >
                   <motion.div
                     className="work-card relative flex w-full flex-col overflow-hidden rounded-xl bg-white shadow-lg"
@@ -181,8 +175,6 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                     whileHover={{
                       boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
                     }}
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
                   >
                     <div className="flex h-full flex-grow flex-col lg:flex-row">
                       {/* Left side - Image */}
@@ -211,7 +203,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                               {project.subtitle}
                             </span>
 
-                            {project.tags.slice(0, 2).map((tag) => (
+                            {project.tags.slice(0, 2).map((tag: string) => (
                               <span
                                 key={tag}
                                 className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600"
@@ -278,8 +270,6 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                 "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
             }}
             whileTap={{ scale: 0.98 }}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
           >
             Explore More Projects
             <ExternalLink size={20} />
@@ -339,8 +329,6 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                 <motion.button
                   className="absolute z-10 right-6 top-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/25 text-white backdrop-blur-md transition-colors hover:bg-white/40"
                   onClick={closeModal}
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -372,7 +360,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
               {/* Modal content */}
               <div className="p-10">
                 <div className="mb-8 flex flex-wrap gap-2">
-                  {selectedCaseStudy.tags.map((tag) => (
+                  {selectedCaseStudy.tags.map((tag: string) => (
                     <span
                       key={tag}
                       className="rounded-full px-4 py-1.5 text-sm font-medium"
@@ -415,7 +403,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                       .includes("logo") ? (
                       // Bento grid for branding/logo projects
                       <div className="mt-10 grid auto-rows-[180px] grid-cols-2 gap-4 md:grid-cols-4">
-                        {selectedCaseStudy.gallery.map((img, i) => (
+                        {selectedCaseStudy.gallery.map((img: string, i: number) => (
                           <div
                             key={i}
                             className={`overflow-hidden rounded-xl shadow-lg ${i % 5 === 0 ? "col-span-2 row-span-2" : ""}`}
@@ -431,7 +419,7 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                     ) : (
                       // Simple 2-column grid for regular projects
                       <div className="mt-10 grid grid-cols-2 gap-4">
-                        {selectedCaseStudy.gallery.map((img, i) => (
+                        {selectedCaseStudy.gallery.map((img: string, i: number) => (
                           <div
                             key={i}
                             className="overflow-hidden rounded-xl shadow-lg"
@@ -457,8 +445,6 @@ export default function WorkSection({ setIsHovering }: WorkSectionProps) {
                       boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
                     onClick={() => selectedCaseStudy.link ? window.open(selectedCaseStudy.link, '_blank', 'noopener,noreferrer') : window.open('mailto:letscreate.inksandinterfaces@gmail.com')}
                   >
                     <span>{selectedCaseStudy.link ? 'View Full Case Study' : 'Contact for Similar Project'}</span>

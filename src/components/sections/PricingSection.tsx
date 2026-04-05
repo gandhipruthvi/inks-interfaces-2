@@ -4,22 +4,16 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { 
-  CheckCircle, 
   Palette, 
   Layers, 
-  Layout, 
   LineChart, 
   Users, 
   Code, 
   FileText, 
   Laptop, 
   Figma,
-  Zap, 
-  UserCheck,
-  PencilRuler,
-  Workflow,
-  BarChart4,
-  PenTool,
+  Smartphone,
+  Calendar,
   PhoneCall,
   SquareStack,
   FileImage,
@@ -28,13 +22,10 @@ import {
   TypeOutline,
   FilePen,
   LayoutTemplate,
-  Smartphone,
-  Calendar
+  PenTool,
+  BarChart4,
+  Workflow
 } from "lucide-react";
-
-interface PricingSectionProps {
-  setIsHovering: (isHovering: boolean) => void;
-}
 
 interface PricingPlan {
   id: string;
@@ -50,16 +41,14 @@ interface PricingPlan {
   ctaText: string;
 }
 
-export default function PricingSection({ setIsHovering }: PricingSectionProps) {
+export default function PricingSection() {
   const [ref, inView] = useInView({
     triggerOnce: false,
     threshold: 0.1,
   });
 
-  // Hover state for each pricing card
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   
-  // Pricing data with integrated icons
   const pricingPlans: PricingPlan[] = [
     {
       id: "logo-design",
@@ -67,358 +56,153 @@ export default function PricingSection({ setIsHovering }: PricingSectionProps) {
       price: "$291",
       description: "Crafted brand marks that are timeless, memorable, and scalable across all mediums.",
       features: [
-        { 
-          text: "Strategic Discovery Call",
-          icon: <PhoneCall size={18} className="flex-shrink-0" />
-        },
-        { 
-          text: "Moodboard & Style Exploration", 
-          icon: <Palette size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "3 Logo Concepts",
-          icon: <SquareStack size={18} className="flex-shrink-0" />
-        },
-        { 
-          text: "3 Rounds of Revisions", 
-          icon: <RotateCwIcon size={18} className="flex-shrink-0" />
-        },
-        { 
-          text: "Final Logo in Multiple Formats (SVG, PNG, PDF)",
-          icon: <FileImage size={18} className="flex-shrink-0" />
-        },
-        { 
-          text: "Light Brand Guide (color codes, font usage)",
-          icon: <FileText size={18} className="flex-shrink-0" />
-        },
-        { 
-          text: "Social Media Profile Assets",
-          icon: <Instagram size={18} className="flex-shrink-0" />
-        },
-        { 
-          text: "Turnaround time: Less than a week",
-          icon: <Calendar size={18} className="flex-shrink-0" />
-        }
+        { text: "Strategic Discovery Call", icon: <PhoneCall size={18} /> },
+        { text: "Moodboard & Style Exploration", icon: <Palette size={18} /> },
+        { text: "3 Logo Concepts", icon: <SquareStack size={18} /> },
+        { text: "3 Rounds of Revisions", icon: <RotateCwIcon size={18} /> },
+        { text: "Final Logo in Multiple Formats", icon: <FileImage size={18} /> },
+        { text: "Light Brand Guide", icon: <FileText size={18} /> },
+        { text: "Social Media Profile Assets", icon: <Instagram size={18} /> },
+        { text: "Turnaround: Under a week", icon: <Calendar size={18} /> }
       ],
       popular: false,
-      accentColor: "#F15B54", 
-      ctaText: "Design My Logo"
+      accentColor: "#333333",
+      ctaText: "Get Started"
     },
     {
-      id: "branding",
+      id: "brand-identity",
       title: "Brand Identity",
-      price: "$498",
-      description: "A holistic brand identity system tailored to tell your story and stand out in a crowded market.",
+      price: "$585",
+      description: "A complete visual language that defines your brand's personality and voice.",
       features: [
-        { 
-          text: "Brand Discovery & Strategy",
-          icon: <Layers size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Logo Suite + Variations",
-          icon: <Layout size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Brand Color Palette", 
-          icon: <Palette size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Typography System",
-          icon: <TypeOutline size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Visual Style Direction (patterns, icons, mockups)", 
-          icon: <Figma size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Brand Guidelines (PDF & Web)",
-          icon: <FilePen size={18} className="flex-shrink-0" />
-        },
-        { 
-          text: "Social Media Templates",
-          icon: <LayoutTemplate size={18} className="flex-shrink-0" />
-        },
-        { 
-          text: "Turnaround time: A week or more",
-          icon: <Calendar size={18} className="flex-shrink-0" />
-        }
+        { text: "Strategic Discovery & Audit", icon: <LineChart size={18} /> },
+        { text: "Target Audience Profiling", icon: <Users size={18} /> },
+        { text: "Full Logo System", icon: <Layers size={18} /> },
+        { text: "Typography & Color System", icon: <TypeOutline size={18} /> },
+        { text: "Visual Language Elements", icon: <SquareStack size={18} /> },
+        { text: "Stationery Design", icon: <FilePen size={18} /> },
+        { text: "3 Social Media Templates", icon: <Instagram size={18} /> },
+        { text: "Comprehensive Style Guide", icon: <FileText size={18} /> }
       ],
       popular: true,
-      accentColor: "#ffd602",
-      ctaText: "Start Your Design System"
+      accentColor: "#FFD700",
+      ctaText: "Elevate My Brand"
     },
     {
-      id: "full-uxui-project",
-      title: "UI/UX Design Project",
-      price: "$741",
-      description: "End-to-end design process from research to high-fidelity prototypes ready for development",
+      id: "ui-ux-design",
+      title: "UI / UX Design",
+      price: "$876",
+      description: "User-centered digital experiences that balance form, function, and emotion.",
       features: [
-        { 
-          text: "In-depth User Research",
-          icon: <Users size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Information Architecture",
-          icon: <Workflow size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Wireframing & User Flows",
-          icon: <PencilRuler size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "High-fidelity UI Design (Figma file)",
-          icon: <PenTool size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "4-6 key screens",
-          icon: <Smartphone size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Interactive Prototyping",
-          icon: <Laptop size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Usability Testing",
-          icon: <UserCheck size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "UI Kit Development",
-          icon: <Layers size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Implementation Support",
-          icon: <Zap size={18} className="flex-shrink-0" /> 
-        },
-        { 
-          text: "Turnaround time: 2 weeks",
-          icon: <Calendar size={18} className="flex-shrink-0" />
-        }
+        { text: "User Research & Flow Mapping", icon: <Workflow size={18} /> },
+        { text: "Competitor Analysis", icon: <BarChart4 size={18} /> },
+        { text: "Wireframing & Prototyping", icon: <LayoutTemplate size={18} /> },
+        { text: "Responsive High-Fidelity UI", icon: <Smartphone size={18} /> },
+        { text: "Interactive Prototype (Figma)", icon: <Figma size={18} /> },
+        { text: "Custom Iconography", icon: <PenTool size={18} /> },
+        { text: "Developer Handoff Docs", icon: <Code size={18} /> },
+        { text: "Live Presentation Sessions", icon: <Laptop size={18} /> }
       ],
       popular: false,
-      accentColor: "#F15B54", 
-      ctaText: "Get Project Quote"
+      accentColor: "#333333",
+      ctaText: "Start My Project"
     }
   ];
   
   return (
-    <section 
-      ref={ref}
-      className="relative py-28 bg-white"
-      id="pricing"
-    >
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-gray-50 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-gray-50 to-transparent" />
-        <div className="absolute left-0 top-1/4 w-40 h-40 rounded-full bg-blue-100/40 blur-3xl" />
-        <div className="absolute right-0 bottom-1/4 w-60 h-60 rounded-full bg-purple-100/40 blur-3xl" />
+    <section ref={ref} className="relative py-24 bg-white overflow-hidden" id="pricing">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gray-50 to-transparent" />
       </div>
       
-      {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl font-bold mb-6">Design Tiers</h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Transform your digital product with our premium design services. Choose the package that best fits your needs or contact us for a custom solution.
+          <h2 className="text-5xl font-black mb-6 tracking-tight">Design Tiers</h2>
+          <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">
+            Premium design solutions tailored for brands that refuse to be ordinary.
           </p>
         </motion.div>
         
-        {/* Pricing cards - optimized for mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {pricingPlans.map((plan, index) => (
             <motion.div
               key={plan.id}
-              className={`relative bg-white rounded-xl overflow-hidden border border-gray-200 ${
-                plan.popular ? "ring-2 ring-opacity-80" : ""
-              } shadow-lg transition-all duration-300`}
-              style={{
-                ["--tw-ring-color" as any]: plan.popular ? plan.accentColor : 'transparent',
-                boxShadow: hoveredCard === plan.id 
-                  ? `0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 15px 2px ${plan.accentColor}30`
-                  : '0 10px 25px -5px rgba(0, 0, 0, 0.05)'
-              }}
               initial={{ opacity: 0, y: 40 }}
-              animate={{ 
-                opacity: 1, 
-                y: 0,
-                transition: { delay: index * 0.15, duration: 0.6 }
-              }}
-              whileHover={{ 
-                y: -8,
-                transition: { duration: 0.3 }
-              }}
-              onMouseEnter={() => {
-                setHoveredCard(plan.id);
-                setIsHovering(true);
-              }}
-              onMouseLeave={() => {
-                setHoveredCard(null);
-                setIsHovering(false);
-              }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              onMouseEnter={() => setHoveredCard(plan.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className={`group relative flex flex-col p-8 sm:p-10 rounded-[2.5rem] border transition-all duration-500 ${
+                plan.popular 
+                  ? "border-black shadow-2xl scale-105 z-10 bg-white" 
+                  : "border-gray-100 bg-gray-50/50 hover:bg-white hover:border-gray-200 hover:shadow-xl"
+              }`}
             >
               {plan.popular && (
-                <div 
-                  className="absolute top-0 right-0 text-white font-bold text-xs px-4 py-2 rounded-bl-lg z-10"
-                  style={{ backgroundColor: plan.accentColor }}
-                >
-                  MOST POPULAR
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] font-black uppercase tracking-[0.2em] py-2 px-6 rounded-full shadow-lg">
+                  Most Popular
                 </div>
               )}
               
-              {/* Card header with accent color */}
-              <div 
-                className="pt-8 sm:pt-10 px-6 sm:px-8 pb-6 relative overflow-hidden"
-                style={{ backgroundColor: `${plan.accentColor}08` }}
-              >
-                <motion.div 
-                  className="absolute top-0 right-0 w-32 h-32 opacity-10 rounded-full"
-                  style={{ backgroundColor: plan.accentColor }}
-                  initial={{ scale: 1, x: 40, y: -40 }}
-                  animate={hoveredCard === plan.id ? 
-                    { scale: 1.5, x: 20, y: -20 } : 
-                    { scale: 1, x: 40, y: -40 }
-                  }
-                  transition={{ duration: 1.5, ease: "easeInOut" }}
-                />
-                
-                <h3 
-                  className="text-2xl font-bold mb-2"
-                  style={{ color: plan.accentColor }}
-                >
-                  {plan.title}
-                </h3>
-                <p className="text-gray-600 mb-5 min-h-[3rem] sm:min-h-[4rem]">{plan.description}</p>
-                
-                <div className="flex items-end mb-4">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  {!plan.price.includes("+") && (
-                    <span className="text-gray-500 ml-2">/ project</span>
-                  )}
+              <div className="mb-8">
+                <h3 className="text-2xl font-black mb-4 uppercase tracking-tight">{plan.title}</h3>
+                <div className="flex items-baseline gap-1 mb-4">
+                  <span className="text-5xl font-black tracking-tighter">{plan.price}</span>
+                  <span className="text-gray-400 text-sm font-bold uppercase tracking-widest">/ Project</span>
                 </div>
+                <p className="text-gray-500 text-base leading-relaxed font-medium">{plan.description}</p>
               </div>
               
-              {/* Card features */}
-              <div className="p-6 sm:p-8 pt-6 bg-white">
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature) => (
-                    <motion.li 
-                      key={feature.text} 
-                      className="flex items-start text-gray-700"
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div 
-                        className="mr-3 mt-0.5 p-1 rounded-full"
-                        style={{ color: plan.accentColor }}
-                      >
-                        {feature.icon}
-                      </div>
-                      <span>{feature.text}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-                
-                <motion.a
-                  href={(() => {
-                    if (plan.ctaText === "Design My Logo") {
-                      return "mailto:letscreate.inksandinterfaces@gmail.com?subject=Logo%20Design%20Inquiry";
-                    } else if (plan.ctaText === "Start Your Design System") {
-                      return "mailto:letscreate.inksandinterfaces@gmail.com?subject=Design%20System%20Project%20Inquiry";
-                    } else if (plan.ctaText === "Get Project Quote") {
-                      return "mailto:letscreate.inksandinterfaces@gmail.com?subject=Project%20Quote%20Request";
-                    } else {
-                      return "mailto:letscreate.inksandinterfaces@gmail.com";
-                    }
-                  })()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full block"
-                >
-                  <motion.button
-                    className="w-full py-3.5 px-6 rounded-lg font-bold text-white transition-all duration-300 relative overflow-hidden"
-                    style={{ 
-                      backgroundColor: hoveredCard === plan.id 
-                        ? plan.accentColor 
-                        : plan.accentColor + "CC"
-                    }}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <motion.span
-                      className="absolute inset-0 w-full h-full bg-black opacity-0"
-                      animate={hoveredCard === plan.id ? 
-                        { opacity: 0.1, scale: 1 } : 
-                        { opacity: 0, scale: 0.9 }
-                      }
-                      transition={{ duration: 0.4 }}
-                    />
-                    <span className="relative z-10">{plan.ctaText}</span>
-                  </motion.button>
-                </motion.a>
+              <div className="flex-grow space-y-4 mb-10">
+                {plan.features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-[#FFD700]/10 transition-colors duration-300" 
+                         style={{ color: plan.popular ? '#000' : '#666' }}>
+                      {feature.icon}
+                    </div>
+                    <span className="text-sm text-gray-700 font-semibold">{feature.text}</span>
+                  </div>
+                ))}
               </div>
+              
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => window.open('mailto:letscreate.inksandinterfaces@gmail.com')}
+                className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-sm transition-all duration-300 ${
+                  plan.popular 
+                    ? "bg-black text-white hover:bg-[#FFD700] hover:text-black shadow-xl shadow-black/10" 
+                    : "bg-white border-2 border-black text-black hover:bg-black hover:text-white"
+                }`}
+              >
+                {plan.ctaText}
+              </motion.button>
             </motion.div>
           ))}
         </div>
         
-        {/* Custom projects */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 sm:mt-20 text-center bg-gray-50 p-6 sm:p-10 rounded-xl sm:rounded-2xl shadow-sm"
+           initial={{ opacity: 0 }}
+           animate={inView ? { opacity: 1 } : {}}
+           transition={{ delay: 0.8 }}
+           className="mt-24 text-center p-12 rounded-[3rem] bg-gray-50 border border-gray-100"
         >
-          <div className="max-w-3xl mx-auto">
-            <BarChart4 className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-            <h3 className="text-2xl font-bold mb-4">Need a custom solution?</h3>
-            <p className="text-gray-700 mb-8">
-              Every project is unique. If you need something tailored to your specific requirements, 
-              our team of UX/UI experts is ready to create a custom solution that perfectly fits your needs.
-            </p>
-            
-            <motion.a
-              href="mailto:letscreate.inksandinterfaces@gmail.com?subject=Custom%20Quote%20Request"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <motion.button
-                className="bg-black text-white font-bold py-3 sm:py-4 px-6 sm:px-10 rounded-lg hover:bg-gray-800 transition-all duration-300 touch-target"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 15px 30px rgba(0, 0, 0, 0.15)" 
-                }}
-                whileTap={{ scale: 0.98 }}
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-              >
-                <span className="flex items-center gap-2">
-                  Contact for Custom Quote
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </span>
-              </motion.button>
-            </motion.a>
-          </div>
+           <BarChart4 className="w-12 h-12 mx-auto mb-6 text-gray-300" />
+           <h3 className="text-3xl font-black mb-4 tracking-tight">Need something custom?</h3>
+           <p className="text-gray-500 text-lg mb-10 max-w-2xl mx-auto font-medium">
+             For enterprise projects, long-term partnerships, or specific creative needs, we offer bespoke engagement models.
+           </p>
+           <a href="mailto:letscreate.inksandinterfaces@gmail.com" 
+              className="inline-block text-black font-black text-lg border-b-4 border-[#FFD700] pb-1 hover:bg-[#FFD700]/10 px-4 transition-all">
+             Let's start a conversation
+           </a>
         </motion.div>
-        
-        {/* Guarantee section */}
-        {/* <div className="mt-16 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="flex items-center justify-center gap-2 text-gray-500"
-          >
-            <CheckCircle size={18} />
-            <span>14-day satisfaction guarantee on all projects</span>
-          </motion.div>
-        </div> */}
       </div>
     </section>
   );

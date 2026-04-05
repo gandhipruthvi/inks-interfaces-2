@@ -1,89 +1,86 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
-interface CursorProps {
-  position: { x: number; y: number };
-  isHovering: boolean;
-}
-
-export default function Cursor({ position, isHovering }: CursorProps) {
+export default function Cursor() {
   const [isMounted, setIsMounted] = useState(false);
-  // Track whether cursor is visible (only show when mouse moves)
+  const [isHovering, setIsHovering] = useState(false);
   const [isActive, setIsActive] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth springs for rendering, instead of React state
+  const springConfig = { damping: 18, stiffness: 120, mass: 0.7 };
+  const trailSpringConfig = { damping: 30, stiffness: 80, mass: 1.1 };
   
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  const trailX = useSpring(mouseX, trailSpringConfig);
+  const trailY = useSpring(mouseY, trailSpringConfig);
+
   useEffect(() => {
-    // Set mounted state
     setIsMounted(true);
-    
-    // Reset activity timer whenever position changes
-    if (position.x !== 0 && position.y !== 0) {
+
+    let timeoutId: NodeJS.Timeout;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX - 12);
+      mouseY.set(e.clientY - 12);
+      
       setIsActive(true);
-    }
-    
-    // Hide cursor after 2 seconds of inactivity
-    const timer = setTimeout(() => {
-      if (position.x === 0 && position.y === 0) {
-        setIsActive(false);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => setIsActive(false), 2000);
+
+      // Infer hovering based on cursor style or elements
+      const target = e.target as HTMLElement;
+      const computedCursor = window.getComputedStyle(target).cursor;
+      
+      if (
+        computedCursor === "pointer" ||
+        target.closest("a") ||
+        target.closest("button") || 
+        target.closest("[data-hoverable]")
+      ) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
       }
-    }, 2000);
-    
-    return () => {
-      clearTimeout(timer);
     };
-  }, [position]);
-  
-  // Handle mouse movement globally
-  useEffect(() => {
-    const handleMouseMove = () => {
-      setIsActive(true);
-    };
-    
+
     window.addEventListener("mousemove", handleMouseMove);
-    
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      clearTimeout(timeoutId);
     };
-  }, []);
-  
+  }, [mouseX, mouseY]);
+
   if (!isMounted) return null;
-  
+
   return (
     <>
-      {/* Main cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-6 h-6 rounded-full bg-[#FFD700] mix-blend-difference pointer-events-none z-50"
+        className="fixed top-0 left-0 w-6 h-6 rounded-full bg-[#FFD700] mix-blend-difference pointer-events-none z-50 will-change-transform"
+        style={{ x: smoothX, y: smoothY }}
         animate={{
-          x: position.x - 12,
-          y: position.y - 12,
           scale: isHovering ? 2 : 1,
           opacity: isActive ? 1 : 0,
         }}
-        transition={{
-          type: "spring",
-          damping: 18,
-          stiffness: 120,
-          mass: 0.7,
-          restDelta: 0.2,
-        }}
+        transition={{ duration: 0.15 }}
       />
       
-      {/* Cursor trail */}
       <motion.div
-        className="fixed top-0 left-0 w-3 h-3 rounded-full bg-[#FFD700] opacity-50 mix-blend-difference pointer-events-none z-40"
-        animate={{
-          x: position.x - 6,
-          y: position.y - 6,
-          opacity: isActive ? 0.5 : 0,
+        className="fixed top-0 left-0 w-3 h-3 rounded-full bg-[#FFD700] opacity-50 mix-blend-difference pointer-events-none z-40 will-change-transform"
+        style={{
+          x: trailX,
+          y: trailY,
+          translateX: "6px",
+          translateY: "6px"
         }}
-        transition={{
-          type: "spring",
-          damping: 30,
-          stiffness: 80,
-          mass: 1.1,
-          restDelta: 0.3,
-        }}
+        animate={{ opacity: isActive ? 0.5 : 0 }}
+        transition={{ duration: 0.15 }}
       />
     </>
   );

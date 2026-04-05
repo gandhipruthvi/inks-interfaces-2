@@ -12,10 +12,6 @@ import { Navigation, Autoplay, EffectCoverflow } from 'swiper/modules';
 // Define Timeout type since NodeJS namespace isn't available
 type Timeout = ReturnType<typeof setTimeout>;
 
-interface TestimonialsSectionProps {
-  setIsHovering: (isHovering: boolean) => void;
-}
-
 interface Testimonial {
   id: number;
   content: string;
@@ -23,10 +19,9 @@ interface Testimonial {
   position: string;
   company: string;
   rating: number;
-
 }
 
-export default function TestimonialsSection({ setIsHovering }: TestimonialsSectionProps) {
+export default function TestimonialsSection() {
   // Viewport detection
   const [sectionRef, sectionInView] = useInView({
     triggerOnce: false,
@@ -178,7 +173,7 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
             }}
             className="testimonial-swiper"
           >
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial: Testimonial) => (
               <SwiperSlide key={testimonial.id} className="py-12 px-2">
                 <motion.div
                   className="bg-white rounded-2xl overflow-hidden shadow-xl transition-all duration-300 mx-auto max-w-2xl"
@@ -186,8 +181,6 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={() => setIsHovering(false)}
                 >
                   <div className="p-8 sm:p-10">
                     {/* Content */}
@@ -232,11 +225,9 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
           <div className="flex justify-center mt-10 gap-6">
             <motion.button
               ref={prevRef}
-              className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-gray-100"
-              whileHover={{ scale: 1.1, backgroundColor: "#FFD700" }}
+              className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-gray-100 transition-colors hover:bg-[#FFD700]"
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
               aria-label="Previous testimonial"
             >
               <ChevronLeft size={20} />
@@ -257,11 +248,9 @@ export default function TestimonialsSection({ setIsHovering }: TestimonialsSecti
 
             <motion.button
               ref={nextRef}
-              className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-gray-100"
-              whileHover={{ scale: 1.1, backgroundColor: "#FFD700" }}
+              className="w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-md border border-gray-100 transition-colors hover:bg-[#FFD700]"
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
               aria-label="Next testimonial"
             >
               <ChevronRight size={20} />
