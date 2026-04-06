@@ -6,8 +6,6 @@ import { useInView } from "react-intersection-observer";
 import { 
   Palette, 
   Layers, 
-  LineChart, 
-  Users, 
   Code, 
   FileText, 
   Laptop, 
@@ -18,6 +16,7 @@ import {
   SquareStack,
   FileImage,
   Instagram,
+  Layout,
   RotateCwIcon,
   TypeOutline,
   FilePen,
@@ -75,14 +74,38 @@ export default function PricingSection() {
       price: "$585",
       description: "A complete visual language that defines your brand's personality and voice.",
       features: [
-        { text: "Strategic Discovery & Audit", icon: <LineChart size={18} /> },
-        { text: "Target Audience Profiling", icon: <Users size={18} /> },
-        { text: "Full Logo System", icon: <Layers size={18} /> },
-        { text: "Typography & Color System", icon: <TypeOutline size={18} /> },
-        { text: "Visual Language Elements", icon: <SquareStack size={18} /> },
-        { text: "Stationery Design", icon: <FilePen size={18} /> },
-        { text: "3 Social Media Templates", icon: <Instagram size={18} /> },
-        { text: "Comprehensive Style Guide", icon: <FileText size={18} /> }
+        { 
+          text: "Brand Discovery & Strategy",
+          icon: <Layers size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Logo Suite + Variations",
+          icon: <Layout size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Brand Color Palette", 
+          icon: <Palette size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Typography System",
+          icon: <TypeOutline size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Visual Style Direction (patterns, icons, mockups)", 
+          icon: <Figma size={18} className="flex-shrink-0" /> 
+        },
+        { 
+          text: "Brand Guidelines (PDF & Web)",
+          icon: <FilePen size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Social Media Templates",
+          icon: <LayoutTemplate size={18} className="flex-shrink-0" />
+        },
+        { 
+          text: "Turnaround time: A week or more",
+          icon: <Calendar size={18} className="flex-shrink-0" />
+        }
       ],
       popular: true,
       accentColor: "#FFD700",

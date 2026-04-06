@@ -131,7 +131,7 @@ export default function HeroSection() {
       {/* Modern bottom accent */}
       <div className="absolute bottom-12 left-12 hidden lg:block">
          <div className="text-[10px] font-bold text-gray-300 uppercase tracking-[0.3em] [writing-mode:vertical-lr]">
-            Based in New York & Remote
+            Based in India & Remote
          </div>
       </div>
     </section>
