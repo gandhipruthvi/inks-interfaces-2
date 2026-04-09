@@ -163,8 +163,8 @@ export default function ImaginationsPage() {
             transition={{ duration: 0.8 }}
             className="text-center"
            >
-              <h1 className="mb-10 text-7xl sm:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none italic">
-                Imagination <br /> <span className="text-[#FFD700] not-italic">Manifested</span>
+              <h1 className="mb-10 text-[3.2rem] sm:text-7xl lg:text-9xl font-black uppercase tracking-tighter leading-none text-center">
+                Imagination <br /> <span className="text-[#FFD700]">Manifested</span>
               </h1>
               <p className="mx-auto mb-16 max-w-3xl text-xl text-gray-500 font-medium leading-relaxed">
                 Strategic design thinking meets artistic precision. <br />
@@ -300,8 +300,18 @@ function CaseStudyModal({ selectedCaseStudy, onClose }: { selectedCaseStudy: Cas
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Truly Sticky Close Button */}
+          <div className="sticky top-0 right-0 z-[120] flex justify-end p-6 pointer-events-none">
+            <button
+               onClick={onClose}
+               className="pointer-events-auto h-12 w-12 sm:h-16 sm:w-16 flex items-center justify-center rounded-[1.25rem] bg-black/50 sm:bg-white/10 backdrop-blur-md text-white hover:bg-[#FFD700] hover:text-black transition-all shadow-xl"
+            >
+              <X size={24} strokeWidth={3} />
+            </button>
+          </div>
+
           {/* Hero Header */}
-          <div className="relative h-[45vh] min-h-[350px] w-full overflow-hidden">
+          <div className="relative h-[45vh] min-h-[350px] w-full overflow-hidden -mt-24 sm:-mt-32">
             <img
               src={selectedCaseStudy.image}
               alt={selectedCaseStudy.title}
@@ -316,13 +326,6 @@ function CaseStudyModal({ selectedCaseStudy, onClose }: { selectedCaseStudy: Cas
                  {selectedCaseStudy.title}
                </h2>
             </div>
-            
-            <button
-               onClick={onClose}
-               className="absolute top-8 right-8 h-16 w-16 flex items-center justify-center rounded-[1.25rem] bg-white/10 backdrop-blur-md text-white hover:bg-[#FFD700] hover:text-black transition-all"
-            >
-              <X size={24} strokeWidth={3} />
-            </button>
           </div>
 
           <div className="p-8 sm:p-14 lg:p-20">

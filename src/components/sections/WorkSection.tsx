@@ -182,8 +182,8 @@ function ProjectCard({ project, index, onClick }: { project: CaseStudy; index: n
   return (
     <motion.div
       onMouseMove={handleMouseMove}
-      className="sticky group relative flex w-full flex-col overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white shadow-2xl transition-all duration-500 hover:shadow-black/10"
-      style={{ top: `${topSticky}px`, height: '75vh' }}
+      className="sticky group relative flex w-full flex-col overflow-hidden rounded-[2.5rem] border border-gray-100 bg-white shadow-2xl transition-all duration-500 hover:shadow-black/10 min-h-[580px] h-[75vh] lg:h-[70vh]"
+      style={{ top: `${topSticky}px` }}
       initial={{ y: 50 }}
       whileInView={{ y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -197,7 +197,7 @@ function ProjectCard({ project, index, onClick }: { project: CaseStudy; index: n
 
       <div className="flex h-full flex-col lg:flex-row relative z-10">
         {/* Left: Project Image */}
-        <div className="lg:w-1/2 relative overflow-hidden h-[40%] lg:h-full min-h-[350px]">
+        <div className="lg:w-1/2 relative overflow-hidden h-[45%] lg:h-full min-h-[300px]">
            <motion.img
               src={project.image}
               alt={project.title}
@@ -210,9 +210,9 @@ function ProjectCard({ project, index, onClick }: { project: CaseStudy; index: n
         </div>
 
         {/* Right: Project Details */}
-        <div className="lg:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col justify-start items-start h-full">
-          <div className="mb-10">
-             <div className="flex items-center gap-4 mb-6">
+        <div className="lg:w-1/2 p-6 sm:p-10 lg:p-14 flex flex-col justify-start items-start h-full">
+          <div className="mb-4">
+             <div className="flex items-center gap-4 mb-4">
                 <span className="text-xs font-black uppercase tracking-[0.2em] text-[#FFD700] bg-black px-4 py-1.5 rounded-full">
                    {project.subtitle}
                 </span>
@@ -265,8 +265,19 @@ function CaseStudyModal({ selectedCaseStudy, onClose }: { selectedCaseStudy: Cas
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header & Body Content stays as previously refactored... */}
-          <div className="relative h-[45vh] min-h-[350px] w-full overflow-hidden">
+          {/* Truly Sticky Close Button */}
+          <div className="sticky top-0 right-0 z-[120] flex justify-end p-6 pointer-events-none">
+            <button
+               onClick={onClose}
+               className="pointer-events-auto h-12 w-12 sm:h-16 sm:w-16 flex items-center justify-center rounded-[1.25rem] bg-black/50 sm:bg-white/10 backdrop-blur-md text-white hover:bg-[#FFD700] hover:text-black transition-all shadow-xl"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="relative h-[60vh] w-full -mt-24 sm:-mt-32">
             <img
               src={selectedCaseStudy.image}
               alt={selectedCaseStudy.title}
@@ -281,15 +292,6 @@ function CaseStudyModal({ selectedCaseStudy, onClose }: { selectedCaseStudy: Cas
                  {selectedCaseStudy.title}
                </h2>
             </div>
-            
-            <button
-               onClick={onClose}
-               className="absolute top-8 right-8 h-16 w-16 flex items-center justify-center rounded-[1.25rem] bg-white/10 backdrop-blur-md text-white hover:bg-[#FFD700] hover:text-black transition-all"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
           </div>
 
           <div className="p-8 sm:p-14 lg:p-20">

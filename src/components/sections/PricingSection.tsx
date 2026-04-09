@@ -109,7 +109,7 @@ export default function PricingSection() {
       ],
       popular: true,
       accentColor: "#FFD700",
-      ctaText: "Elevate My Brand"
+      ctaText: "Elevate Brand"
     },
     {
       id: "ui-ux-design",
@@ -128,7 +128,7 @@ export default function PricingSection() {
       ],
       popular: false,
       accentColor: "#333333",
-      ctaText: "Start My Project"
+      ctaText: "Start Project"
     }
   ];
   

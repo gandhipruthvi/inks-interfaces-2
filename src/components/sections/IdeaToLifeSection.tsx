@@ -107,7 +107,7 @@ export default function IdeaToLifeSection() {
 
   return (
     <section className="bg-white overflow-visible" id="process">
-      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-32 mb-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-32 mb-12">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <motion.div
             initial={{ opacity: 0, x: -30 }}

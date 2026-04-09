@@ -76,7 +76,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Animated headline */}
-        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black mb-8 leading-[0.9] tracking-tighter">
+        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black mb-8 leading-[1.1] sm:leading-[1.05] lg:leading-[1.1] tracking-tight">
           {heroText.split(" ").map((word, wi) => (
             <span
               key={wi}

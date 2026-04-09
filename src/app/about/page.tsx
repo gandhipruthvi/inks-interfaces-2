@@ -69,12 +69,12 @@ export default function AboutPage() {
                 Est. 2021
               </motion.span>
               <motion.h1 
-                className="text-7xl sm:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.8] mb-12 uppercase italic"
+                className="text-7xl sm:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.8] mb-12 uppercase"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                Our <br /> <span className="text-[#FFD700] not-italic">Story</span>
+                Our <br /> <span className="text-[#FFD700]">Story</span>
               </motion.h1>
               <motion.p
                 className="text-2xl text-gray-400 font-medium leading-relaxed max-w-xl mb-12"
