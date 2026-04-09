@@ -52,11 +52,6 @@ const ServiceCard = ({ title, description, icon, index }: ServiceCardProps) => {
         </p>
       </div>
 
-      {/* Call to Action */}
-      <div className="relative z-10 flex items-center gap-2 text-black font-black uppercase tracking-widest text-xs group-hover:gap-4 transition-all duration-300">
-        Discover more <ArrowRight size={16} />
-      </div>
-
       {/* Decorative Ink Element */}
       <div className="absolute -bottom-6 -right-6 text-[#FFD700] opacity-[0.03] group-hover:opacity-10 transition-opacity duration-500 pointer-events-none">
         {icon}

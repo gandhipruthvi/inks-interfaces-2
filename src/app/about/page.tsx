@@ -1,267 +1,238 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useMotionTemplate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import {
-  Heart,
-  Lightbulb,
-  Users,
-  Shield,
-  Star
-} from "lucide-react";
+import { Heart, Lightbulb, Users, Shield, Star, ArrowRight, Quote } from "lucide-react";
 import Navbar from "@/components/ui/Navbar";
 import Cursor from "@/components/ui/Cursor";
-import TypewriterText from "@/components/ui/TypewriterText";
-import AnimatedBackground from "@/components/ui/AnimatedBackground";
-import ValueCard from "@/components/ui/ValueCard";
 
 export default function AboutPage() {
-  const [heroRef, heroInView] = useInView({ threshold: 0.2 });
-  const [heartRef, heartInView] = useInView({ threshold: 0.3 });
+  const [heroRef, heroInView] = useInView({ threshold: 0.2, triggerOnce: true });
   const [missionRef, missionInView] = useInView({ threshold: 0.2 });
-  const [valuesRef, valuesInView] = useInView({ threshold: 0.2 });
-
-  const companyOverview = {
-    mission: "To transform brand visions into meaningful digital experiences through thoughtful design, strategic thinking, and creative storytelling.",
-    vision: "A world where every digital interaction is both beautiful and purposeful, creating lasting connections between brands and their audiences.",
-    values: [
-      {
-        title: "Excellence",
-        description: "We pursue the highest standards in everything we create, balancing aesthetics with function to deliver exceptional results.",
-        icon: <Star size={32} />,
-        color: "#FFD700"
-      },
-      {
-        title: "Collaboration",
-        description: "We believe the best work emerges from meaningful partnerships with our clients and cross-disciplinary teamwork.",
-        icon: <Users size={32} />,
-        color: "#333333"
-      },
-      {
-        title: "Innovation",
-        description: "We embrace creative challenges and constantly explore new approaches to solve complex design problems.",
-        icon: <Lightbulb size={32} />,
-        color: "#FFD700"
-      },
-      {
-        title: "Integrity",
-        description: "We maintain complete transparency throughout our process and take full responsibility for the impact of our work.",
-        icon: <Shield size={32} />,
-        color: "#333333"
-      }
-    ]
-  };
+  const [valuesRef, valuesInView] = useInView({ threshold: 0.1 });
 
   const { scrollYProgress } = useScroll();
-  const heroTitleY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+
+  const stats = [
+    { number: "4+", label: "Years of Experience" },
+    { number: "100+", label: "Projects Delivered" },
+    { number: "50+", label: "Global Clients" },
+    { number: "100%", label: "In-house Crafted" }
+  ];
+
+  const values = [
+    {
+      title: "Impact",
+      description: "We don't just design for screens; we design for business growth and meaningful human connection.",
+      icon: <Star size={32} />,
+    },
+    {
+      title: "Precision",
+      description: "Pixel perfection is our baseline. We obsess over the details that others might overlook.",
+      icon: <Target size={32} />,
+    },
+    {
+      title: "Authenticity",
+      description: "Every brand has a soul. Our job is to find it and bring it to life through visual storytelling.",
+      icon: <Users size={32} />,
+    },
+    {
+      title: "Velocity",
+      description: "Moving fast without breaking things. Strategic design is built for the pace of modern business.",
+      icon: <Zap size={32} />,
+    }
+  ];
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-visible">
       <Navbar />
       <Cursor />
       
-      {/* 1. Dynamic Interactive Hero */}
+      {/* Editorial Hero */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex flex-col justify-center pt-24 pb-20 bg-gray-50 overflow-hidden"
+        className="relative min-h-[90vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden"
       >
-        <AnimatedBackground variant="ink" intensity="medium" color="#000" secondaryColor="#FFD700" />
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gray-50 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
         
-        <div className="relative z-10 max-w-7xl w-full mx-auto px-6 lg:px-12">
-          <motion.div
-            style={{ y: heroTitleY }}
-            className="flex flex-col lg:flex-row items-center justify-between gap-12"
-          >
-            <div className="lg:w-1/2 text-left">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+          <motion.div style={{ y: heroY }} className="flex flex-col lg:flex-row items-center justify-between gap-20">
+            <div className="lg:w-1/2">
+              <motion.span 
+                className="text-xs font-black uppercase tracking-[0.4em] text-[#FFD700] mb-8 block"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                Est. 2021
+              </motion.span>
               <motion.h1 
-                className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-8"
-                initial={{ opacity: 0, x: -50 }}
-                animate={heroInView ? { opacity: 1, x: 0 } : {}}
+                className="text-7xl sm:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.8] mb-12 uppercase"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                Our 
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] to-yellow-600">
-                  Story
-                </span>
+                Our <br /> <span className="text-[#FFD700]">Story</span>
               </motion.h1>
-
-              <motion.div
-                className="text-2xl sm:text-3xl font-medium text-gray-800 mb-6"
-                initial={{ opacity: 0 }}
-                animate={heroInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.7, delay: 0.4 }}
-              >
-                <TypewriterText
-                  text="Excellence in design since 2021."
-                  speed={40}
-                  delay={800}
-                />
-              </motion.div>
-              
-              <motion.div
-                className="w-20 h-2 bg-[#FFD700] mb-8"
-                initial={{ width: 0 }}
-                animate={heroInView ? { width: 80 } : {}}
-                transition={{ duration: 0.6, delay: 1 }}
-              />
-
               <motion.p
-                className="text-xl text-gray-600 max-w-xl leading-relaxed"
+                className="text-2xl text-gray-400 font-medium leading-relaxed max-w-xl mb-12"
                 initial={{ opacity: 0, y: 20 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 1.2 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
               >
-                At Inks & Interfaces, we believe design is more than aesthetics—it's about crafting meaningful experiences that drive business success and lasting brand loyalty.
+                We bridge the gap between creative <span className="text-black">Inks</span> and digital <span className="text-black">Interfaces</span>, crafting identities that resonate.
               </motion.p>
+              
+              <div className="flex items-center gap-10">
+                 <div className="h-[2px] w-20 bg-black" />
+                 <motion.button 
+                   className="text-sm font-black uppercase tracking-widest hover:text-[#FFD700] transition-colors"
+                   whileHover={{ x: 10 }}
+                 >
+                   Learn More
+                 </motion.button>
+              </div>
             </div>
 
-            {/* Statistics Column */}
-            <div className="lg:w-1/2 w-full grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {[
-                { number: "4+", label: "Years of Excellence" },
-                { number: "100+", label: "Projects Delivered" },
-                { number: "50+", label: "Happy Clients" },
-                { number: "100%", label: "In-house Crafted" }
-              ].map((stat, index) => (
+            <div className="lg:w-1/2 grid grid-cols-2 gap-8">
+              {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
-                  className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl hover:-translate-y-2 transition-transform duration-300"
-                  initial={{ y: 50, opacity: 0 }}
-                  animate={heroInView ? { y: 0, opacity: 1 } : {}}
-                  transition={{ duration: 0.6, delay: 0.8 + (index * 0.15) }}
+                  className="bg-white border border-gray-100 p-10 rounded-[2.5rem] shadow-2xl shadow-black/5"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 + (i * 0.1) }}
                 >
-                  <div className="text-5xl font-black text-[#FFD700] mb-2">{stat.number}</div>
-                  <div className="text-lg font-semibold text-gray-800">{stat.label}</div>
+                  <div className="text-5xl font-black text-black mb-2">{stat.number}</div>
+                  <div className="text-xs font-black uppercase tracking-widest text-[#FFD700]">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
         </div>
       </section>
-      
-      {/* 2. The Heart Behind the Interface (50/50 Split) */}
-      <section className="py-32 relative overflow-hidden bg-white" ref={heartRef}>
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#FFD700]/10 rounded-full blur-[100px] -z-10 translate-x-1/2 -translate-y-1/2" />
-        
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-24">
-            <motion.div 
-              className="lg:w-5/12 lg:sticky lg:top-32"
-              initial={{ opacity: 0, x: -30 }}
-              animate={heartInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight relative">
-                The Heart
-                <span className="block text-[#FFD700] mt-2">Behind the</span>
-                Interface
-                <div className="absolute -left-6 top-4 w-2 h-full bg-[#FFD700]" />
-              </h2>
-            </motion.div>
-            
-            <motion.div 
-              className="lg:w-7/12 text-xl sm:text-2xl text-gray-600 leading-relaxed font-light"
-              initial={{ opacity: 0, y: 30 }}
-              animate={heartInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <p className="mb-8">
-                We believe in the power of blending art with innovation. We are a creative and technology-driven studio passionate about building brands, crafting beautiful designs, and delivering intuitive digital experiences.
-              </p>
-              <p className="text-gray-900 font-normal">
-                Our name says it all — <span className="font-bold">"Inks"</span> represents creativity, imagination, and design, while <span className="font-bold">"Interfaces"</span> reflects technology, function, and digital evolution.
-              </p>
-              <p className="mt-8">
-                Together, they create a seamless bridge between ideas and execution, vision and experience, brands and people.
-              </p>
-            </motion.div>
-          </div>
-        </div>
+
+      {/* The Philosophy Section */}
+      <section className="py-40 bg-black text-white relative overflow-hidden" ref={missionRef}>
+         <Quote size={400} className="absolute -top-20 -left-20 opacity-[0.03] text-[#FFD700]" />
+         
+         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+            <div className="flex flex-col lg:flex-row gap-20 items-start">
+               <motion.div 
+                 className="lg:w-1/2"
+                 initial={{ opacity: 0, x: -30 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 transition={{ duration: 0.8 }}
+               >
+                  <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-10">
+                    The <span className="text-[#FFD700]">Heart</span> <br /> Behind the Interface
+                  </h2>
+                  <div className="h-1 w-32 bg-[#FFD700]" />
+               </motion.div>
+               
+               <motion.div 
+                 className="lg:w-1/2 text-2xl lg:text-3xl font-light text-gray-400 leading-relaxed"
+                 initial={{ opacity: 0, y: 30 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.8, delay: 0.2 }}
+               >
+                  <p className="mb-10 text-white font-medium">
+                    "Inks" represents our artistic soul, the raw creativity that sparks every project. "Interfaces" represents the precision of technology, the bridge to the user.
+                  </p>
+                  <p>
+                    Since our inception, we have been obsessed with how these two worlds overlap. We believe every pixel should serve a purpose, and every purpose should be beautiful.
+                  </p>
+               </motion.div>
+            </div>
+         </div>
       </section>
 
-      {/* 3. Mission & Vision - Glassmorphism floating cards */}
-      <section className="py-24 bg-gray-900 relative text-white overflow-hidden" ref={missionRef}>
-        <div className="absolute inset-0 z-0">
-          <div className="absolute left-10 bottom-10 w-64 h-64 bg-[#FFD700]/20 rounded-full blur-[80px]" />
-          <div className="absolute right-10 top-10 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <motion.div
-              className="p-12 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-[#FFD700]/50 transition-colors duration-500 shadow-2xl"
-              initial={{ opacity: 0, y: 50 }}
-              animate={missionInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7 }}
-            >
-              <h3 className="text-3xl font-bold mb-8 flex items-center">
-                <span className="inline-flex justify-center items-center w-16 h-16 mr-6 rounded-2xl bg-[#FFD700]/20 text-[#FFD700]">
-                  <Heart size={32} />
-                </span>
-                Our Mission
-              </h3>
-              <p className="text-xl text-gray-300 leading-relaxed font-light">{companyOverview.mission}</p>
-            </motion.div>
-            
-            <motion.div
-              className="p-12 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-[#FFD700]/50 transition-colors duration-500 shadow-2xl"
-              initial={{ opacity: 0, y: 50 }}
-              animate={missionInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <h3 className="text-3xl font-bold mb-8 flex items-center">
-                <span className="inline-flex justify-center items-center w-16 h-16 mr-6 rounded-2xl bg-[#FFD700]/20 text-[#FFD700]">
-                  <Lightbulb size={32} />
-                </span>
-                Our Vision
-              </h3>
-              <p className="text-xl text-gray-300 leading-relaxed font-light">{companyOverview.vision}</p>
-            </motion.div>
-          </div>
-        </div>
+      {/* Values Stacking Refinement */}
+      <section className="py-40 bg-white" ref={valuesRef}>
+         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+               {values.map((v, i) => (
+                 <AboutValueCard key={v.title} value={v} index={i} />
+               ))}
+            </div>
+         </div>
       </section>
-      
-      {/* 4. Company Values - Staggered layout */}
-      <section className="py-32 bg-gray-50 relative" ref={valuesRef}>
-        <div className="absolute top-0 right-0 w-full h-1/2 bg-white -z-10" />
-        
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <motion.div
-            className="text-center mb-24"
-            initial={{ opacity: 0, y: 30 }}
-            animate={valuesInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
-          >
-            <h2 className="text-5xl font-black mb-6">Our Code of <span className="text-[#FFD700]">Creativity</span></h2>
-            <p className="text-2xl text-gray-600 max-w-3xl mx-auto font-light">
-              The principles that govern our craft.
-            </p>
-          </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-            {companyOverview.values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                className={`relative ${index % 2 === 1 ? 'md:mt-16' : ''}`} // Staggered masonry effect
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-              >
-                <ValueCard
-                  title={value.title}
-                  description={value.description}
-                  icon={value.icon}
-                  color={value.color}
-                  index={index}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+
+      {/* CTA Section */}
+      <section className="py-40 bg-gray-50 flex justify-center">
+         <motion.div 
+           className="text-center"
+           initial={{ opacity: 0, scale: 0.9 }}
+           whileInView={{ opacity: 1, scale: 1 }}
+           transition={{ duration: 0.8 }}
+         >
+            <h2 className="text-5xl lg:text-7xl font-black uppercase tracking-tighter mb-12">
+              Ready to <br /> <span className="text-[#FFD700]">Start a Story?</span>
+            </h2>
+            <motion.a 
+              href="mailto:letscreate.inksandinterfaces@gmail.com"
+              className="inline-flex items-center gap-6 bg-black text-white px-12 py-6 rounded-full text-lg font-black uppercase tracking-widest shadow-2xl"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Get in Touch <ArrowRight size={24} />
+            </motion.a>
+         </motion.div>
       </section>
     </main>
   );
 }
+
+function AboutValueCard({ value, index }: { value: any, index: number }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  const background = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(255, 215, 0, 0.1), transparent 80%)`;
+
+  return (
+    <motion.div
+      onMouseMove={handleMouseMove}
+      className="group relative p-12 rounded-[2.5rem] bg-white border border-gray-100 shadow-2xl shadow-black/5 flex flex-col items-center text-center overflow-hidden h-full"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+    >
+       <motion.div
+        className="pointer-events-none absolute -inset-px rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition duration-500 z-0"
+        style={{ background }}
+      />
+
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="h-20 w-20 flex items-center justify-center rounded-3xl bg-gray-50 text-gray-400 group-hover:bg-black group-hover:text-[#FFD700] transition-colors duration-500 mb-8">
+           {value.icon}
+        </div>
+        <h3 className="text-2xl font-black uppercase tracking-tight mb-6">{value.title}</h3>
+        <p className="text-gray-500 font-medium leading-relaxed">{value.description}</p>
+      </div>
+    </motion.div>
+  );
+}
+
+// Missing icons for the redesigned list
+const Target = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="6" />
+    <circle cx="12" cy="12" r="2" />
+  </svg>
+);
+
+const Zap = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+  </svg>
+);
